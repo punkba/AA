@@ -1,0 +1,480 @@
+<!Doctype html5>
+<html>
+<head>
+  <title>Propensity Model</title>
+  <script src="../opencpu/jquery-1.10.2.min.js"></script>
+  <script src="../opencpu/opencpu-0.4.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+  <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+  <script src ="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+  <link href="model_new.css" rel="stylesheet" type="text/css">
+  <!-- <link href="css/bubbles.css" rel="stylesheet" type="text/css"> -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../scss/style.css" rel="stylesheet" type="text/css">
+  <link href="../fontawesome/web-fonts-with-css/css/fontawesome-all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <script src="../js/highcharts.js"></script>
+  <script src="http://code.highcharts.com/highcharts-more.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.appear/0.3.3/jquery.appear.js"></script>
+  <script type="text/javascript" src="model_new.js"></script>
+      <style>
+	  #output{
+      min-height: 200px;
+      border: solid gray 1px;
+	  padding: 3px;
+	  color:black;
+	  background-color : white;
+    }
+	#output2{
+     		 height: 50px;
+		 width: 600px;
+     		 border: solid gray 1px;
+	  	padding: 3px;
+	  	color:black;
+	  	background-color : white;
+   	 }
+     #plotdiv1 {
+       position: relative;
+       width: 600px;
+       height: 400px;
+       border: solid gray 1px;
+     }
+	      #plotdiv {
+       position: relative;
+       width: 400px;
+       height: 400px;
+       border: solid gray 1px;
+     }
+	 
+	 #plotdiv_custom {
+       position: relative;
+       width: 400px;
+       height: 400px;
+       border: 0px;
+     }
+    </style>
+</head>
+
+<body>
+  <div id="background-wrap">
+    <div class="bubble x1"></div>
+    <div class="bubble x2"></div>
+    <div class="bubble x3"></div>
+    <div class="bubble x4"></div>
+    <div class="bubble x5"></div>
+    <div class="bubble x6"></div>
+    <div class="bubble x7"></div>
+    <div class="bubble x8"></div>
+    <div class="bubble x9"></div>
+    <div class="bubble x10"></div>
+  </div>
+  
+	<div class="perspective effect-rotate-left">
+		<div id="viewport" class="l-viewport">
+			<div class="container-main">
+				<header>
+				  <div class="container-fluid">
+					<div class="row">
+					  <div class="col-12">
+						<div class="header-wrapper">
+						  <h5>Propensity Model</h5>
+						  <div class="header--nav-toggle">
+							<span></span>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</header>
+				<div class="container-fluid body-margin">
+					<div class="row">
+						<div class="col-12">
+							<div class="row">
+								<div class="col-sm-2">
+									<div class="side-nav-fixed">
+										<ul class="side-nav">
+											<li class="is-active">
+												<span>Choose CSV File</span>
+											</li>
+											<li id ="var_conf">
+												<span>Variable Config</span>
+											</li>
+											<li id = "var_stats">
+												<span>Variable Stats</span>
+											</li>
+											<li>
+												<span>Build a Model</span>
+											</li>
+											<li>
+												<span>View Model Results</span>
+											</li>
+											<li>
+												<span>Score the Model</span>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="col-sm-10">
+									<div class="body-right-wrapper">
+										<div class="row">
+											<div class="col-sm-12">
+												<ul class="l-main-content main-content">
+													<li class="l-section section section--is-active">
+														<div class="intro">
+															<h2><b>Choose CSV File</b></h2>
+															<div class="choose-data">
+																<b>Input Data File Path</b> <input type="file" id="uploadFile"> 
+																<b>DV name: </b> <input type="text" id="dvname">
+																<b><button id="submitbutton" type="button">Upload CSV file!</button></b>
+																<br>
+																<br>
+																<b>Data Split Training Set (%)</b> <input type="text" id="data-split" align="left">
+																<div class="split_msg_out">
+																</div>
+																
+																<!--<pre id="output"><code></code></pre>-->
+															</div>
+															<br>
+															<br>
+															<br>
+															<br>
+															<div class="lds-dual-ring" id="status1">Go on & feed me a CSV!</div>
+														</div>
+													</li>
+													<li class="l-section section">
+														<div class="work">
+															<h2><b>Variable Configuration</h2></b>
+																<div class="row">
+																	<div class="col-3"></div>
+																	<div class="col-2">
+																		<b>Categorical</b>
+																	</div>
+																	<div class="col-1">
+																		
+																	</div>
+																	<div class="col-2"></div>
+																	<div class="col-4">
+																		<b>Continuous</b>
+																	</div>
+																</div>
+																<div class="row">
+																	<div class="col-5">
+																		<div id="left_sel">
+																			<select class="custom-select float-right" multiple size="14" id="left_box">
+																			  <option value="1">Var 1</option>
+																			  <option value="2">Var 2</option>
+																			  <option value="3">Var 3</option>
+																			  <option value="4">Var 4</option>
+																			  <option value="5">Var 5</option>
+																			  <option value="6">Var 6</option>
+																			  <option value="7">Var 7</option>
+																			</select>
+																		</div>
+																	</div>
+																	<div class="col-2">
+																		<div class="row">&nbsp </div>
+																		<div class="row">&nbsp </div>
+																		<div class="row">&nbsp </div>
+																		<div class="row">
+																			<div class="mx-auto text-center">						
+																				<button id="swap_right" class="btn btn-default">
+																					<i class="material-icons">keyboard_arrow_right</i>
+																				</button>
+																			</div>
+																		</div>
+																		<div class="row">&nbsp </div>
+																		<div class="row">
+																			<div class="mx-auto text-center">
+																				<button id="swap_left" class="btn btn-default">
+																					<i class="material-icons">keyboard_arrow_left</i>
+																				</button>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-5">
+																		<select class="custom-select float-left" multiple size="14" id="right_box">
+																		  <option value="8">Var 8</option>
+																		  <option value="9">Var 9</option>
+																		  <option value="10">Var 10</option>
+																		  <option value="11">Var 11</option>
+																		  <option value="12">Var 12</option>
+																		  <option value="13">Var 13</option>
+																		  <option value="14">Var 14</option>
+																		</select>
+																	</div>
+																</div>
+																<!--</div>-->
+																<!--<div id="plotdiv">-->
+																<!--</div>-->
+															<!--</div>-->
+														</div>
+													</li>
+													<li class="l-section section">
+														<div class="work">
+															<h2>Data PreProcessing - Variable Stats</h2>
+																<table class="dead_center table-borderless">
+																	<thead>
+																		<tr class>
+																			<th scope="col" class="table_my_th"></th>
+																			<th scope="col" class="table_my_th"></th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr>
+																			<th scope="row">Eliminated Variables</th>
+																			<td>Var 1,Var 35,Var 45,Var 23,Var 45</td>
+																		</tr>
+																		<tr>
+																			<th scope="row">Imputed as Unknown</th>
+																			<td>Var 2,Var14,Var 15,Var 78</td>
+																		</tr>
+																		<tr>
+																			<th scope="row">Mean Imputation</th>
+																			<td>Var 46,Var 77,Var 89</td>
+																		</tr>
+																		<tr>
+																			<th scope="row">Removed Levels</th>
+																			<td>Var 55,Var 79,Var 36,Var 56,Var 99</td>
+																		</tr>
+																		<tr>
+																			<th scope="row">Skewness Treatment</th>
+																			<td>Var 42</td>
+																		</tr>
+																		<tr>
+																			<th scope="row">DV Levels Conversion(Y/N)</th>
+																			<td>Y</td>
+																		</tr>
+																		<tr>
+																		<td>&nbsp;</td>
+																		</tr>
+																		<tr>
+																		<td>&nbsp;</td>
+																		</tr>
+																		<tr>
+																		<td>&nbsp;</td>
+																		</tr>
+																		<tr>
+																			<th scope="row">Choose Variable(s) to be Excluded:</th>
+																			<td>
+																				<!--<select class="btn_ct selectpicker" multiple data-live-search="true">
+																				  <option>Variable 1</option>
+																				  <option>Variable 2</option>
+																				  <option>Variable 3</option>
+																				</select>-->
+																				
+																				<select size="5" name="varSel" multiple="multiple" id="varSel">																				
+																					<option value="v1">Variable 1</option>
+																					<option value="v2">Variable 2</option>
+																					<option value="v3">Variable 3</option>
+																					<option value="v4">Variable 4</option>
+																					<option value="v5">Variable 5</option>																				
+																				</select>
+																			</td>
+																			<td>
+																				<button type="button" class="btn btn-danger">Exclude</button>
+																			</td>
+																		</tr>
+																	</tbody>
+																</table>
+														</div>
+													</li>
+													<li class="l-section section">
+														<div class="about">
+														<div id="model_opt">
+															<div class="radio-list">
+																<h2><div id="status3">Select a Model to train!</div></h2>
+																<div class="radio-list-cover">
+																	<div class="radio">
+																		<input id="select-1" name="radio" type="radio" value="LR" checked>
+																		<label for="select-1" class="radio-label">Logistic Regression</label>
+																	</div>
+																	<div class="radio">
+																		<input id="select-2" name="radio" type="radio" value="RF">
+																		<label for="select-2" class="radio-label">Random Forest</label>
+																	</div>
+																	
+																	<div class="radio">
+																		<input id="select-3" name="radio" type="radio" value="SVM">
+																		<label for="select-3" class="radio-label">SVM</label>
+																	</div>
+
+																	<div class="radio">
+																		<input id="select-4" name="radio" type="radio" value="GBM">
+																		<label for="select-4" class="radio-label">GBM</label>
+																	</div>
+
+																	<div class="radio">
+																		<input id="select-5" name="radio" type="radio" value="NB">
+																		<label for="select-5" class="radio-label">Naive Bayes</label>
+																	</div>
+
+																	<div class="radio">
+																		<input id="select-6" name="radio" type="radio" value="NNET">
+																		<label for="select-6" class="radio-label">Neural Network</label>
+																	</div>
+
+																	<div class="radio">
+																		<input id="select-7" name="radio" type="radio" value="OEM">
+																		<label for="select-7" class="radio-label">optimized Ensemble model</label>
+																	</div>
+																</div>
+																<div>
+																  <button id="show_perf">Start Building</button>
+																</div>
+															</div>
+															</div>
+															<div class="lds-dual-ring" id="building_inter">Training the model, Will be ready in a jiffy!!
+															</div>															
+															<div id="model_out" >
+															<h2 align="center"><b>Model Performance</b></h2>
+															<table class="table table-borderless table-responsive">
+																<thead>
+																	<tr class>
+																		<th scope="col">Model</th>
+																		<th scope="col">No Info Rate(%)</th>
+																		<th scope="col">Accuracy(%)</th>
+																		<th scope="col">Sensitivity(%)</th>
+																		<th scope="col">Specificity(%)</th>
+																		<th scope="col">Kappa(%)</th>
+																	</tr>
+																</thead>
+																<tbody id="normal_results">
+																	<tr>
+																		<th id="mod_nm" scope="row"></th>
+																		<td> 67.17% </td>
+																		<td> 79.82% </td>
+																		<td> 88.79% </td>
+																		<td> 61.47% </td>
+																		<td> 52.34% </td>
+																	</tr>
+																</tbody>
+																<tbody id="oem_results">
+																	<tr>
+																		<th scope="row">LR</th>
+																		<td> 67.17% </td>
+																		<td> 79.82% </td>
+																		<td> 88.79% </td>
+																		<td> 61.47% </td>
+																		<td> 52.34% </td>
+																	</tr>
+																	<tr>
+																		<th scope="row">NB</th>
+																		<td> 67.17% </td>
+																		<td> 75.98% </td>
+																		<td> 79.00% </td>
+																		<td> 60.56% </td>
+																		<td> 51.76% </td>
+																	</tr>
+																	<tr>
+																		<th scope="row">RF</th>
+																		<td> 67.17% </td>
+																		<td> 82.76% </td>
+																		<td> 89.79% </td>
+																		<td> 70.36% </td>
+																		<td> 65.47% </td>
+																	</tr>
+																	<tr class="table-active">
+																		<th scope="row">OEM</th>
+																		<td> 67.17% </td>
+																		<td> 95.03% </td>
+																		<td> 92.65% </td>
+																		<td> 94.37% </td>
+																		<td> 72.45% </td>
+																	</tr>
+																</tbody>
+															</table>
+															<button id="show_model_sel" align="right">Show Model Selection</button>
+															<!-- div for results-->
+															</div>
+														</div>
+													</li>
+													<li class="l-section section">
+														<div class="contact--lockup">
+															<h2>Results</h2>
+															<div class="result-wrapper">
+																<div class="list">
+																  <h6>Significant Variables</h6>
+																  <ul>
+																	<li>age</li>
+																	<li>gender - female</li>
+																	<li>BMI</li>
+																	<li>country</li>
+																	<li>region EMEA</li>
+																	<li>salary</li>
+																  </ul>
+																</div>
+																<div class="result-chart">
+																  <div id="Result01">
+																  </div>
+																  <div id="Result02">
+																  </div>
+																  <table border="1">
+																	<thead>
+																	  <tr>
+																		<th></th>
+																		<th>Predicted: No</th>
+																		<th>Predicted: Yes</th>
+																	  </tr>
+																	</thead>
+
+																	<tbody>
+																	  <tr>
+																		<td>Actual: No</td>
+																		<td>50</td>
+																		<td>20</td>
+																	  </tr>
+																	  <tr>
+																		<td>Actual: Yes</td>
+																		<td>5</td>
+																		<td>100</td>
+																	  </tr>
+																	</tbody>
+																  </table>
+																</div>
+														  </div>
+														</div>
+													</li>
+													<li class="l-section section">
+														<div class="hire">
+															<div class="intro">
+																<h2>Evaluation Module</h2>
+																<div class="choose-data">
+																	<b>Input Data File Path</b> <input type="file" id="uploadFile2">
+																	<b><button id="downloadbutton" type="button">Download Results Here!</button></b>	
+																</div>
+															  <pre id="output2"><code></code></pre>	
+															  <div class="lds-dual-ring" id="status2">Waiting for Dataset to Score on!</div>
+															</div>
+														</div>
+
+								   
+													</li>
+													<!-- codes for other sections here-->
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<ul class="outer-nav">
+      <li class="is-active">Choose CSV</li>
+      <li>Variable Config</li>
+	  <li>Variable Stats</li>
+      <li>Build a Model</li>
+      <li>View Model Results</li>
+      <li>Scoring</li>
+    </ul>
+</body>
+  <script src="../js/functions-min.js"></script>
+ <script src="../js/high-chart-code.js"></script>
+</html>
