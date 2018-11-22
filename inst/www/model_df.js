@@ -89,11 +89,11 @@ $("#show_perf").on("click", function(){
       "DV" : dvname, "model_selection" :  isChecked, "predictorClass" : preddv
     }, function(session){
 		session.getObject(function(full_output){			
-			$("#building_inter").show().delay(1000).fadeOut(100,showModelResults);
+			//$("#building_inter").show().delay(1000).fadeOut(100,showModelResults);
 			
 			console.log(full_output)
-			/*
-			var sig_var=full_output[0]
+			
+			/*var sig_var=full_output[0]
 			var output=full_output[1]
 			
 			alert(isChecked);
@@ -153,10 +153,10 @@ $("#show_perf").on("click", function(){
 					var textnode = document.createTextNode(sig_var[i]);         // Create a text node
 					node.appendChild(textnode);                              // Append the text to <li>
 					document.getElementById("sig_list").appendChild(node);     // Append <li> to <ul> with id="myList"
-				}
+				}*/
 				
 				
-			plot_rocr_graph();
+			//plot_rocr_graph();
 			
 		
 			//get results and display
@@ -164,7 +164,7 @@ $("#show_perf").on("click", function(){
 		    }).fail(function(){
 			alert("Server error: " + req.responseText);
 			});  
-    });*/
+    });
     
     //if R returns an error, alert the error message
     req.fail(function(){
