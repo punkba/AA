@@ -21,6 +21,7 @@ modelling_module<-function(DV,model_selection,predictorClass)
   processOutput <- function(model,vars,metrics,oemInd){
     library(dplyr)
     library(RJSONIO)
+    library(data.table)
     
     if(oemInd)
     {
