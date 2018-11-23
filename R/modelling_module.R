@@ -54,8 +54,8 @@ modelling_module<-function(DV,model_selection,predictorClass)
       
       save(model,file=modelSaveLocation)
       
-      #modelName <- list(modelName=modelName))
-      #modelSaveLocation <- list(modelSaveLocation=I(modelSaveLocation))
+      modelName <- list(modelName=I(modelName))
+      modelSaveLocation <- list(modelSaveLocation=I(modelSaveLocation))
       
       modelCoeff <- 0
       
@@ -71,9 +71,9 @@ modelling_module<-function(DV,model_selection,predictorClass)
         modelCoeff$pval <- NULL
       }
       
-      #modelCoeff <-list(modelCoeff=I(modelCoeff))
+      modelCoeff <-list(modelCoeff=I(modelCoeff))
       
-      variables <- vars
+      variables <- list(variables=I(vars))
       
       metricOutput <- list(as.numeric(metrics['tpr']),
                            as.numeric(metrics['fpr']),
@@ -81,22 +81,22 @@ modelling_module<-function(DV,model_selection,predictorClass)
                            as.numeric(metrics['fnr']),
                            as.numeric(metrics['accuracy']))
       
-      #metricOutput <- list(metricOutput=I(metricOutput))
+      metricOutput <- list(metricOutput=I(metricOutput))
       
     }
     outL <- list(modelName,modelSaveLocation,modelCoeff,variables,metricOutput)
     
-    if(modelName == 'lr')
-    {
-      out <- jsonlite::toJSON(outL,pretty=T,auto_unbox = T)
-      out <- gsub(pattern = '\\]$', replacement = "}", x = out)
-      out <- gsub(pattern = '^\\[', replacement = "{", x = out)
-      return (out)
-    }
-    else
-    {
-      return (list(modelName,modelSaveLocation,modelCoeff,variables,metricOutput)) 
-    }
+    #if(modelName == 'lr')
+    #{
+     # out <- jsonlite::toJSON(outL,pretty=T,auto_unbox = T)
+      #out <- gsub(pattern = '\\]$', replacement = "}", x = out)
+      #out <- gsub(pattern = '^\\[', replacement = "{", x = out)
+    return (outL)
+    #}
+    #else
+    #{
+     # return (list(modelName,modelSaveLocation,modelCoeff,variables,metricOutput)) 
+    #}
   }
   
   setUpFunction<- function(train,test,positive_class,model){
