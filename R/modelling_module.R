@@ -23,8 +23,10 @@ modelling_module<-function(DV,model_selection,predictorClass)
     if(modelName == 'lr')
     {
       modelOutput <- as.data.frame(summary(model)$coefficients,keep.rownames = T)
-      modelOutput$pval <-  modelOutput[,5]
-      modelOutput <- modelOutput[modelOutput$pval < 0.1]
+      modelOutput$vars <- rownames(modelOutput)
+      rownames(modelOutput) <- NULL
+      modelOutput$pval <-  modelOutput[,4]
+      modelOutput <- modelOutput[modelOutput$pval < 0.1,]
       modelOutput$`Std. Error` <- NULL
       modelOutput$`z value`<- NULL
       modelOutput$`Pr(>|z|)`<-NULL
