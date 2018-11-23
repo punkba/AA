@@ -22,7 +22,7 @@ modelling_module<-function(DV,model_selection,predictorClass)
     
     if(modelName == 'lr')
     {
-      modelOutput <- data.table(summary(model)$coefficients,keep.rownames = T)
+      modelOutput <- as.data.frame(summary(model)$coefficients,keep.rownames = T)
       modelOutput$pval <-  modelOutput[,5]
       modelOutput <- modelOutput[modelOutput$pval < 0.1]
       modelOutput$`Std. Error` <- NULL
@@ -91,7 +91,7 @@ modelling_module<-function(DV,model_selection,predictorClass)
     }
     outL <- list(modelName,modelSaveLocation,modelCoeff,variables,metricOutput)
     
-    cat("\014")
+    shell("cls")
     print(summary(model))
     
     #if(modelName == 'lr')
