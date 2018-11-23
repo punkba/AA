@@ -54,8 +54,8 @@ modelling_module<-function(DV,model_selection,predictorClass)
       
       save(model,file=modelSaveLocation)
       
-      modelName <- list(modelName=I(modelName))
-      modelSaveLocation <- list(modelSaveLocation=I(modelSaveLocation))
+      #modelName <- list(modelName=modelName))
+      #modelSaveLocation <- list(modelSaveLocation=I(modelSaveLocation))
       
       modelCoeff <- 0
       
@@ -71,9 +71,9 @@ modelling_module<-function(DV,model_selection,predictorClass)
         modelCoeff$pval <- NULL
       }
       
-      modelCoeff <-list(modelCoeff=I(modelCoeff))
+      #modelCoeff <-list(modelCoeff=I(modelCoeff))
       
-      variables <- list(variables=I(vars))
+      variables <- vars
       
       metricOutput <- list(as.numeric(metrics['tpr']),
                            as.numeric(metrics['fpr']),
@@ -81,7 +81,7 @@ modelling_module<-function(DV,model_selection,predictorClass)
                            as.numeric(metrics['fnr']),
                            as.numeric(metrics['accuracy']))
       
-      metricOutput <- list(metricOutput=I(metricOutput))
+      #metricOutput <- list(metricOutput=I(metricOutput))
       
     }
     outL <- list(modelName,modelSaveLocation,modelCoeff,variables,metricOutput)
