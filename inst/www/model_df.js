@@ -8,6 +8,7 @@ $(document).ready(function(){
 	$('#oem_results').hide();
 	
 	var model_persist = "";
+	var varImpData = "";
   
 $("#show_perf").on("click", function(){
     
@@ -85,13 +86,40 @@ $("#show_perf").on("click", function(){
 
 //alert(dvname);	alert(isChecked);alert(preddv);
     //perform the request
+	function prepareVarImpData(listInp){
+		
+		varImpData = [['Variable Name','Variable Importance']];
+		
+		for(var i =0;i<listInp.length;i++){
+			obsArray = [];
+			obsArray.push(listInp[i]["var_names"],listInp[i]["Overall"]);
+			varImpData.push(obsArray);
+		}
+	}
+	
+	function processLROutput(lists){
+		modelLink = lists[1]["modelSaveLocation"].toString()
+		sig_var = lists[4]["metricOutput"]
+		prepareVarImpData(lists[3]["variables"])
+	}
+	
     var req = ocpu.call("modelling_module", {
       "DV" : dvname, "model_selection" :  isChecked, "predictorClass" : preddv
     }, function(session){
 		session.getObject(function(full_output){	
 			$("#building_inter").show().delay(1000).fadeOut(100,showModelResults);
 			
-			console.log(full_output)
+			console.log(full_output);
+			var sig_var = 0;
+			if(full_output[0]["modelName"] == 'lr')
+			{
+				processLROutput(full_output);
+			}
+			
+			console.log(modelLink);
+			console.log(sig_var);
+			console.log(varImpData);
+			console.log(session.getConsole());
 			
 			/*var sig_var=full_output[0]
 			var output=full_output[1]
