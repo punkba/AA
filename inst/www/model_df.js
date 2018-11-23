@@ -99,7 +99,7 @@ $("#show_perf").on("click", function(){
 	
 	function processLROutput(lists){
 		modelLink = lists[1]["modelSaveLocation"].toString()
-		sig_var = lists[5]["metricOutput"]
+		output = lists[4]["metricOutput"]
 		prepareVarImpData(lists[3]["variables"])
 	}
 	
@@ -110,14 +110,14 @@ $("#show_perf").on("click", function(){
 			$("#building_inter").show().delay(1000).fadeOut(100,showModelResults);
 			
 			console.log(full_output);
-			var sig_var = 0;
+			var output = 0;
 			if(full_output[0]["modelName"] == 'lr')
 			{
 				processLROutput(full_output);
 			}
 			
 			console.log(modelLink);
-			console.log(sig_var);
+			console.log(output);
 			console.log(varImpData);
 			console.log(session.getConsole()["responseText"]);
 			
