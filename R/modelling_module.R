@@ -65,8 +65,10 @@ modelling_module<-function(DV,model_selection,predictorClass)
         modelCoeff <- data.table(summary(model)$coefficients,keep.rownames = T)
         modelCoeff$pval <-  modelCoeff[,5]
         modelCoeff <- modelCoeff[modelCoeff$pval < 0.1]
-        modelCoeff <- modelCoeff %>% transmute(varNm=rn,
-                                               Estimate=Estimate)
+        modelCoeff$`Std. Error` <- NULL
+        modelCoeff$`z value`<- NULL
+        modelCoeff$`Pr(>|z|)`<-NULL
+        modelCoeff$pval <- NULL
       }
       
       modelCoeff <-list(modelCoeff=I(modelCoeff))
