@@ -18,6 +18,23 @@ modelling_module<-function(DV,model_selection,predictorClass)
    return(as.list(wars)) 
   }
   
+  processModelOutput <- function(model,modelName){
+    
+    if(modelName == 'lr')
+    {
+      modelOutput <- data.table(summary(model)$coefficients,keep.rownames = T)
+      modelOutput$pval <-  modelOutput[,5]
+      modelOutput <- modelOutput[modelOutput$pval < 0.1]
+      modelOutput$`Std. Error` <- NULL
+      modelOutput$`z value`<- NULL
+      modelOutput$`Pr(>|z|)`<-NULL
+      modelOutput$pval <- NULL
+    }
+    
+    return(modelOutput)
+    
+  }
+  
   processOutput <- function(model,vars,metrics,oemInd){
     library(dplyr)
     library(RJSONIO)
@@ -57,19 +74,7 @@ modelling_module<-function(DV,model_selection,predictorClass)
       modelName <- list(modelName=I(modelName))
       modelSaveLocation <- list(modelSaveLocation=I(modelSaveLocation))
       
-      modelCoeff <- 0
-      
-      if(modelName == 'lr')
-      {
-        
-        modelCoeff <- data.table(summary(model)$coefficients,keep.rownames = T)
-        modelCoeff$pval <-  modelCoeff[,5]
-        modelCoeff <- modelCoeff[modelCoeff$pval < 0.1]
-        modelCoeff$`Std. Error` <- NULL
-        modelCoeff$`z value`<- NULL
-        modelCoeff$`Pr(>|z|)`<-NULL
-        modelCoeff$pval <- NULL
-      }
+      modelCoeff <- processModelOutput(model,modelName)
       
       modelCoeff <-list(modelCoeff=I(modelCoeff))
       
@@ -85,6 +90,9 @@ modelling_module<-function(DV,model_selection,predictorClass)
       
     }
     outL <- list(modelName,modelSaveLocation,modelCoeff,variables,metricOutput)
+    
+    cat("\014")
+    print(summary(model))
     
     #if(modelName == 'lr')
     #{
@@ -738,3 +746,4 @@ modelling_module<-function(DV,model_selection,predictorClass)
   
   return (vars_imp)
 }
+
