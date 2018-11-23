@@ -61,10 +61,10 @@ modelling_module<-function(DV,model_selection,predictorClass)
       
       if(modelName == 'lr')
       {
+        
         modelCoeff <- data.table(summary(model)$coefficients,keep.rownames = T)
-        modelCoeff <- data.table(modelCoeff)
-        modelCoeff <- modelCoeff[,pval:= modelCoeff[,5]][pval<0.1]
-        modelCoeff<-  modelCoeff[,colnames(modelCoeff[,c(3,4,5,6)]):=NULL]
+        modelCoeff$pval <-  modelCoeff[,5]
+        modelCoeff<-  modelCoeff[pval<0.1][,colnames(modelCoeff[,c(3,4,5,6)]):=NULL]
       }
       
       modelCoeff <-list(modelCoeff=I(modelCoeff))
