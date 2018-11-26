@@ -98,10 +98,10 @@ $("#show_perf").on("click", function(){
 	}
 	
 	function processLROutput(lists){
-		modelLink = lists[1]["modelSaveLocation"].toString()
-		output = lists[4]["metricOutput"]
-		prepareVarImpData(lists[3]["variables"])
-		modelSummary = lists[5]["summaryPath"].toString()
+		modelLink = lists[1]["modelSaveLocation"].toString();
+		output = lists[4]["metricOutput"].flat();
+		prepareVarImpData(lists[3]["variables"]);
+		modelSummary = lists[5]["summaryPath"].toString();
 	}
 	
     var req = ocpu.call("modelling_module", {
