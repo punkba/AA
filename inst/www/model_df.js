@@ -101,7 +101,7 @@ $("#show_perf").on("click", function(){
 		modelLink = lists[1]["modelSaveLocation"].toString()
 		output = lists[4]["metricOutput"]
 		prepareVarImpData(lists[3]["variables"])
-		modelSummary = lists[5]["modelSummary"]
+		modelSummary = lists[5]["summaryPath"].toString()
 	}
 	
     var req = ocpu.call("modelling_module", {
