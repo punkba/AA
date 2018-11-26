@@ -114,7 +114,6 @@ $("#show_perf").on("click", function(){
 			$("#building_inter").show().delay(1000).fadeOut(100,showModelResults);
 			
 			console.log(full_output);
-			var output = 0;
 			if(full_output[0]["modelName"] == 'lr')
 			{
 				processLROutput(full_output);
