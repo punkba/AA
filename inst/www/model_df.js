@@ -9,7 +9,10 @@ $(document).ready(function(){
 	
 	var model_persist = "";
 	var varImpData = "";
-  
+    var modelLink = "";
+	var output = "";
+	var modelSummaryPath="";
+	
 $("#show_perf").on("click", function(){
     
 	//alert("inside Ensemble Model....");
@@ -101,7 +104,7 @@ $("#show_perf").on("click", function(){
 		modelLink = lists[1]["modelSaveLocation"].toString();
 		output = lists[4]["metricOutput"].flat();
 		prepareVarImpData(lists[3]["variables"]);
-		modelSummary = lists[5]["summaryPath"].toString();
+		modelSummaryPath = lists[5]["summaryPath"].toString();
 	}
 	
     var req = ocpu.call("modelling_module", {
@@ -120,7 +123,7 @@ $("#show_perf").on("click", function(){
 			console.log(modelLink);
 			console.log(output);
 			console.log(varImpData);
-			console.log(modelSummary);
+			console.log(modelSummaryPath);
 			
 			/*var sig_var=full_output[0]
 			var output=full_output[1]
@@ -159,7 +162,8 @@ $("#show_perf").on("click", function(){
 			else
 			{	*/
 				var table = document.getElementById("results_table").tBodies[0];
-				alert(isChecked,table.rows[0].cells[0].innerHTML);
+				//alert(isChecked,table.rows[0].cells[0].innerHTML);
+				console.log(isChecked)
 				table.rows[0].cells[0].innerHTML=isChecked;
 				
 				table.rows[0].cells[1].innerHTML=output[0];
