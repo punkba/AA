@@ -91,7 +91,7 @@ $("#show_perf").on("click", function(){
 		varImpData = [['Variable Name','Variable Importance']];
 		
 		for(var i =0;i<listInp.length;i++){
-			obsArray = [];
+			var obsArray = [];
 			obsArray.push(listInp[i]["var_names"],listInp[i]["Overall"]);
 			varImpData.push(obsArray);
 		}
@@ -101,6 +101,7 @@ $("#show_perf").on("click", function(){
 		modelLink = lists[1]["modelSaveLocation"].toString()
 		output = lists[4]["metricOutput"]
 		prepareVarImpData(lists[3]["variables"])
+		modelSummary = lists[5]["modelSummary"]
 	}
 	
     var req = ocpu.call("modelling_module", {
@@ -119,8 +120,7 @@ $("#show_perf").on("click", function(){
 			console.log(modelLink);
 			console.log(output);
 			console.log(varImpData);
-			cns = session.getConsole();
-			console.log(cns);
+			console.log(modelSummary);
 			
 			/*var sig_var=full_output[0]
 			var output=full_output[1]
@@ -157,7 +157,7 @@ $("#show_perf").on("click", function(){
 				table.rows[0].cells[5].innerHTML=cur_op[4];
 			}
 			else
-			{	
+			{	*/
 				var table = document.getElementById("results_table").tBodies[0];
 				alert(isChecked,table.rows[0].cells[0].innerHTML);
 				table.rows[0].cells[0].innerHTML=isChecked;
@@ -172,9 +172,9 @@ $("#show_perf").on("click", function(){
 				//var cell2 = row.insertCell(1);
 				//cell1.innerHTML = "NEW CELL1";
 				//cell2.innerHTML = "NEW CELL2";
-			}
+			//}
 			
-			alert(sig_var.length);
+			/*alert(sig_var.length);
 			//Signififcant Variable List
 			for (var i=0; i < sig_var.length;++i)
 				{					
