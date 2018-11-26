@@ -22,8 +22,7 @@ modelling_module<-function(DV,model_selection,predictorClass)
     
     if(modelName == 'lr')
     {
-      modelSummary <- summary(model)
-      modelOutput <- as.data.frame(modelSummary$coefficients,keep.rownames = T)
+      modelOutput <- as.data.frame(summary(model)$coefficients,keep.rownames = T)
       modelOutput$vars <- rownames(modelOutput)
       rownames(modelOutput) <- NULL
       modelOutput$pval <-  modelOutput[,4]
@@ -32,10 +31,13 @@ modelling_module<-function(DV,model_selection,predictorClass)
       modelOutput$`z value`<- NULL
       modelOutput$`Pr(>|z|)`<-NULL
       modelOutput$pval <- NULL
+      
+      sink(file="C:/OpencpuApp_IP/lr_summary.txt",split=TRUE)
+      print(summary(model))
+      sink(NULL)
     }
     
-    return(list(modelOutput,modelSummary))
-    
+    return(modelOutput)
   }
   
   processOutput <- function(model,vars,metrics,oemInd){
@@ -77,13 +79,9 @@ modelling_module<-function(DV,model_selection,predictorClass)
       modelName <- list(modelName=I(modelName))
       modelSaveLocation <- list(modelSaveLocation=I(modelSaveLocation))
       
-      modOutput <- processModelOutput(model,modelName)
-      
-      modelCoeff <- modOutput[[1]]
+      modelCoeff <- processModelOutput(model,modelName)
+  
       modelCoeff <-list(modelCoeff=I(modelCoeff))
-      
-      modelSummary <- modOutput[[2]] 
-      modelSummary <-list(modelSummary=I(modelSummary))
       
       variables <- list(variables=I(vars))
       
@@ -95,8 +93,12 @@ modelling_module<-function(DV,model_selection,predictorClass)
       
       metricOutput <- list(metricOutput=I(metricOutput))
       
+      summaryPath <- list(summaryPath=I("C:/OpencpuApp_IP/lr_summary.txt"))
+      
     }
-    outL <- list(modelName,modelSaveLocation,modelCoeff,variables,metricOutput,modelSummary)
+    outL <- list(modelName,
+                 modelSaveLocation,
+                 modelCoeff,variables,metricOutput,summaryPath)
     
     #if(modelName == 'lr')
     #{
