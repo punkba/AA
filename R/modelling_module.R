@@ -22,7 +22,8 @@ modelling_module<-function(DV,model_selection,predictorClass)
     
     if(modelName == 'lr')
     {
-      modelOutput <- as.data.frame(summary(model)$coefficients,keep.rownames = T)
+      modelSummary <- summary(model)
+      modelOutput <- as.data.frame(modelSummary$coefficients,keep.rownames = T)
       modelOutput$vars <- rownames(modelOutput)
       rownames(modelOutput) <- NULL
       modelOutput$pval <-  modelOutput[,4]
@@ -33,7 +34,7 @@ modelling_module<-function(DV,model_selection,predictorClass)
       modelOutput$pval <- NULL
     }
     
-    return(modelOutput)
+    return(list(modelOutput,modelSummary))
     
   }
   
@@ -76,9 +77,13 @@ modelling_module<-function(DV,model_selection,predictorClass)
       modelName <- list(modelName=I(modelName))
       modelSaveLocation <- list(modelSaveLocation=I(modelSaveLocation))
       
-      modelCoeff <- processModelOutput(model,modelName)
+      modOutput <- processModelOutput(model,modelName)
       
+      modelCoeff <- modOutput[[1]]
       modelCoeff <-list(modelCoeff=I(modelCoeff))
+      
+      modelSummary <- modOutput[[2]] 
+      modelSummary <-list(modelSummary=I(modelSummary))
       
       variables <- list(variables=I(vars))
       
@@ -89,8 +94,6 @@ modelling_module<-function(DV,model_selection,predictorClass)
                            as.numeric(metrics['accuracy']))
       
       metricOutput <- list(metricOutput=I(metricOutput))
-      
-      modelSummary <- list(modelSummary=I(summary(model)))
       
     }
     outL <- list(modelName,modelSaveLocation,modelCoeff,variables,metricOutput,modelSummary)
