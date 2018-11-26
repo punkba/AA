@@ -90,11 +90,10 @@ modelling_module<-function(DV,model_selection,predictorClass)
       
       metricOutput <- list(metricOutput=I(metricOutput))
       
+      modelSummary <- list(modelSummary=I(summary(model)))
+      
     }
-    outL <- list(modelName,modelSaveLocation,modelCoeff,variables,metricOutput)
-    
-    shell("cls")
-    print(summary(model))
+    outL <- list(modelName,modelSaveLocation,modelCoeff,variables,metricOutput,modelSummary)
     
     #if(modelName == 'lr')
     #{
