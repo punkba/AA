@@ -112,7 +112,7 @@ $("#show_perf").on("click", function(){
 				title: "Variable Importance",
 				width:600,
 				height:400,
-				bar: {groupWidth: "5%"},
+				bar: {groupWidth: "15%"},
 				legend: {position:"none"},
 			};
 			var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
@@ -128,8 +128,6 @@ $("#show_perf").on("click", function(){
 			eqn = eqnData[i]["Estimate"] +' * '+ eqnData[i]["vars"] +' + ' 
 		}
 		
-		eqn = eqn.slice(0,-1);
-		
 		document.getElementById('eqnBox').innerHTML = eqn;
 		$('#lrEqn').show();
 	}
@@ -140,7 +138,7 @@ $("#show_perf").on("click", function(){
 		prepareVarImpData(lists[3]["variables"]);
 		modelSummaryPath = lists[5]["summaryPath"].toString();
 		
-		document.getElementById('dLink').href= modelLink;
+		document.getElementById('dLink').href= 'file:///'+modelLink;
 		
 		//call functions to populate the results
 		drawVarImpPlot(varImpData);
