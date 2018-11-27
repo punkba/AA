@@ -122,12 +122,12 @@ $("#show_perf").on("click", function(){
 	
 	function contructLREQN(eqnData){
 		
-		var eqn = "";
+		var eqn = "logit(p) = ";
 		
 		for(var i =0;i<eqnData.length;i++){	
 			eqn = eqn + eqnData[i]["Estimate"] +' * '+ eqnData[i]["vars"] +' + ' 
 		}
-		eqn.slice(0,-1);
+		eqn.slice(0,-2);
 		document.getElementById('eqnBox').innerHTML = eqn;
 		$('#lrEqn').show();
 	}
