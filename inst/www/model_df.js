@@ -127,7 +127,7 @@ $("#show_perf").on("click", function(){
 		for(var i =0;i<eqnData.length;i++){	
 			eqn = eqn + eqnData[i]["Estimate"] +' * '+ eqnData[i]["vars"] +' + ' 
 		}
-		eqn.splice(0,-1);
+		eqn.slice(0,-1);
 		document.getElementById('eqnBox').innerHTML = eqn;
 		$('#lrEqn').show();
 	}
