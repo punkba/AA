@@ -5,6 +5,7 @@
   <title>Propensity Model</title>
     <script src="opencpu/jquery-1.10.2.min.js"></script>
     <script src="opencpu/opencpu-0.4.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 						<!--<script src="plot_df.js"></script>-->
 						<script src="read_df.js"></script>
 						<script src="model_df.js"></script>
@@ -19,6 +20,12 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <script src="js/highcharts.js"></script>
   <script src="http://code.highcharts.com/highcharts-more.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+  <script src ="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <!--	
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 -->
@@ -383,10 +390,7 @@
 														</div>
 
 
-                      <li class="l-section section">
-                        <div class="contact--lockup">
-                          <h2>Results</h2>
-                          <div class="result-wrapper">
+    <!--                      <div class="result-wrapper">
 
                             <div class="list">
                               <h6>Significant Variables</h6>
@@ -396,7 +400,7 @@
 							
 							<div id="plotdiv2"></div>	
 		
-		<!--
+		
                             <div class="result-chart">
                               <div id="Result01"></div>
                               <div id="Result02"></div>
@@ -431,7 +435,36 @@
                         </div>
                       </li>
 					  -->
-
+							<li class="l-section section">
+								<div class="text-center"><h2>Results</h2></div>
+								<div class="row">&nbsp </div>
+								<div class="row">&nbsp </div>
+								<div class="row">
+									<div class="nav nav-pills nav-fill flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+										<a class="nav-link" id="v-pills-varsImpPlot-tab" data-toggle="pill" href="#varsImpPlot" role="tab" aria-controls="" aria-selected="false">Variable Importance Plot</a>
+										<a class="nav-link active" id="v-pills-logEqn-tab" data-toggle="pill" href="#logEqn" role="tab" aria-controls="#logEqn" aria-selected="true">Model Output</a>
+										<a class="nav-link" id="v-pills-varsOdds-tab" data-toggle="pill" href="#varsOdds" role="tab" aria-controls="" aria-selected="false">Variable Odds</a>
+									</div>
+									<div class="tab-content col-8" id="v-pills-tabContent">
+										<div class="tab-pane fade show active" id="logEqn" role="tabpanel" aria-labelledby="v-pills-logEqn-tab">
+											<div class="m-3" id="lrEqn">
+												<code id="eqnBox">
+												</code>
+											</div>
+											<div id="modelDownload">
+												<a href="#" id="dLink" target="_blank"><i class="material-icons">cloud_download</i></a>
+												<h2> Download your trained model </h2>
+											</div>
+										</div>
+										<div class="tab-pane fade card-size" id="varsOdds" role="tabpanel" aria-labelledby="v-pills-varsOdds-tab">
+										</div>
+										<div class="tab-pane fade" id="varsImpPlot" role="tabpanel" aria-labelledby="v-pills-varsImpPlot-tab">
+											<div id="barchart_values" style="width: 600px; height: 400px;"></div>
+										</div>
+									</div>
+								</div>
+							<!--</div>-->
+						</li>
 
                       <li class="l-section section">
                         <div class="hire">
