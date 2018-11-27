@@ -6,6 +6,8 @@ $(document).ready(function(){
 	//hide the interstitial initially
 	$('#building_inter').hide();
 	$('#oem_results').hide();
+	$('#modelDownload').hide();
+	$('#lrEqn').hide();
 	
 	var model_persist = "";
 	var varImpData = "";
@@ -100,11 +102,50 @@ $("#show_perf").on("click", function(){
 		}
 	}
 	
+	function drawVarImpPlot(chartData)
+	{
+		google.charts.load("current", {packages:["corechart"]});
+		google.charts.setOnLoadCallback(drawChart);
+		function drawChart(){
+			var data = google.visualization.arrayToDataTable(chartData);
+			var options = {
+				title: "Variable Importance",
+				width:600,
+				height:400,
+				bar: {groupWidth: "5%"},
+				legend: {position:"none"},
+			};
+			var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+			chart.draw(data, options);
+		}
+	}
+	
+	function contructLREQN(eqnData){
+		
+		var eqn = "";
+		
+		for(var i =0;i<eqnData.length;i++){	
+			eqn = eqnData[i]["Estimate"] +' * '+ eqnData[i]["vars"] +' + ' 
+		}
+		
+		eqn = eqn.slice(0,-1);
+		
+		document.getElementById('eqnBox').innerHTML = eqn;
+		$('#lrEqn').show();
+	}
+	
 	function processLROutput(lists){
 		modelLink = lists[1]["modelSaveLocation"].toString();
 		output = lists[4]["metricOutput"].flat();
 		prepareVarImpData(lists[3]["variables"]);
 		modelSummaryPath = lists[5]["summaryPath"].toString();
+		
+		document.getElementById('dLink').href= modelLink;
+		
+		//call functions to populate the results
+		drawVarImpPlot(varImpData);
+		$('#modelDownload').show();
+		contructLREQN(lists[2]["modelCoeff"]);
 	}
 	
     var req = ocpu.call("modelling_module", {
