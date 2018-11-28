@@ -140,7 +140,7 @@ $("#show_perf").on("click", function(){
 		prepareVarImpData(lists[3]["variables"]);
 		modelSummaryPath = lists[5]["summaryPath"].toString();
 		
-		document.getElementById('modelLk').href=modelLink;
+		document.getElementById('modelLk').href=session.getFileURL(modelLink);
 		
 		//call functions to populate the results
 		drawVarImpPlot(varImpData);
@@ -164,7 +164,6 @@ $("#show_perf").on("click", function(){
 			console.log(output);
 			console.log(varImpData);
 			console.log(modelSummaryPath);
-			console.log(session.getLoc());
 			console.log(session.getFileURL("lr_summary.txt"));
 			
 			/*var sig_var=full_output[0]

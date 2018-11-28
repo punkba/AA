@@ -32,9 +32,10 @@ modelling_module<-function(DV,model_selection,predictorClass)
       modelOutput$`Pr(>|z|)`<-NULL
       modelOutput$pval <- NULL
       
-      sink(file="C:/OpencpuApp_IP/lr_summary.txt",split=TRUE)
+      #sink(file="C:/OpencpuApp_IP/lr_summary.txt",split=TRUE)
       sumMod <- summary(model)
-      save(sumMod,file="lr_summary.txt")
+      capture.output(sumMod,file="lr_summary.txt")
+      
       print(summary(model))
       sink(NULL)
     }
@@ -74,7 +75,7 @@ modelling_module<-function(DV,model_selection,predictorClass)
     else
     {
       modelName <- rownames(metrics)
-      modelSaveLocation <- paste0("C:/OpencpuApp_IP/",modelName,"_model.RData")
+      modelSaveLocation <- paste0(modelName,"_model.RData")
       
       save(model,file=modelSaveLocation)
       
@@ -95,7 +96,7 @@ modelling_module<-function(DV,model_selection,predictorClass)
       
       metricOutput <- list(metricOutput=I(metricOutput))
       
-      summaryPath <- list(summaryPath=I("C:/OpencpuApp_IP/lr_summary.txt"))
+      summaryPath <- list(summaryPath=I("lr_summary.txt"))
       
     }
     outL <- list(modelName,
