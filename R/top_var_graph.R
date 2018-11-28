@@ -8,6 +8,7 @@ top_var_graph <- function(target.var.name, ds){
   names(data)[names(data)==target.var.name] <- "DV"
   #options(java.parameters = "-Xmx1g")
   options(java.home="C:\\Program Files (x86)\\Java\\jre1.8.0_181\\")
+  Sys.setenv(JAVA_HOME="C:\\Program Files (x86)\\Java\\jre1.8.0_181\\")
   data$DV<- as.integer(data$DV)
   options(warn=-1)  
   
