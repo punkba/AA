@@ -120,6 +120,8 @@ $("#show_perf").on("click", function(){
 		}
 	}
 	
+	
+	
 	function contructLREQN(eqnData){
 		
 		var eqn = "logit(p) = ";
@@ -127,7 +129,7 @@ $("#show_perf").on("click", function(){
 		for(var i =0;i<eqnData.length;i++){	
 			eqn = eqn + eqnData[i]["Estimate"] +' * '+ eqnData[i]["vars"] +' + ' 
 		}
-		eqn.slice(0,-2);
+		eqn = eqn.slice(0,-2);
 		document.getElementById('eqnBox').innerHTML = eqn;
 		$('#lrEqn').show();
 	}
@@ -138,7 +140,7 @@ $("#show_perf").on("click", function(){
 		prepareVarImpData(lists[3]["variables"]);
 		modelSummaryPath = lists[5]["summaryPath"].toString();
 		
-		document.getElementById('dLink').href= 'file:///'+modelLink;
+		document.getElementById('modelLk').innerHTML= 'Find your saved model @ '+modelLink;
 		
 		//call functions to populate the results
 		drawVarImpPlot(varImpData);
