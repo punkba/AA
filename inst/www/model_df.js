@@ -164,6 +164,8 @@ $("#show_perf").on("click", function(){
 			console.log(output);
 			console.log(varImpData);
 			console.log(modelSummaryPath);
+			console.log(session.getLoc());
+			console.log(session.getFileURL("lr_summary.txt"));
 			
 			/*var sig_var=full_output[0]
 			var output=full_output[1]

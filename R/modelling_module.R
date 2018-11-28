@@ -34,7 +34,7 @@ modelling_module<-function(DV,model_selection,predictorClass)
       
       sink(file="C:/OpencpuApp_IP/lr_summary.txt",split=TRUE)
       sumMod <- summary(model)
-      save(sumMod,file="data/lr_summary.txt")
+      save(sumMod,file="lr_summary.txt")
       print(summary(model))
       sink(NULL)
     }
