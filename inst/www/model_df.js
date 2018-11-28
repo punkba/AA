@@ -140,8 +140,6 @@ $("#show_perf").on("click", function(){
 		prepareVarImpData(lists[3]["variables"]);
 		modelSummaryPath = lists[5]["summaryPath"].toString();
 		
-		document.getElementById('modelLk').href=session.getFileURL(modelLink);
-		
 		//call functions to populate the results
 		drawVarImpPlot(varImpData);
 		$('#modelDownload').show();
@@ -158,6 +156,7 @@ $("#show_perf").on("click", function(){
 			if(full_output[0]["modelName"] == 'lr')
 			{
 				processLROutput(full_output);
+				document.getElementById('modelLk').href=session.getFileURL(modelLink);
 			}
 			
 			console.log(modelLink);
