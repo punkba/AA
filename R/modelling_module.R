@@ -33,7 +33,8 @@ modelling_module<-function(DV,model_selection,predictorClass)
       modelOutput$pval <- NULL
       
       sink(file="C:/OpencpuApp_IP/lr_summary.txt",split=TRUE)
-      save(summary(model),file="data/lr_summary.txt")
+      sumMod <- summary(model)
+      save(sumMod,file="data/lr_summary.txt")
       print(summary(model))
       sink(NULL)
     }
