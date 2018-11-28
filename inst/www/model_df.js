@@ -8,6 +8,7 @@ $(document).ready(function(){
 	$('#oem_results').hide();
 	$('#modelDownload').hide();
 	$('#lrEqn').hide();
+	$("summaryArea").hide();
 	
 	var model_persist = "";
 	var varImpData = "";
@@ -157,6 +158,8 @@ $("#show_perf").on("click", function(){
 			{
 				processLROutput(full_output);
 				document.getElementById('modelLk').href=session.getFileURL(modelLink);
+				$("summaryArea").load(session.getFileURL(modelSummaryPath));
+				$("summaryArea").show();
 			}
 			
 			console.log(modelLink);
