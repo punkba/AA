@@ -140,7 +140,7 @@ $("#show_perf").on("click", function(){
 		prepareVarImpData(lists[3]["variables"]);
 		modelSummaryPath = lists[5]["summaryPath"].toString();
 		
-		document.getElementById('modelLk').innerHTML= 'Find your saved model @ '+modelLink;
+		document.getElementById('modelLk').href=modelLink;
 		
 		//call functions to populate the results
 		drawVarImpPlot(varImpData);
