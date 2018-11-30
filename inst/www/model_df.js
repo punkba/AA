@@ -160,7 +160,7 @@ $("#show_perf").on("click", function(){
 				document.getElementById('modelLk').href=session.getFileURL(modelLink);
 				
 				$.get(session.getFileURL(modelSummaryPath),function(data){
-					$("#summaryArea").html(data);
+					$("#summaryArea").val(data);
 				});
 				$("summaryArea").show();
 			}
