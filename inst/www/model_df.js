@@ -158,7 +158,10 @@ $("#show_perf").on("click", function(){
 			{
 				processLROutput(full_output);
 				document.getElementById('modelLk').href=session.getFileURL(modelLink);
-				$("summaryArea").load(session.getFileURL(modelSummaryPath));
+				
+				$.get(session.getFileURL(modelSummaryPath),function(data){
+					$("#summaryArea").html(data);
+				});
 				$("summaryArea").show();
 			}
 			
