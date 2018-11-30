@@ -164,13 +164,6 @@ $("#show_perf").on("click", function(){
 				});
 				$("summaryArea").show();
 			}
-			
-			console.log(modelLink);
-			console.log(output);
-			console.log(varImpData);
-			console.log(modelSummaryPath);
-			console.log(session.getFileURL("lr_summary.txt"));
-			console.log(session.getFileURL(modelSummaryPath));
 			/*var sig_var=full_output[0]
 			var output=full_output[1]
 			
