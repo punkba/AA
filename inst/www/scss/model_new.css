@@ -17,34 +17,6 @@ line-height:0.8 !important;
 	width:50%
 }
 
-lnk {
-  position: relative;
-  display: inline-block;
-  transition: .3s;
-  text-decoration: none;
-}
-
-lnk::before {
-  position: absolute;
-  top: .3em;
-  left: 0;
-  content: '';
-  width: 100%;
-  height: 1px;
-  background-color: red;
-  opacity: 0;
-  transition: .3s;
-}
-
-lnk:hover::before {
-  top: 0;
-  opacity: 1;
-}
-
-lnk:hover {
-  color: red;
-}
-
 .card-size>.list-group {
 	max-width:400px;
 	max-height:200px;
