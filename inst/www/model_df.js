@@ -135,6 +135,52 @@ $("#show_perf").on("click", function(){
 		$('#lrEqn').show();
 	}
 	
+	function constructVarOdds(varData){
+		var html1 = '<a href="#" class="list-group-item list-group-item-action flex-column align-items-start py-1"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">';
+		var html2 = '</h5><small>';
+		var html3 = '</small></div><p class="mb-1">';
+		var html4 = '</p><small><i class="material-icons">';
+		var html5 = '</i>';
+		var html6 = '</small></a>'
+		
+		var trUp = 'trending_up';
+		var trDown = 'trending_down';
+		var trend = ' ';
+		
+		var messagePosit1='With change in var Odds changes by xx times';
+		var times = 'xx times';
+		
+		for(var i =0;i<eqnData.length;i++){	
+			var val = eqnData[i]["Estimate"];
+			var name = eqnData[i]["vars"];
+			positiveIndicator =  val > 0
+			
+			var percent = Math.exp(val).toFixed(2);
+			times = times.replace(' xx ',(' '+percent+' '));
+			
+			messagePosit = messagePosit.replace(' var ',(' '+name+' '));
+			if(positiveIndicator > 0)
+			{
+				messagePosit = messagePosit.replace(' change ',' increase ');
+				messagePosit = messagePosit.replace(' changes ',' increases ');
+				messagePosit = messagePosit.replace(' xx ',(' '+percent+' '));
+				trend = 'trending_up';
+			}
+			else
+			{
+				messagePosit = messagePosit.replace(' change ',' decrease ');
+				messagePosit = messagePosit.replace(' changes ',' decreases ');
+				messagePosit = messagePosit.replace(' xx ',(' '+percent+' '));
+				trend = 'trending_down';
+			}
+			htmlText = html1+name+html2+'Coeff: '+val+html3+messagePosit+html4+trend+html5+times+html6;
+			
+			$('coeffElem').html(htmlText);
+		}
+		
+		
+	}
+	
 	function processLROutput(lists){
 		modelLink = lists[1]["modelSaveLocation"].toString();
 		output = lists[4]["metricOutput"].flat();
@@ -145,6 +191,7 @@ $("#show_perf").on("click", function(){
 		drawVarImpPlot(varImpData);
 		$('#modelDownload').show();
 		contructLREQN(lists[2]["modelCoeff"]);
+		constructVarOdds(lists[2]["modelCoeff"]);
 	}
 	
     var req = ocpu.call("modelling_module", {
