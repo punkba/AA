@@ -136,7 +136,7 @@ $("#show_perf").on("click", function(){
 	}
 	
 	function constructVarOdds(varData){
-		var html1 = '<a href="#" class="list-group-item list-group-item-action flex-column align-items-start py-1"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">';
+		var html1 = '<a href="#" class="list-group-item list-group-item-action flex-column align-items-start py-2"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">';
 		var html2 = '</h5><small>';
 		var html3 = '</small></div><p class="mb-1">';
 		var html4 = '</p><small><i class="material-icons">';
@@ -156,7 +156,7 @@ $("#show_perf").on("click", function(){
 			var positiveIndicator =  val > 0
 			
 			var percent = Math.exp(val).toFixed(2);
-			times = times.replace(' xx ',(' '+percent+' '));
+			times = times.replace('xx ',(' '+percent+' '));
 			
 			messagePosit1 = messagePosit1.replace(' var ',(' '+name+' '));
 			if(positiveIndicator > 0)
