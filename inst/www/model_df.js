@@ -153,27 +153,27 @@ $("#show_perf").on("click", function(){
 		for(var i =0;i<varData.length;i++){	
 			var val = varData[i]["Estimate"];
 			var name = varData[i]["vars"];
-			positiveIndicator =  val > 0
+			var positiveIndicator =  val > 0
 			
 			var percent = Math.exp(val).toFixed(2);
 			times = times.replace(' xx ',(' '+percent+' '));
 			
-			messagePosit = messagePosit.replace(' var ',(' '+name+' '));
+			messagePosit1 = messagePosit1.replace(' var ',(' '+name+' '));
 			if(positiveIndicator > 0)
 			{
-				messagePosit = messagePosit.replace(' change ',' increase ');
-				messagePosit = messagePosit.replace(' changes ',' increases ');
-				messagePosit = messagePosit.replace(' xx ',(' '+percent+' '));
+				messagePosit1 = messagePosit1.replace(' change ',' increase ');
+				messagePosit1 = messagePosit1.replace(' changes ',' increases ');
+				messagePosit1 = messagePosit1.replace(' xx ',(' '+percent+' '));
 				trend = 'trending_up';
 			}
 			else
 			{
-				messagePosit = messagePosit.replace(' change ',' decrease ');
-				messagePosit = messagePosit.replace(' changes ',' decreases ');
-				messagePosit = messagePosit.replace(' xx ',(' '+percent+' '));
+				messagePosit1 = messagePosit1.replace(' change ',' decrease ');
+				messagePosit1 = messagePosit1.replace(' changes ',' decreases ');
+				messagePosit1 = messagePosit1.replace(' xx ',(' '+percent+' '));
 				trend = 'trending_down';
 			}
-			htmlText = html1+name+html2+'Coeff: '+val+html3+messagePosit+html4+trend+html5+times+html6;
+			htmlText = html1+name+html2+'Coeff: '+val+html3+messagePosit1+html4+trend+html5+times+html6;
 			
 			$('coeffElem').html(htmlText);
 		}
