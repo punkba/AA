@@ -13,6 +13,10 @@ select#btn_ct {
 line-height:0.8 !important;
 }
 
+a{
+	background-color:white;
+}
+
 .custom-select{
 	width:50%
 }
