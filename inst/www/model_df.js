@@ -150,9 +150,9 @@ $("#show_perf").on("click", function(){
 		var messagePosit1='With change in var Odds changes by xx times';
 		var times = 'xx times';
 		
-		for(var i =0;i<eqnData.length;i++){	
-			var val = eqnData[i]["Estimate"];
-			var name = eqnData[i]["vars"];
+		for(var i =0;i<varData.length;i++){	
+			var val = varData[i]["Estimate"];
+			var name = varData[i]["vars"];
 			positiveIndicator =  val > 0
 			
 			var percent = Math.exp(val).toFixed(2);
