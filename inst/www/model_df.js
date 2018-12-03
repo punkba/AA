@@ -176,6 +176,8 @@ $("#show_perf").on("click", function(){
 			htmlText = html1+name+html2+'Coeff: '+val+html3+messagePosit1+html4+trend+html5+times+html6;
 			
 			$('#coeffElem').append(htmlText);
+			
+			times = 'xx times';
 		}
 		
 		
