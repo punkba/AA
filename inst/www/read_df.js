@@ -56,7 +56,7 @@ $(document).ready(function(){
 				var req = ocpu.call("imp_var_list", {	"target.var.name" : dvname}, 
 			function(session){
 				session.getObject(function(data){
-				//$("#output code").text(data);	
+				$("#output").text(data);	
 				//alert("imp_var_list ends: trying to append" );
 				
 				for (var i=0; i < data.length;++i)
