@@ -1,0 +1,56 @@
+.dead_center {
+        position: relative;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 60%;
+        height: 60%;
+        margin: auto;
+    }
+
+select#btn_ct {
+line-height:0.8 !important;
+}
+
+a{
+	background-color:white;
+}
+
+.custom-select{
+	width:50%
+}
+
+.card-size>.list-group {
+	max-width:600px;
+	max-height:200px;
+}
+
+.align_cust{
+	margin-left:auto; 
+	margin-right:0;
+}
+
+.item-select select
+{
+    right: auto;
+    padding: 13px 45px 15px 0px;
+    direction: ltr;
+}
+
+.text_cust_right_1{
+	position:relative;
+	margin-left:65%;
+}
+
+.text_cust_right{
+	position:relative;
+	margin-left:25%;
+}
+
+.shadow-textarea textarea.form-control::placeholder {
+    font-weight: 300;
+}
+.shadow-textarea textarea.form-control {
+    padding-left: 0.8rem;
+}
