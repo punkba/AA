@@ -1,26 +1,31 @@
-('#varChangeLnk').hide();
+$(document).ready(function(){
+$('#varChangeLnk').hide();
 //Get the variable list after uploading the data
 
+
+var categorical = ;
+var continuous = '';
+var discrete = '';
+
 function getAndDisplayVariables(listInput){
-	categorical = listInput[1]['categorical']
-	continuous = listInput[2]['continuous']
-	discrete = listInput[3]['discrete']
+	categorical = listInput[1]['categorical'];
+	continuous = listInput[2]['continuous'];
+	discrete = listInput[3]['discrete'];
 	
 	//create the lsit elements to display continuous variables
 	for(elem = 0;elem < categorical.length;elem++){
-		createCheckBox(categorical[elem],'#cate-list');
+		createList(categorical[elem],'#cate-list');
 	}
 	
 	//create the lsit elements to display continuous variables
 	for(elem = 0;elem < continuous.length;elem++){
-		createCheckBox(continuous[elem],'#conte-list');
+		createList(continuous[elem],'#conte-list');
 	}
 	
 	//create checkbox to convert discrete to categorical
 	for(elem = 0;elem < discrete.length;elem++){
-		createCheckBox(discrete[elem]);
+		createCheckBox(discrete[elem],elem);
 	}
-	
 }
 
 function createList(value,locToCreate){
@@ -30,10 +35,10 @@ function createList(value,locToCreate){
 	document.getElementById(locToCreate).appendChild(node);
 }
 
-function createCheckBox(value){
+function createCheckBox(value,elem){
 	var chk = document.createElement('input');  // CREATE CHECK BOX.
     chk.setAttribute('type', 'checkbox');       // SPECIFY THE TYPE OF ELEMENT.
-    chk.setAttribute('id', value + ' Box');     // SET UNIQUE ID.
+    chk.setAttribute('id', 'Variable'+elem);     // SET UNIQUE ID.
     chk.setAttribute('value', value);
     chk.setAttribute('name', 'variables');
 	
@@ -49,12 +54,37 @@ function createCheckBox(value){
 	value = '';
 }
 
+function getUpdatedVariableList(){
+	var checkBoxes = document.getElementById('discreteBox').elements;
+	var updatedDiscrete = '';
+	
+	for(var i=0;checkBoxes.length;i++)
+	{
+		var checkBoxObj = document.getElementById('Variable'+i);
+		if(checkBoxObj.checked == true)
+		{
+			categorical.push(checkBoxObj.value);
+		}
+		else
+		{
+			updatedDiscrete.push(checkBoxObj.value)
+		}
+	} 
+		
+	var finalOutput  = finalOutput.push(continuous);
+	finalOutput.push(categorical);
+	finalOutput.push(updatedDiscrete);
+}
 
-('#varChangeBtn').on('click',function(){
-	('#varChangeBtn').
+$('#varChangeBtn').on('click',function(){
+	//Disable the button for the user
+	$('#varChangeBtn').prop("disabled",true);
 	
+	//Get the list of variable names after updation by user for passing it to R
+	
+	
+	var req = ocpu.call("fileName",{},function(session){});
+	$('#varChangeLnk').show();
 });
-/*
-var req = ocpu.call("fileName",{
-	
-})*/
+
+});

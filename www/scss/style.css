@@ -253,6 +253,11 @@ h6 {
   padding: 0;
 }
 
+.scroll {
+    max-height: 700px;
+    overflow-y: auto;
+}
+
 li {
   list-style: none;
 }

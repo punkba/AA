@@ -10,6 +10,7 @@
 						<script src="read_df.js"></script>
 						<script src="model_df.js"></script>
 						<script src="scoring_df.js"></script>
+						<script src="var_change.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
   <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -180,7 +181,7 @@
 							<div class='container-fluid'>
 									<div class='varLi'><h2> Variable Manipulation </h2></div>
 								<div class='row'>
-									<div class='col-sm'>
+									<div class='col-sm scroll'>
 										<div class="card">
 											<div class="card-header text-primary text-center">
 											Categorical Variables
@@ -194,7 +195,7 @@
 											</div>
 										</div>
 									</div>
-									<div class='col-sm'>
+									<div class='col-sm scroll'>
 										<div class="card">
 											<div class="card-header text-primary text-center">
 											Continuous Variables
@@ -208,7 +209,7 @@
 											</div>
 										</div>
 									</div>
-									<div class='col-sm'>
+									<div class='col-sm scroll'>
 										<div class="card">
 											<div class="card-header text-primary text-center">
 											Discrete Variables
@@ -248,8 +249,8 @@
 								</div>
 								<div class='row'>
 									<div class='col-sm'>
-										<div class="text-center">
-											<a id="varChangeLnk" href="#" target="_blank">
+										<div class="text-center" id="varChangeLnk">
+											<a href="#" target="_blank">
 												<h2 class='text-center text-light'>
 													<i class="far fa-arrow-alt-circle-down fa-2x"></i></br>
 													Download the variable treatment Log file
