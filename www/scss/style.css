@@ -280,14 +280,11 @@ li {
 }
 
 button {
-  background: #0077a3 !important;
   border: none;
   padding: 6px 12px;
-  transition: .4s;
   color: #fff;
 }
 button:hover {
-  background: #005270 !important;
   cursor: pointer;
 }
 
