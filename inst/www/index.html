@@ -11,6 +11,7 @@
 						<script src="model_df.js"></script>
 						<script src="scoring_df.js"></script>
 						<script src="var_change.js"></script>
+						<script src="plot.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
   <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -174,7 +175,7 @@
 										<br>
 										</br>
 									</div>
-									<div class="lds-dual-ring" id="status1">Go on & feed me a CSV!</div>
+									<div id="status1">Go on & feed me a CSV!</div>
 									</div>
 						</li>
 						<li class="l-section section" id="varManip">
@@ -264,15 +265,28 @@
 						<li class="l-section section">
 							<div class="work">
 							  <h2>Variable Profiling</h2>
-								<body id="addOption_list";></body>
-								<FORM name="drop_list">
-									<SELECT id="DropList" NAME="DropList" >
-									</SELECT>
-								</form>
-								<div class="radio-list-wrapper">
-									<div id="plotdiv"></div>
-									<div id="plotdiv1"></div>	
-								</div>
+										<!--<body id="addOption_list";></body>
+										<FORM name="drop_list">
+											<SELECT id="DropList" NAME="DropList">
+											</SELECT>
+										</form>-->
+									<div class="dropdown">
+										<button class="btn btn-outline-light dropdown-toggle float-right" type="button" id="varDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											Dropdown button
+										</button>
+										<div class="dropdown-menu" id='varProfileOptions' aria-labelledby="dropdownMenuButton">
+											<a class="dropdown-item" href="#">Variable 1</a>
+											<a class="dropdown-item" href="#">Variable 2</a>
+											<a class="dropdown-item" href="#">Variable 3</a>
+										</div>
+									</div>
+									<div>
+									&nbsp
+									</div>
+									<div class="radio-list-wrapper">
+										<div id="plotdiv"></div>
+										<div id="plotdiv1"></div>	
+									</div>
 							</div>
 						</li>
 						<li class="l-section section">

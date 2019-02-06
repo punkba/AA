@@ -63,35 +63,6 @@ $("#show_perf").on("click", function(){
 		$('#building_inter').show();
 	    $("#building_inter").text("Training the Model... Will be ready in a jiffy!");
 		
-		//alert(isChecked);		
-		//$('#building_inter').hide();
-		//$('#model_out').show();
-		//$('#normal_results').show();
-		//var table = document.getElementById("results_table").tBodies[0];
-		//alert("1");
-		//table.rows[0].cells[0].innerHTML=isChecked;
-		//table.rows[0].cells[1].innerHTML=output[1];
-		//table.rows[0].cells[2].innerHTML=output[2];
-		//table.rows[0].cells[3].innerHTML=output[3];
-		//table.rows[0].cells[4].innerHTML=output[4];
-		
-			//Signififcant Variable List
-			
-			//sig_var=["hi","hello"]
-			//for (var i=0; i < sig_var.length;++i)
-			//	{	
-			//		var node = document.createElement("LI");           		// create the a <li> node			
-			//		var textnode = document.createTextNode(sig_var[i]);         // Create a text node
-			//		node.appendChild(textnode);                              // Append the text to <li>
-			//		document.getElementById("sig_list").appendChild(node);     // Append <li> to <ul> with id="myList"
-			//	}
-				
-		
-		
-		//alert(isChecked);
-
-//alert(dvname);	alert(isChecked);alert(preddv);
-    //perform the request
 	function prepareVarImpData(listInp){
 		
 		varImpData = [['Variable Name','Variable Importance']];

@@ -3,6 +3,7 @@ $(document).ready(function(){
 	var categorical = '';
 	var continuous = '';
 	var discrete = '';
+
 	
 function createList(value,locToCreate){
 	var node = document.createElement("LI");           		
@@ -56,7 +57,8 @@ function createCheckBox(value,elem){
 		  return;
 		}
 		
-		$("#status1").text("Reading the CSV...");	
+		$("#status1").text("Reading the CSV...")
+		$("#status1").addClass("lds-dual-ring");	
 	  
 		uploadcsv(filename); 
 	  });

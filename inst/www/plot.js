@@ -1,25 +1,18 @@
 $(document).ready(function(){
-  	  
-	$("#submitbutton").on("click", function(){
-
-		nfield=1000
-		distfield="normal"
-		//create the plot area on the plotdiv element
-		alert("plotting");
-			var req = $("#plotdiv1").rplot("randomplot", {
-			n : nfield,
-			dist : distfield
-		})
-
-		//if R returns an error, alert the error message
-		req.fail(function(){
-		  alert("Server error: " + req.responseText);
-		});
+	
+	var selectedVar = '';
+	
+	$("#varProfileOptions a").on('click',function(){
+		console.log($(this).text());
+		selectedVar = $(this).text();
+		$('#varDropdownMenuButton').html(selectedVar);
 		
-		//after request complete, re-enable the button 
-		req.always(function(){
-		  $("#submitbutton").removeAttr("disabled")
-		});
+		/*
+		var req = $('#plotdiv1').rplot('variable_profiling_function',{dv:dvname,var:selectedVar});
+		
+		req.fail(function(){
+				alert("Server error: " + req.responseText);
+		}); */
 	});
 });
 
