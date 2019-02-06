@@ -17,7 +17,7 @@
   border-radius: 0;
 }
 
-#background-wrap {
+--#background-wrap {
   bottom: 0;
   left: 0;
   position: fixed;
@@ -231,7 +231,7 @@
 body {
   background: #12a2e5;
   font: normal 14px "Open Sans", sans-serif;
-  color: #fff;
+  color: #343a40;
 }
 
 label {
@@ -253,19 +253,38 @@ h6 {
   padding: 0;
 }
 
+.scroll {
+    max-height: 700px;
+    overflow-y: auto;
+}
+
 li {
   list-style: none;
 }
 
+.varLi li {
+	position:relative;
+	margin-bottom:20px;
+	padding-left:5px;
+}
+
+.varLi h2 {
+  margin: 0 0 12px 0;
+  text-align: center;
+}
+
+.varLi li:last-child {
+	position:relative;
+	margin-bottom:9px;
+	padding-left:5px;
+}
+
 button {
-  background: #0077a3 !important;
   border: none;
   padding: 6px 12px;
-  transition: .4s;
   color: #fff;
 }
 button:hover {
-  background: #005270 !important;
   cursor: pointer;
 }
 
@@ -284,6 +303,11 @@ header .header-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.variables h2 {
+  margin: 0 0 12px 0;
+  text-align: center;
 }
 
 .l-viewport {
@@ -393,6 +417,10 @@ header .header-wrapper {
 .body-margin .side-nav-fixed .side-nav li:nth-child(6)::before {
   content: "06";
 }
+.body-margin .side-nav-fixed .side-nav li:nth-child(7)::before {
+  content: "07";
+}
+
 .body-margin .side-nav-fixed .side-nav li.is-active {
   color: #fff;
   transition: color 0.4s ease-in-out;
