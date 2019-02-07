@@ -102,6 +102,7 @@ function initiatePrelimAnalysis(sessionData){
 								alert("Server error: " + req.responseText);
 							});
 						$("#status1").text("Go to next page for variable information ..");
+						$("#status1").removeClass("lds-dual-ring");	
 						$("#chooseCSV").removeClass("section--is-active");
 						$("#varManip").addClass("section--is-active");
 						});
