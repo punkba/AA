@@ -67,19 +67,10 @@ function createCheckBox(value,elem){
   function uploadcsv(filename){
     $("#submitbutton").attr("disabled", "disabled");
     var req = ocpu.call("read_csv", {
-		file : filename
+		file : filename,
     },function(session){
-		$("#status1").text("Analysing the Data !!");
-		session.getObject(function(full_output){
-			getAndDisplayVariables(full_output);
-		}).fail(
-		function(){
-			alert("Server error: " + req.responseText);
-		});
-		$("#status1").text("Go to next page for variable information ..");
-		//Focusing to next page automatically
-		$("#chooseCSV").removeClass("section--is-active");
-		$("#varManip").addClass("section--is-active");
+		$("#status1").text("Got the file !!");
+		initiatePrelimAnalysis(session);
     });
     
     //if R returns an error, alert the error message
@@ -91,7 +82,28 @@ function createCheckBox(value,elem){
     req.always(function(){
       $("#submitbutton").removeAttr("disabled")
     });        
-  }    
+  }
+  
+function initiatePrelimAnalysis(sessionData){
+	
+	var req = ocpu.call('exploreDf',
+						{
+							df_full: sessionData,
+							dv		: dvname
+						},
+						function(session){
+							$("#status1").text("Analysing the file !!");
+							session.getObject(function(full_output){
+								getAndDisplayVariables(full_output);
+							}).fail(
+							function(){
+								alert("Server error: " + req.responseText);
+							});
+						$("#status1").text("Go to next page for variable information ..");
+						$("#chooseCSV").removeClass("section--is-active");
+						$("#varManip").addClass("section--is-active");
+						});
+}
   
 function getAndDisplayVariables(listInput){
 	categorical = listInput[1]['categorical'];
