@@ -3,6 +3,8 @@ $(document).ready(function(){
 	var categorical = '';
 	var continuous = '';
 	var discrete = '';
+	
+	var testOutput='';
 
 	
 function createList(value,locToCreate){
@@ -106,6 +108,7 @@ function initiatePrelimAnalysis(sessionData){
 }
   
 function getAndDisplayVariables(listInput){
+	testOutput = listInput;
 	categorical = listInput[1]['categorical'];
 	continuous = listInput[2]['continuous'];
 	discrete = listInput[3]['discrete'];
