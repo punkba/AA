@@ -110,9 +110,9 @@ function initiatePrelimAnalysis(sessionData){
   
 function getAndDisplayVariables(listInput){
 	testOutput = listInput;
+	discrete = listInput[0]['discrete'];
 	categorical = listInput[1]['categorical'];
 	continuous = listInput[2]['continuous'];
-	discrete = listInput[3]['discrete'];
 	
 	//create the lsit elements to display continuous variables
 	for(elem = 0;elem < categorical.length;elem++){
