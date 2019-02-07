@@ -122,7 +122,7 @@ function createCheckBox(value,elem){
     lbl.setAttribute('for', value + ' Box');
 
     // CREATE A TEXT NODE AND APPEND IT TO THE LABEL.
-    lbl.appendChild(document.createTextNode(obj.value));
+    lbl.appendChild(document.createTextNode(value));
 	
 	discreteBox.appendChild(chk);
 	discreteBox.appendChild(lbl);
