@@ -114,13 +114,16 @@ function createListElem(value,locToCreate){
 function createCheckBox(value,elem){
 	var chk = document.createElement('input');  // CREATE CHECK BOX.
     chk.setAttribute('type', 'checkbox');       // SPECIFY THE TYPE OF ELEMENT.
-    chk.setAttribute('id', 'Variable'+elem);     // SET UNIQUE ID.
+    chk.setAttribute('id', 'Variable'+elem); 
+	chk.setAttribute('class','form-check-input');
+	console.log()// SET UNIQUE ID.
     chk.setAttribute('value', value);
     chk.setAttribute('name', 'variables');
 	
 	var lbl = document.createElement('label');  // CREATE LABEL.
-    lbl.setAttribute('for', value + ' Box');
-
+    lbl.setAttribute('for', 'Variable'+elem);
+	lbl.setAttribute('class','form-check-label');
+	
     // CREATE A TEXT NODE AND APPEND IT TO THE LABEL.
     lbl.appendChild(document.createTextNode(value));
 	
