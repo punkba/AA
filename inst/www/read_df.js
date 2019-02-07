@@ -5,33 +5,6 @@ $(document).ready(function(){
 	var discrete = '';
 	
 	var testOutput='';
-
-	
-function createList(value,locToCreate){
-	var node = document.createElement("LI");           		
-	var textnode = document.createTextNode(value);
-	node.appendChild(textnode);
-	document.getElementById(locToCreate).appendChild(node);
-}
-	
-function createCheckBox(value,elem){
-	var chk = document.createElement('input');  // CREATE CHECK BOX.
-    chk.setAttribute('type', 'checkbox');       // SPECIFY THE TYPE OF ELEMENT.
-    chk.setAttribute('id', 'Variable'+elem);     // SET UNIQUE ID.
-    chk.setAttribute('value', value);
-    chk.setAttribute('name', 'variables');
-	
-	var lbl = document.createElement('label');  // CREATE LABEL.
-    lbl.setAttribute('for', value + ' Box');
-
-    // CREATE A TEXT NODE AND APPEND IT TO THE LABEL.
-    lbl.appendChild(document.createTextNode(obj.value));
-	
-	discreteBox.appendChild(chk);
-	discreteBox.appendChild(lbl);
-	
-	value = '';
-}
 	
 	$("#submitbutton").on("click", function(){
 		var filename = $("#uploadFile")[0].files[0];
@@ -116,12 +89,12 @@ function getAndDisplayVariables(listInput){
 	
 	//create the lsit elements to display continuous variables
 	for(elem = 0;elem < categorical.length;elem++){
-		createList(categorical[elem],'#cate-list');
+		createListElem(categorical[elem],'#cate-list');
 	}
 	
 	//create the lsit elements to display continuous variables
 	for(elem = 0;elem < continuous.length;elem++){
-		createList(continuous[elem],'#conte-list');
+		createListElem(continuous[elem],'#conte-list');
 	}
 	
 	//create checkbox to convert discrete to categorical
@@ -130,7 +103,31 @@ function getAndDisplayVariables(listInput){
 	}
 }
 
+function createListElem(value,locToCreate){
+	var node = document.createElement("LI");           		
+	var textnode = document.createTextNode(value);
+	node.appendChild(textnode);
+	document.getElementById(locToCreate).appendChild(node);
+}
+	
+function createCheckBox(value,elem){
+	var chk = document.createElement('input');  // CREATE CHECK BOX.
+    chk.setAttribute('type', 'checkbox');       // SPECIFY THE TYPE OF ELEMENT.
+    chk.setAttribute('id', 'Variable'+elem);     // SET UNIQUE ID.
+    chk.setAttribute('value', value);
+    chk.setAttribute('name', 'variables');
+	
+	var lbl = document.createElement('label');  // CREATE LABEL.
+    lbl.setAttribute('for', value + ' Box');
 
+    // CREATE A TEXT NODE AND APPEND IT TO THE LABEL.
+    lbl.appendChild(document.createTextNode(obj.value));
+	
+	discreteBox.appendChild(chk);
+	discreteBox.appendChild(lbl);
+	
+	value = '';
+}
 
 
 /*  
