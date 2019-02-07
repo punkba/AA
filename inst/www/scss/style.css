@@ -253,6 +253,12 @@ h6 {
   padding: 0;
 }
 
+.card-body { 
+	height: 42px; 
+	overflow-x: scroll; 
+	width: 100%; 
+}
+
 .scroll {
     max-height: 400px;
     overflow-y: auto;

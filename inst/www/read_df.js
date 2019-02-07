@@ -7,7 +7,7 @@ $(document).ready(function(){
 	var testOutput='';
 	
 	$("#submitbutton").on("click", function(){
-		var filename = $("#uploadFile")[0].files[0];
+		filename = $("#uploadFile")[0].files[0];
 		dvname=$("#dvname").val();
 		preddv=$("#preddv").val();
 		ds=$("#data-split").val();
@@ -116,7 +116,6 @@ function createCheckBox(value,elem){
     chk.setAttribute('type', 'checkbox');       // SPECIFY THE TYPE OF ELEMENT.
     chk.setAttribute('id', 'Variable'+elem); 
 	chk.setAttribute('class','form-check-input');
-	console.log()// SET UNIQUE ID.
     chk.setAttribute('value', value);
     chk.setAttribute('name', 'variables');
 	

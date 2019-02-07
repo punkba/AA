@@ -3,7 +3,6 @@ $('#varChangeLnk').hide();
 //Get the variable list after uploading the data
 
 function getUpdatedVariableList(){
-	var checkBoxes = document.getElementById('discreteBox').elements;
 	var elementList = new Array();
 	
 	for(var i=0;checkBoxes.length;i++)
@@ -14,7 +13,6 @@ function getUpdatedVariableList(){
 			elementList.push(checkBoxObj.value);
 		}
 	}
-	
 	return elementList;
 }
 
