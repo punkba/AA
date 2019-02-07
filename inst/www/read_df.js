@@ -107,7 +107,8 @@ function createListElem(value,locToCreate){
 	var node = document.createElement("LI");           		
 	var textnode = document.createTextNode(value);
 	node.appendChild(textnode);
-	document.getElementById(locToCreate).appendChild(node);
+	console.log(locToCreate);
+	$(locToCreate).append(node);
 }
 	
 function createCheckBox(value,elem){
