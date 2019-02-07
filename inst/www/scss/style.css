@@ -254,14 +254,9 @@ h6 {
 }
 
 .card-body { 
-	height: 42px; 
+	height: 300px; 
 	overflow-x: scroll; 
 	width: 100%; 
-}
-
-.scroll {
-    max-height: 400px;
-    overflow-y: auto;
 }
 
 li {
