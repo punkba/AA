@@ -2,7 +2,6 @@ $(document).ready(function(){
 $('#varChangeLnk').hide();
 //Get the variable list after uploading the data
 
-var checkedVars = new Array();
 
 
 $('#varChangeBtn').on('click',function(){

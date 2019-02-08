@@ -134,6 +134,8 @@ function createCheckBox(value,elem){
 }
 
 
+var checkedVars = new Array();
+
 function updateCheckList(variableName){
 	
 	var variable = document.getElementById(variableName);
