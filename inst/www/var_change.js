@@ -4,23 +4,6 @@ $('#varChangeLnk').hide();
 
 var checkedVars = new Array();
 
-function updateCheckList(variableName){
-	
-	var variable = document.getElementById(variableName);
-	
-	if(variable.checked)
-	{
-		checkedVars.push(variable.value);
-	}
-	else{
-		var index = checkedVars.indexOf(variable.value);
-		if(index !== -1)
-		{
-			checkedVars.splice(index,1);
-		}			
-	}
-}
-
 
 $('#varChangeBtn').on('click',function(){
 	//Disable the button for the user
@@ -43,4 +26,22 @@ $('#varChangeBtn').on('click',function(){
 								);
 						});
 });
+
+function updateCheckList(variableName){
+	
+	var variable = document.getElementById(variableName);
+	
+	if(variable.checked)
+	{
+		checkedVars.push(variable.value);
+	}
+	else{
+		var index = checkedVars.indexOf(variable.value);
+		if(index !== -1)
+		{
+			checkedVars.splice(index,1);
+		}			
+	}
+}
+
 });
