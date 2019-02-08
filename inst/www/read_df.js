@@ -6,6 +6,8 @@ $(document).ready(function(){
 	
 	var testOutput='';
 	
+	var fileLinkBeforePreProcess = '';
+	
 	$("#submitbutton").on("click", function(){
 		filename = $("#uploadFile")[0].files[0];
 		dvname=$("#dvname").val();
@@ -86,6 +88,7 @@ function getAndDisplayVariables(listInput){
 	discrete = listInput[0]['discrete'];
 	categorical = listInput[1]['categorical'];
 	continuous = listInput[2]['continuous'];
+	fileLinkBeforePreProcess = session.getFileURL(listInput[3]['savedFileName']);
 	
 	//create the lsit elements to display continuous variables
 	for(elem = 0;elem < categorical.length;elem++){
@@ -152,8 +155,6 @@ function updateCheckList(variableName){
 		}			
 	}
 }
-
-/*  
   function printsummary(mydata){
 	var req = ocpu.call("printsummary", 
 						{"df_full" : mydata,

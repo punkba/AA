@@ -64,8 +64,12 @@ cont_var_names<-names(df_cont)
 cont_var_names
 continuous <- list(continuous=I(cont_var_names))
 
+#send the saved input file name to UI so that it can be passed to the preprocessing.R in the next call
+
+savedFileName <- list(savedFileName=I("prepro_step1.csv"))
+
 #store the variables as list of lists
-final_list <- list(discrete,categorical,continuous)
+final_list <- list(discrete,categorical,continuous,savedFileName)
 
 lapply(final_list, function(x) write.table( data.frame(x), 'test_user.csv'  , append= T, sep=','))
 

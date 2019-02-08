@@ -10,7 +10,8 @@ $('#varChangeBtn').on('click',function(){
 	//Get the list of variable names after updation by user for passing it to R
 
 	var req = ocpu.call("preprocessing",
-						{conv_var_names:checkedVars},
+						{conv_var_names:checkedVars,
+						fileName:fileLinkBeforePreProcess},
 						function(session){
 								session.getObject(function(full_output){
 									//document.getElementById('varChangeLnk').href = session.getFileURL(full_output[1]['fileName']);
