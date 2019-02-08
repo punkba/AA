@@ -64,11 +64,10 @@ cont_var_names<-names(df_cont)
 cont_var_names
 continuous <- list(continuous=I(cont_var_names))
 
-
 #store the variables as list of lists
 final_list <- list(discrete,categorical,continuous)
 
-lapply(final_list, function(x) write.table( data.frame(x), 'test_user.csv'  , append= T, sep=','))
+#lapply(final_list, function(x) write.table( data.frame(x), 'test_user.csv'  , append= T, sep=','))
 
 return(final_list)
 #close loop and return lists

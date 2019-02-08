@@ -6,8 +6,6 @@ $(document).ready(function(){
 	
 	var testOutput='';
 	
-	var globalSession = '';
-	
 	$("#submitbutton").on("click", function(){
 		filename = $("#uploadFile")[0].files[0];
 		dvname=$("#dvname").val();

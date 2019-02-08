@@ -1,6 +1,8 @@
 preprocessing <- function(conv_var_names){
 
-data = read.csv(file="C:/opencpuapp_ip/prepro_step1.csv", header=TRUE, sep=",")
+print(system.file('prepro_step1.csv'))
+
+data = read.csv(file='C:/opencpuapp_ip/prepro_step1.csv', header=TRUE, sep=",")
 cat_var=data.frame()
 df_temp <- data
 df_temp<-df_temp[, names(df_temp) != "DV"] 
@@ -363,8 +365,6 @@ final_data_after_processing=data.frame()
 final_data_after_processing<-df_cat
 final_data_after_processing<-cbind(final_data_after_processing,select(data,.data$DV))
 #return(final_data_after_processing)
-
-write.csv(final_data_after_processing,"C:/opencpuapp_ip/cleaned_data.csv")
 
 return (0)
 }
