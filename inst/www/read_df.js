@@ -6,7 +6,7 @@ $(document).ready(function(){
 	
 	var testOutput='';
 	
-	var fileLinkBeforePreProcess = '';
+	var globalSession = '';
 	
 	$("#submitbutton").on("click", function(){
 		filename = $("#uploadFile")[0].files[0];
@@ -70,6 +70,7 @@ function initiatePrelimAnalysis(sessionData){
 						},
 						function(session){
 							$("#status1").text("Analysing the file !!");
+							globalSession = session;
 							session.getObject(function(full_output){
 								getAndDisplayVariables(full_output);
 							}).fail(

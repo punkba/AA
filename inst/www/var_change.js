@@ -8,22 +8,7 @@ $('#varChangeBtn').on('click',function(){
 	//Disable the button for the user
 	$('#varChangeBtn').prop("disabled",true);
 	//Get the list of variable names after updation by user for passing it to R
-
-	var req = ocpu.call("read_csv", {
-		file : filename,
-    },function(session){
-		initiatePreProcess(session);
-    });
-    
-    //if R returns an error, alert the error message
-    req.fail(function(){
-      alert("Server error: " + req.responseText);
-    });
-    
-    //after request complete, re-enable the button 
-    req.always(function(){
-      $("#submitbutton").removeAttr("disabled")
-    });
+	
 });
 
 function initiatePreProcess(sessionData){
