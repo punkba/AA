@@ -118,7 +118,7 @@ function createCheckBox(value,elem){
 	chk.setAttribute('class','form-check-input');
     chk.setAttribute('value', value);
     chk.setAttribute('name', 'variables');
-	chk.setAttribute('onclick','updateCheckList('+'Variable'+elem+');');
+	chk.setAttribute('onclick','updateCheckList('+'Variable'+elem+')');
 	
 	var lbl = document.createElement('label');  // CREATE LABEL.
     lbl.setAttribute('for', 'Variable'+elem);
@@ -133,6 +133,23 @@ function createCheckBox(value,elem){
 	value = '';
 }
 
+
+function updateCheckList(variableName){
+	
+	var variable = document.getElementById(variableName);
+	
+	if(variable.checked)
+	{
+		checkedVars.push(variable.value);
+	}
+	else{
+		var index = checkedVars.indexOf(variable.value);
+		if(index !== -1)
+		{
+			checkedVars.splice(index,1);
+		}			
+	}
+}
 
 /*  
   function printsummary(mydata){

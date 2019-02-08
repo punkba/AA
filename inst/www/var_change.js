@@ -26,22 +26,4 @@ $('#varChangeBtn').on('click',function(){
 								);
 						});
 });
-
-function updateCheckList(variableName){
-	
-	var variable = document.getElementById(variableName);
-	
-	if(variable.checked)
-	{
-		checkedVars.push(variable.value);
-	}
-	else{
-		var index = checkedVars.indexOf(variable.value);
-		if(index !== -1)
-		{
-			checkedVars.splice(index,1);
-		}			
-	}
-}
-
 });
