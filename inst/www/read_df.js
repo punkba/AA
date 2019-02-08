@@ -88,7 +88,7 @@ function getAndDisplayVariables(listInput){
 	discrete = listInput[0]['discrete'];
 	categorical = listInput[1]['categorical'];
 	continuous = listInput[2]['continuous'];
-	fileLinkBeforePreProcess = session.getFileURL(listInput[3]['savedFileName']);
+	fileLinkBeforePreProcess = session.getFileURL(listInput[3]['savedFileName'])[0];
 	
 	//create the lsit elements to display continuous variables
 	for(elem = 0;elem < categorical.length;elem++){
