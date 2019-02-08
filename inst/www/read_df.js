@@ -71,6 +71,7 @@ function initiatePrelimAnalysis(sessionData){
 						function(session){
 							$("#status1").text("Analysing the file !!");
 							session.getObject(function(full_output){
+								fileLinkBeforePreProcess = session.getFileURL(full_output[3]['savedFileName'])[0];
 								getAndDisplayVariables(full_output);
 							}).fail(
 							function(){
@@ -88,7 +89,6 @@ function getAndDisplayVariables(listInput){
 	discrete = listInput[0]['discrete'];
 	categorical = listInput[1]['categorical'];
 	continuous = listInput[2]['continuous'];
-	fileLinkBeforePreProcess = session.getFileURL(listInput[3]['savedFileName'])[0];
 	
 	//create the lsit elements to display continuous variables
 	for(elem = 0;elem < categorical.length;elem++){
