@@ -118,6 +118,7 @@ function createCheckBox(value,elem){
 	chk.setAttribute('class','form-check-input');
     chk.setAttribute('value', value);
     chk.setAttribute('name', 'variables');
+	chk.setAttribute('onclick','updateCheckList('+'Variable'+elem+');');
 	
 	var lbl = document.createElement('label');  // CREATE LABEL.
     lbl.setAttribute('for', 'Variable'+elem);
