@@ -71,7 +71,7 @@ function initiatePrelimAnalysis(sessionData){
 						function(session){
 							$("#status1").text("Analysing the file !!");
 							session.getObject(function(full_output){
-								fileLinkBeforePreProcess = session.getFileURL(full_output[3]['savedFileName'])[0];
+								fileLinkBeforePreProcess = session.getFileURL(full_output[3]['savedFileName'][0]);
 								getAndDisplayVariables(full_output);
 							}).fail(
 							function(){
