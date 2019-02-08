@@ -1,6 +1,6 @@
-preprocessing <- function(conv_var_names,fileName){
+preprocessing <- function(conv_var_names,fileContainer){
 
-data = read.csv(file=fileName, header=TRUE, sep=",")
+data = read.csv(file=fileContainer, header=TRUE, sep=",")
 cat_var=data.frame()
 df_temp <- data
 df_temp<-df_temp[, names(df_temp) != "DV"] 

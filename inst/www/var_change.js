@@ -11,7 +11,7 @@ $('#varChangeBtn').on('click',function(){
 
 	var req = ocpu.call("preprocessing",
 						{conv_var_names:checkedVars,
-						fileName:fileLinkBeforePreProcess},
+						fileContainer:filename},
 						function(session){
 								session.getObject(function(full_output){
 									//document.getElementById('varChangeLnk').href = session.getFileURL(full_output[1]['fileName']);
