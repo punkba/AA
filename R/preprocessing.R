@@ -364,5 +364,7 @@ final_data_after_processing<-df_cat
 final_data_after_processing<-cbind(final_data_after_processing,select(data,.data$DV))
 #return(final_data_after_processing)
 
+write.csv(final_data_after_processing,"C:/opencpuapp_ip/cleaned_data.csv")
+
 return (0)
 }

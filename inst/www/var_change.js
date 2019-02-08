@@ -7,6 +7,7 @@ $('#varChangeLnk').hide();
 $('#varChangeBtn').on('click',function(){
 	//Disable the button for the user
 	$('#varChangeBtn').prop("disabled",true);
+	initiatePreProcess();
 	//Get the list of variable names after updation by user for passing it to R
 	
 });
@@ -28,5 +29,4 @@ function initiatePreProcess(){
 								);
 						});
 }
-	
 });
