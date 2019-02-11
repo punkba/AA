@@ -6,9 +6,9 @@ top_var_graph <- function(target.var.name, ds){
   data<-data[ , !(names(data) %in% drops)]
   
   names(data)[names(data)==target.var.name] <- "DV"
-  #options(java.parameters = "-Xmx1g")
-  options(java.home="C:\\Program Files (x86)\\Java\\jre1.8.0_181\\")
-  Sys.setenv(JAVA_HOME="C:\\Program Files (x86)\\Java\\jre1.8.0_181\\")
+  options(java.parameters = "-Xmx1g")
+  options(java.home="C:\\Program Files\\Java\\jre1.8.0_181\\")
+  Sys.setenv(JAVA_HOME="C:\\Program Files\\Java\\jre1.8.0_181\\bin")
   data$DV<- as.integer(data$DV)
   options(warn=-1)  
   
@@ -28,26 +28,23 @@ top_var_graph <- function(target.var.name, ds){
     #Int variables with levels less than 12
     intVarsLen <- apply(allIntVarDF,2,function(i) length(unique(i))<=12)
     intvar<-names(intVarsLen)
-    
     #Int variables with more than 12 levels
     intbin_var <- allIntVarDF[,names(intVarsLen[intVarsLen==FALSE])]
     intbin_var2<- names(intbin_var)
     numvars <- names(data[,sapply(data,is.numeric)])
     numbin_var<-setdiff(numvars,intvar)
     
+    if(length(numbin_var) > 0 && length(intbin_var2) > 0)
+    {
+      #Supervised Binning of variables based of woe
+      binning <- woeBinning::woe.binning(data, 'DV', c(numbin_var,intbin_var2))
+      tabulate.binning <- woeBinning::woe.binning.table(binning)
+      data_binned <- woeBinning::woe.binning.deploy(data, binning)
+      
+      return(data_binned)  
+    }
     
-    #Supervised Binning of variables based of woe
-    binning <- woeBinning::woe.binning(data, 'DV', c(numbin_var,intbin_var2))
-    tabulate.binning <- woeBinning::woe.binning.table(binning)
-    #tabulate.binning
-    
-    #Adding binned variables to dataset
-    data_binned <- woeBinning::woe.binning.deploy(data, binning)
-    
-    #Checking for all factor variables in the new dataset
-    #catvar<-names(data_binned[,sapply(data_binned,is.factor)])
-    #nrow(catvar)
-    return(data_binned)
+    return(data)
   }
   
   ######################################
@@ -145,8 +142,9 @@ top_var_graph <- function(target.var.name, ds){
   
   
   ##RESULTS
-  
+  print('Before binning')
   data_binned1 <- dataBinning(data)
+  print('after binning')
   names(data_binned1)[names(data_binned1)=="DV"] <- target.var.name
   write.csv(data_binned1,"c:/opencpuapp_ip/data_after_binning.csv")
   
