@@ -1,7 +1,8 @@
 imp_var_list<- function(target.var.name){
 
-  data<- read.csv("C:/opencpuapp_ip/cleaned_data.csv")
+  library(rJava)
   
+  data<- read.csv("C:/opencpuapp_ip/cleaned_data.csv")
   drops <- c("X")
   data<-data[ , !(names(data) %in% drops)]
   
