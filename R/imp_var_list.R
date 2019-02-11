@@ -1,14 +1,15 @@
 imp_var_list<- function(target.var.name){
 
-  data<- read.csv("C:/opencpuapp_ip/cleaned_data.csv")
+  library(rJava)
   
+  data<- read.csv("C:/opencpuapp_ip/cleaned_data.csv")
   drops <- c("X")
   data<-data[ , !(names(data) %in% drops)]
   
   names(data)[names(data)==target.var.name] <- "DV"
- # options(java.parameters = "-Xmx1g")
- # options(java.home="C:\\Program Files\\Java\\jre1.8.0_181\\")
- # Sys.setenv(JAVA_HOME="C:\\Program Files\\Java\\jre1.8.0_192\\bin\\server")
+  options(java.parameters = "-Xmx1g")
+  options(java.home="C:\\Program Files\\Java\\jre1.8.0_201\\")
+  Sys.setenv(JAVA_HOME="C:\\Program Files\\Java\\jre1.8.0_201\\bin\\server")
   data$DV<- as.integer(data$DV)
   options(warn=-1)  
 
