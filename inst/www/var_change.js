@@ -45,6 +45,7 @@ function initiatePreProcess(){
 												   {'target.var.name':dvname},
 												   function(session){
 														session.getObject(function(output){
+														tempOut1 = output;
 														populateDropList(output);   
 													   }).fail(function()
 														    {
@@ -55,6 +56,7 @@ function initiatePreProcess(){
 												   });
 }
 
+var tempOut1='';
 function populateDropList(dataInput){
 	for (var i=0; i < dataInput.length;++i)
 	{
