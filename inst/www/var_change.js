@@ -43,15 +43,15 @@ function initiatePreProcess(){
 						var reqVarList = ocpu.call('imp_var_list',
 												   {'target.var.name':dvname},
 												   function(session){
-													   session.getObject(output){
-														   populateDropList(output);
-													   }
-												   }).fail(function()
+														session.getObject(function(output){
+														populateDropList(output);   
+													   }).fail(function()
 														    {
 																alert("Server error: " + reqVarImp.responseText);
 															}).always(function(){
 																console.log('plotted varImp');
-															});
+															})
+												   });
 }
 
 function populateDropList(dataInput){
