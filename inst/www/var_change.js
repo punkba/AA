@@ -11,6 +11,7 @@ $('#varChangeBtn').on('click',function(){
 	//Get the list of variable names after updation by user for passing it to R
 	
 });
+});
 
 function initiatePreProcess(){
 	/*var req = ocpu.call("preprocessing",
@@ -60,4 +61,3 @@ function populateDropList(dataInput){
 		$("varProfileOptions").append('<a class="dropdown-item" href="#">'+dataInput[i]+"</a>");
 	}
 }
-});
