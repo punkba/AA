@@ -8,8 +8,8 @@ imp_var_list<- function(target.var.name){
   
   names(data)[names(data)==target.var.name] <- "DV"
   options(java.parameters = "-Xmx1g")
-  options(java.home="C:\\Program Files\\Java\\jre1.8.0_201\\")
-  Sys.setenv(JAVA_HOME="C:\\Program Files\\Java\\jre1.8.0_201\\bin\\server")
+  options(java.home="C:\\Program Files\\Java\\jdk1.8.0_191\\jre")
+  Sys.setenv(JAVA_HOME="C:\\Program Files\\Java\\jdk1.8.0_191\\jre")
   data$DV<- as.integer(data$DV)
   options(warn=-1)  
 
@@ -36,19 +36,21 @@ imp_var_list<- function(target.var.name){
     numvars <- names(data[,sapply(data,is.numeric)])
     numbin_var<-setdiff(numvars,intvar)
     
+	
+	if(length(numbin_var) > 0 && length(intbin_var2) > 0)
+    {
+      #Supervised Binning of variables based of woe
+      binning <- woeBinning::woe.binning(data, 'DV', c(numbin_var,intbin_var2))
+      
+	  tabulate.binning <- woeBinning::woe.binning.table(binning)
+      
+	  #Adding binned variables to dataset
+	  data_binned <- woeBinning::woe.binning.deploy(data, binning)
+      
+      return(data_binned)  
+    }
     
-    #Supervised Binning of variables based of woe
-    binning <- woeBinning::woe.binning(data, 'DV', c(numbin_var,intbin_var2))
-    tabulate.binning <- woeBinning::woe.binning.table(binning)
-    #tabulate.binning
-    
-    #Adding binned variables to dataset
-    data_binned <- woeBinning::woe.binning.deploy(data, binning)
-    
-    #Checking for all factor variables in the new dataset
-    #catvar<-names(data_binned[,sapply(data_binned,is.factor)])
-    #nrow(catvar)
-    return(data_binned)
+    return(data)
   }
   
   ######################################

@@ -36,6 +36,28 @@ function initiatePreProcess(){
 													 .fail(function()
 														    {
 																alert("Server error: " + reqVarImp.responseText);
+															})
+													  .always(function(){
+														  console.log('plotted varImp');
+													  });
+						var reqVarList = ocpu.call('imp_var_list',
+												   {'target.var.name':dvname},
+												   function(session){
+													   session.getObject(output){
+														   populateDropList(output);
+													   }
+												   }).fail(function()
+														    {
+																alert("Server error: " + reqVarImp.responseText);
+															}).always(function(){
+																console.log('plotted varImp');
 															});
+}
+
+function populateDropList(dataInput){
+	for (var i=0; i < dataInput.length;++i)
+	{
+		$("varProfileOptions").append('<a class="dropdown-item" href="#">'+dataInput[i]+"</a>");
+	}
 }
 });
