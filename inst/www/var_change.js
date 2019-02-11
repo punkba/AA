@@ -57,9 +57,10 @@ function initiatePreProcess(){
 }
 
 var tempOut1='';
+
 function populateDropList(dataInput){
 	for (var i=0; i < dataInput.length;++i)
 	{
-		$("#varProfileOptions").append("<a class="dropdown-item" href="#">"+dataInput[i]+"</a>");
+		$("#varProfileOptions").append("<a class='dropdown-item' href='#'>"+dataInput[i]+"</a>");
 	}
 }
