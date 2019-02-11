@@ -13,7 +13,7 @@ $('#varChangeBtn').on('click',function(){
 });
 
 function initiatePreProcess(){
-	var req = ocpu.call("preprocessing",
+	/*var req = ocpu.call("preprocessing",
 						{conv_var_names:checkedVars},
 						function(session){
 								session.getObject(function(full_output){
@@ -27,6 +27,15 @@ function initiatePreProcess(){
 										alert("Server error: " + req.responseText);
 									}
 								);
-						});
+						});*/
+						$('#varChangeLnk').show();
+						
+						var reqVarImp = $("#plotdiv").rplot('top_var_graph',{'target.var.name':dvname,
+																			 'ds': ds}
+													       )
+													 .fail(function()
+														    {
+																alert("Server error: " + req.responseText);
+															});
 }
 });
