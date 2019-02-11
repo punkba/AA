@@ -1,7 +1,10 @@
 $(document).ready(function(){
+	var dropDownSelect ='';
 	
 	$("#varProfileOptions a").on('click',function(){
-	alert(dropDownSelect);
+		console.log($(this).text());
+		dropDownSelect = $(this).text();
+		$('#varDropdownMenuButton').html(dropDownSelect);
 	});
 });
 
