@@ -188,6 +188,6 @@ imp_var_list<- function(target.var.name){
   b=subset(a[,c("VARS","VariableImportance")],a$Rank<=10)
   #graphics::barplot(b$VariableImportance,main="Top 10 Variables", horiz=TRUE,xlab="VariableImportance",names.arg=b$VARS,las=1,col=grDevices::rainbow(10))
 
-  as.character(c$VARS)
+  return (as.character(c$VARS))
   
 }
