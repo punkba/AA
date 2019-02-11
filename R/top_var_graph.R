@@ -197,7 +197,7 @@ top_var_graph <- function(target.var.name, ds){
   a=FS[[1]]
   c=a[,c("VARS","Rank")]
   graphics::par(mai=c(1,3,1,1))
-  b=subset(a[,c("VARS","VariableImportance")],a$Rank<=10)
+  b=a[,c("VARS","VariableImportance")]
   
     #graphics::barplot(b$VariableImportance,main="Top n Variables", horiz=TRUE,xlab="Variable Importance",names.arg=b$VARS,las=1,col=grDevices::rainbow(10))
 
