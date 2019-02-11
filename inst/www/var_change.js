@@ -61,7 +61,7 @@ var dropDownSelect ='';
 function populateDropList(dataInput){
 	for (var i=0; i < dataInput.length;++i)
 	{
-		$("#varProfileOptions").append('<a class="dropdown-item" href="#">'+dataInput[i]+"</a>");
+		$("#varProfileOptions").append('<a class="dropdown-item" href="#" onclick="updateSelectDropdown()">'+dataInput[i]+"</a>");
 	}
 }
 
