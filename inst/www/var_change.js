@@ -35,7 +35,7 @@ function initiatePreProcess(){
 													       )
 													 .fail(function()
 														    {
-																alert("Server error: " + req.responseText);
+																alert("Server error: " + reqVarImp.responseText);
 															});
 }
 });
