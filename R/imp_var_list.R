@@ -8,8 +8,8 @@ imp_var_list<- function(target.var.name){
   
   names(data)[names(data)==target.var.name] <- "DV"
   options(java.parameters = "-Xmx1g")
-  options(java.home="C:\\Program Files\\Java\\jdk1.8.0_191\\jre")
-  Sys.setenv(JAVA_HOME="C:\\Program Files\\Java\\jdk1.8.0_191\\jre")
+  options(java.home="C:\\Program Files\\Java\\jre1.8.0_201\\bin")
+  Sys.setenv(JAVA_HOME="C:\\Program Files\\Java\\jre1.8.0_201\\bin")
   data$DV<- as.integer(data$DV)
   options(warn=-1)  
 
