@@ -14,21 +14,6 @@ $('#varChangeBtn').on('click',function(){
 });
 
 function initiatePreProcess(){
-	/*var req = ocpu.call("preprocessing",
-						{conv_var_names:checkedVars},
-						function(session){
-								session.getObject(function(full_output){
-									//document.getElementById('varChangeLnk').href = session.getFileURL(full_output[1]['fileName']);
-									if(full_output[0] == 0)
-									{
-									$('#varChangeLnk').show();
-									}
-								}).fail(
-									function(){
-										alert("Server error: " + req.responseText);
-									}
-								);
-						});*/
 						$('#varChangeLnk').show();
 						
 						var reqVarImp = $("#plotdiv").rplot('top_var_graph',{'target.var.name':dvname,
@@ -46,12 +31,15 @@ function initiatePreProcess(){
 												   function(session){
 														session.getObject(function(output){
 														tempOut1 = output;
-														populateDropList(output);   
+														/* Plot the variable profile by default for the first variable  in 
+															the dropdown*/
+														plotProfilingGraph(output[0]);
+														populateDropList(output);
 													   }).fail(function()
 														    {
 																alert("Server error: " + reqVarImp.responseText);
 															}).always(function(){
-																console.log('plotted varImp');
+																console.log('populateDropList');
 															})
 												   });
 }
@@ -63,4 +51,20 @@ function populateDropList(dataInput){
 	{
 		$("#varProfileOptions").append("<a class='dropdown-item' href='#'>"+dataInput[i]+"</a>");
 	}
+}
+
+function plotProfilingGraph(variableName){
+	var reqProfileInitGraph = $('#plotdiv1').rplot('variableProfilingFunction',
+												  {'dv':dvname,'vars':variableName})
+											.fail(
+												function()
+													{
+														alert("Server error: " + reqVarImp.responseText);
+													}
+											)
+											.always(
+												function(){
+													console.log('plotted varImp');
+												}
+											);
 }
