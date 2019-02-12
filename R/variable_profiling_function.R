@@ -2,7 +2,7 @@ variable_profiling_function  <- function(dv, vars) {
   
   library(ggplot2)
   
-  dat = read.csv("c:/opencpuapp_ip/data_after_binning.csv")
+  dat = read.csv("c:/opencpuapp_ip/cleaned_data.csv")
   
   drops <- c("X")
   dat<-dat[ , !(names(dat) %in% drops)]
