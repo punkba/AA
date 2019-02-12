@@ -54,7 +54,7 @@ function populateDropList(dataInput){
 }
 
 function plotProfilingGraph(variableName){
-	var reqProfileInitGraph = $('#plotdiv1').rplot('variableProfilingFunction',
+	var reqProfileInitGraph = $('#plotdiv1').rplot('variable_profiling_function',
 												  {'dv':dvname,'vars':variableName})
 											.fail(
 												function()
