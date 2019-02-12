@@ -59,7 +59,7 @@ function plotProfilingGraph(variableName){
 											.fail(
 												function()
 													{
-														alert("Server error: " + reqVarImp.responseText);
+														alert("Server error: " + reqProfileInitGraph.responseText);
 													}
 											)
 											.always(
