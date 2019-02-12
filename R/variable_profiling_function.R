@@ -1,4 +1,4 @@
-variable_profiling_function  <- function(dv, var) {
+variable_profiling_function  <- function(dv, vars) {
   
   library(ggplot2)
   
@@ -7,15 +7,13 @@ variable_profiling_function  <- function(dv, var) {
   drops <- c("X")
   dat<-dat[ , !(names(dat) %in% drops)]
   
-  var1 = dat[,var]
+  var1 = dat[,vars]
   dv = dat[,dv]
   
   freq <- table(var1,dv)
   total <- freq[,"0"]+freq[,"1"]
   meaniv = freq[,"1"]/total
    ggplot(dat, aes(var1, fill=dv)) + geom_bar(stat="count",position=position_dodge()) +
-   #p <- ggplot(diab_train, aes(npreg, fill=diabeties)) + geom_bar(stat="count",position=position_dodge()) + 
-   # scale_fill_manual(values=c("#999999", "#E69F00")) + 
    labs(title = "Bivariate Analysis") + 
    geom_hline(aes(yintercept = mean(meaniv)*100)) +
    theme(
