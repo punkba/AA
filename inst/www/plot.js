@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	var dropDownSelect ='';
 	
-	$("#varProfileOptions a").on('click',function(){
+	$("#varProfileOptions").on('click','a',function(){
 		console.log($(this).text());
 		dropDownSelect = $(this).text();
 		$('#varDropdownMenuButton').html(dropDownSelect);
