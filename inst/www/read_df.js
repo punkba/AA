@@ -78,7 +78,9 @@ function initiatePrelimAnalysis(sessionData){
 						$("#status1").text("Go to next page for variable information ..");
 						$("#status1").removeClass("lds-dual-ring");	
 						$("#chooseCSV").removeClass("section--is-active");
+						$("#csvNav").removeClass("is-active");
 						$("#varManip").addClass("section--is-active");
+						$("#varManNav").addClass("is-active");
 						});
 }
   
