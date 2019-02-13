@@ -47,7 +47,7 @@ disc_var_names<-list()
 disc_var_names<-names(unique_lvl_cnt)
 discrete <- list(discrete=I(disc_var_names))
 cat_var<-cbind(cat_var,unique_lvl_cnt)
-s
+
 cat_var_names<-list()
 cat_var_names<-names(cat_var)
 
