@@ -7,6 +7,7 @@ $(document).ready(function(){
 		
 		//Call the R script to update the plot
 		plotProfilingGraph(dropDownSelect);
+		dropDownSelect = '';
 	});
 });
 
