@@ -15,6 +15,7 @@ variable_profiling_function  <- function(dv, vars) {
   meaniv = freq[,"1"]/total
    ggplot(dat, aes(var1, fill=dv)) + geom_bar(stat="count",position=position_dodge()) +
    labs(title = "Bivariate Analysis") + 
+   xlab(vars) +
    geom_hline(aes(yintercept = mean(meaniv)*100)) +
    theme(
      panel.background = element_rect(fill = "aliceblue",
