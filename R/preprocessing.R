@@ -1,6 +1,5 @@
 preprocessing <- function(conv_var_names){
 
-print(system.file('prepro_step1.csv'))
 
 data = read.csv(file='C:/opencpuapp_ip/prepro_step1.csv', header=TRUE, sep=",")
 cat_var=data.frame()
