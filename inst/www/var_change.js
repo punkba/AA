@@ -49,10 +49,6 @@ var tempOut1='';
 function populateDropList(dataInput){
 	for (var i=0; i < dataInput.length;++i)
 	{
-		a = document.createElement('a');
-		a.setAttribute('href','#')
-		a.setAttribute('class','dropdown-item')
-		a.appendChild()
 		$("#varProfileOptions").append("<a class='dropdown-item' href='#'>"+dataInput[i]+"</a>");
 	}
 }
