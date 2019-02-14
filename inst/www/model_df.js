@@ -73,13 +73,14 @@ $("#show_perf").on("click", function(){
 
 	function populateResults(sessionData){
 		populateConfusionMatrix(sessionData[3]['metricOutput'].flat());
+		drawVarImpPlot(prepareVarImpData(sessionData[2]['variables']));
 	}
 
 	function populateConfusionMatrix(ConfuseData){
-		$('#TP').html(ConfuseData[0]);
-		$('#FP').html(ConfuseData[1]);
-		$('#TN').html(ConfuseData[2]);
-		$('#FN').html(ConfuseData[3]);
+		$('#TP').html(ConfuseData[0]*100+' %');
+		$('#FP').html(ConfuseData[1]*100+' %');
+		$('#TN').html(ConfuseData[2]*100+' %');
+		$('#FN').html(ConfuseData[3]*100+' %');
 	}
 
 	function prepareVarImpData(listInp){
@@ -91,6 +92,8 @@ $("#show_perf").on("click", function(){
 			obsArray.push(listInp[i]["var_names"],listInp[i]["Overall"]);
 			varImpData.push(obsArray);
 		}
+
+		return varImpData;
 	}
 
 	function drawVarImpPlot(chartData)
