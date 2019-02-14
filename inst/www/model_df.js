@@ -50,8 +50,9 @@ $("#show_perf").on("click", function(){
 
 		$('#building_inter').show();
 	    $("#building_inter").text("Training the Model... Will be ready in a jiffy!");
-
-		$('#model_out').show();
+		$("#building_inter").delay(1000).hide();
+		$('#model_out').delay(1000).show();
+		
 	function prepareVarImpData(listInp){
 
 		varImpData = [['Variable Name','Variable Importance']];
