@@ -146,7 +146,7 @@ $(document).ready(function(){
 					width:700,
 					height:500,
 					bar: {groupWidth: "50%"},
-					legend: {position:"none"},
+					legend: {position:"none"}
 				};
 				var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
 				chart.draw(data, options);
