@@ -225,7 +225,7 @@ $("#show_perf").on("click", function(){
 		{
 			$('#oem_results').hide()
 			$('#normal_results').show()
-			model_persist = "";*/
-		}
+			model_persist = "";
+		}*/
 	});
   });
