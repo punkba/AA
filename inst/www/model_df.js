@@ -138,7 +138,7 @@ $(document).ready(function(){
 			        },
 					hAxis: {
           				title: 'Importance Score',
-          				minValue: 0,
+          				minValue: 0
         			},
 			        vAxis: {
 			          title: 'Variables'
