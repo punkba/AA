@@ -22,8 +22,8 @@ $(document).ready(function(){
 		$("#building_inter").text("Setting up Train & Test...");
 
 		//Check which model is selected
-		var dvname=$("#dvname").val()
-		var preddv=$("#preddv").val()
+		var dvname=$("#dvname").val();
+		var preddv=$("#preddv").val();
 
 		var isChecked="";
 
@@ -124,29 +124,29 @@ $(document).ready(function(){
 					annotations: {
           				alwaysOutside: true,
           				textStyle: {
-			            fontSize: 12,
-			            auraColor: 'none',
-			            color: '#555'
-			        },
-					boxStyle: {
-			            stroke: '#ccc',
-			            strokeWidth: 1,
-			            gradient: {
-			            	color: '#f3e5f5',
-			                x: '0%', y: '0%'
-			            }
-			        },
-					hAxis: {
-          				title: 'Importance Score',
-          				minValue: 0
-        			},
-			        vAxis: {
-			          title: 'Variables'
-				  	},
-					width:700,
-					height:500,
-					bar: {groupWidth: "50%"},
-					legend: {position:"none"}
+			            	fontSize: 12,
+			            	auraColor: 'none',
+			            	color: '#555'
+			        	},
+						boxStyle: {
+			            	stroke: '#ccc',
+			            	strokeWidth: 1,
+			            	gradient: {
+			            		color: '#f3e5f5',
+			                	x: '0%', y: '0%'
+			            	}
+			        	},
+						hAxis: {
+          					title: 'Importance Score'
+        				},
+			        	vAxis: {
+			          		title: 'Variables'
+				  		},
+						width:700,
+						height:500,
+						bar: {groupWidth: "50%"},
+						legend: {position:"none"}
+					}
 				};
 				var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
 				chart.draw(data, options);
