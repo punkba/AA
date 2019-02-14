@@ -61,6 +61,7 @@ $("#show_perf").on("click", function(){
 							{
 								session.getObject(function(dataOutput){
 									$("#building_inter").fadeOut(100);
+									console.log(dataOutput);
 									output = dataOutput;
 									$('#model_out').show();
 								}).fail();
