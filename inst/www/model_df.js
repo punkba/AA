@@ -8,7 +8,7 @@ $(document).ready(function(){
 
 	var model_persist = "";
 	var varImpData = "";
-  var modelLink = "";
+    var modelLink = "";
 	var output = "";
 	var modelSummaryPath="";
 
@@ -25,34 +25,51 @@ $("#show_perf").on("click", function(){
 	var isChecked="";
 
 	if($('#LR').prop('checked')==true)
-		{
-		 isChecked="LR"
-		} else if($('#RF').prop('checked')==true)
-		{
-		 isChecked="RF"
-		} else if($('#SVM').prop('checked')==true)
-		{
-		 isChecked="SVM"
-		} else if($('#GBM').prop('checked')==true)
-		{
-		 isChecked="GBM"
-		} else if($('#NB').prop('checked')==true)
-		{
-		 isChecked="NB"
-		} else if($('#NNET').prop('checked')==true)
-		{
-		 isChecked="NNET"
-		}
-		else if($('#OEM').prop('checked')==true)
-		{
-		 isChecked="OEM"
-		}
+	{
+	 isChecked="LR"
+	} else if($('#RF').prop('checked')==true)
+	{
+	 isChecked="RF"
+	} else if($('#SVM').prop('checked')==true)
+	{
+	 isChecked="SVM"
+	} else if($('#GBM').prop('checked')==true)
+	{
+	 isChecked="GBM"
+	} else if($('#NB').prop('checked')==true)
+	{
+	 isChecked="NB"
+	} else if($('#NNET').prop('checked')==true)
+	{
+	 isChecked="NNET"
+	}
+	else if($('#OEM').prop('checked')==true)
+	{
+	 isChecked="OEM"
+	}
 
-		$('#building_inter').show();
-	    $("#building_inter").text("Training the Model... Will be ready in a jiffy!");
-		$("#building_inter").delay(1000).hide();
-		$('#model_out').delay(1000).show();
-		
+	$('#building_inter').show();
+    $("#building_inter").text("Training the Model... Will be ready in a jiffy!");
+
+	var modelReq = ocpu.call("modelling_module",
+							{
+								"DV" : dvname,
+							 	"model_selection" : isChecked,
+								"predictorClass" : preddv
+    						},
+							function(session)
+							{
+								session.getObject(function(dataOutput){
+									$("#building_inter").fadeOut(100);
+									output = dataOutput;
+									$('#model_out').show();
+								}).fail();
+							}).fail(function(){
+								alert("Server error: " + modelReq.responseText);
+							}).always(function(){
+								$("#show_perf").removeAttr("disabled")
+							});
+
 	function prepareVarImpData(listInp){
 
 		varImpData = [['Variable Name','Variable Importance']];
@@ -99,7 +116,7 @@ $("#show_perf").on("click", function(){
 	/*
     var req = ocpu.call("modelling_module", {
       "DV" : dvname, "model_selection" :  isChecked, "predictorClass" : preddv
-    }, function(session){
+  }, function(session){
 		session.getObject(function(full_output){
 			$("#building_inter").show().delay(1000).fadeOut(100,showModelResults);
 
