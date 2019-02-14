@@ -1,3 +1,4 @@
+var output = "";
 $(document).ready(function(){
 
 	//hide the model results initially
@@ -9,7 +10,6 @@ $(document).ready(function(){
 	var model_persist = "";
 	var varImpData = "";
     var modelLink = "";
-	var output = "";
 	var modelSummaryPath="";
 
 $("#show_perf").on("click", function(){
