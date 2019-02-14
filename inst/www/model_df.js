@@ -147,3 +147,4 @@ $("#show_perf").on("click", function(){
 		$('#building_inter').hide();
 	});
   });
+)};
