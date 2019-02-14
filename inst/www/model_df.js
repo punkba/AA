@@ -106,7 +106,7 @@ $("#show_perf").on("click", function(){
 				title: "Variable Importance",
 				width:600,
 				height:400,
-				bar: {groupWidth: "15%"},
+				bar: {groupWidth: "25%"},
 				legend: {position:"none"},
 			};
 			var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
