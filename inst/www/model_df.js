@@ -15,136 +15,140 @@ $(document).ready(function(){
     var modelLink = "";
 	var modelSummaryPath="";
 
-$("#show_perf").on("click", function(){
-	$("#show_perf").attr("disabled", "disabled");
-	$('#model_opt').hide();
-	$('#building_inter').show();
-	$("#building_inter").text("Setting up Train & Test...");
+	$("#show_perf").on("click", function(){
+		$("#show_perf").attr("disabled", "disabled");
+		$('#model_opt').hide();
+		$('#building_inter').show();
+		$("#building_inter").text("Setting up Train & Test...");
 
-	//Check which model is selected
-	var dvname=$("#dvname").val()
-	var preddv=$("#preddv").val()
+		//Check which model is selected
+		var dvname=$("#dvname").val()
+		var preddv=$("#preddv").val()
 
-	var isChecked="";
+		var isChecked="";
 
-	if($('#LR').prop('checked')==true)
-	{
-	 isChecked="LR"
-	} else if($('#RF').prop('checked')==true)
-	{
-	 isChecked="RF"
-	} else if($('#SVM').prop('checked')==true)
-	{
-	 isChecked="SVM"
-	} else if($('#GBM').prop('checked')==true)
-	{
-	 isChecked="GBM"
-	} else if($('#NB').prop('checked')==true)
-	{
-	 isChecked="NB"
-	} else if($('#NNET').prop('checked')==true)
-	{
-	 isChecked="NNET"
-	}
-	else if($('#OEM').prop('checked')==true)
-	{
-	 isChecked="OEM"
-	}
-
-	$('#building_inter').show();
-    $("#building_inter").text("Training the Model... Will be ready in a jiffy!");
-
-	var modelReq = ocpu.call("modelling_module",
-							{
-								"DV" : dvname,
-							 	"model_selection" : isChecked,
-								"predictorClass" : preddv
-    						},
-							function(session)
-							{
-								sessionS = session;
-								getResultChartsAndDisplay(session);
-								session.getObject(function(dataOutput){
-									$("#building_inter").text('Model Trained !! Check next page for results');
-									console.log(dataOutput);
-									populateResults(dataOutput);
-									$('#show_model_sel').show();
-									$('#building_inter').removeClass('lds-dual-ring');
-									$('#ResultsTab').show();
-								}).fail(function(){});
-							}).fail(function(){
-								alert("Server error: " + modelReq.responseText);
-							}).always(function(){
-								$("#show_perf").removeAttr("disabled")
-							});
-
-	function populateResults(sessionData){
-		populateConfusionMatrix(sessionData[3]['metricOutput'].flat());
-		drawVarImpPlot(prepareVarImpData(sessionData[2]['variables']));
-	}
-
-	function getResultChartsAndDisplay(session){
-		var base_url = session.getLoc();
-		var url = base_url +'graphics/1'
-		$("#liftChart").attr('src',url);
-	}
-
-	function populateConfusionMatrix(ConfuseData){
-		$('#TP').html(ConfuseData[0]*100+' %');
-		$('#FP').html(ConfuseData[1]*100+' %');
-		$('#TN').html(ConfuseData[2]*100+' %');
-		$('#FN').html(ConfuseData[3]*100+' %');
-	}
-
-	function prepareVarImpData(listInp){
-
-		varImpData = [['Variable Name','Variable Importance', { role: 'annotation' }]];
-
-		for(var i =0;i<listInp.length;i++){
-			var obsArray = [];
-			obsArray.push(listInp[i]["var_names"],listInp[i]["Overall"],listInp[i]["Overall"]);
-			varImpData.push(obsArray);
+		if($('#LR').prop('checked')==true)
+		{
+		 isChecked="LR"
+		}
+		else if($('#RF').prop('checked')==true)
+		{
+	 		isChecked="RF"
+		}
+		else if($('#SVM').prop('checked')==true)
+		{
+			isChecked="SVM"
+		}
+		else if($('#GBM').prop('checked')==true)
+		{
+			isChecked="GBM"
+		}
+		else if($('#NB').prop('checked')==true)
+		{
+	 		isChecked="NB"
+		}
+		else if($('#NNET').prop('checked')==true)
+		{
+	 		isChecked="NNET"
+		}
+		else if($('#OEM').prop('checked')==true)
+		{
+	 		isChecked="OEM"
 		}
 
-		return varImpData;
-	}
+		$('#building_inter').show();
+    	$("#building_inter").text("Training the Model... Will be ready in a jiffy!");
 
-	function drawVarImpPlot(chartData)
-	{
-		google.charts.load("current", {packages:["corechart"]});
-		google.charts.setOnLoadCallback(drawChart);
-		function drawChart(){
-			var data = google.visualization.arrayToDataTable(chartData);
-			var options = {
-				title: "Variable Importance",
-				width:600,
-				height:400,
-				bar: {groupWidth: "50%"},
-				legend: {position:"none"},
-			};
-			var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
-			chart.draw(data, options);
+		var modelReq = ocpu.call("modelling_module",
+								{
+									"DV" : dvname,
+							 		"model_selection" : isChecked,
+									"predictorClass" : preddv
+    							},
+								function(session)
+								{
+									sessionS = session;
+									getResultChartsAndDisplay(session);
+									session.getObject(function(dataOutput){
+										$("#building_inter").text('Model Trained !! Check next page for results');
+										console.log(dataOutput);
+										populateResults(dataOutput);
+										$('#show_model_sel').show();
+										$('#building_inter').removeClass('lds-dual-ring');
+										$('#ResultsTab').show();
+									}).fail(function(){});
+								}).fail(function(){
+									alert("Server error: " + modelReq.responseText);
+								}).always(function(){
+									$("#show_perf").removeAttr("disabled")
+								});
+
+		function populateResults(sessionData){
+			populateConfusionMatrix(sessionData[3]['metricOutput'].flat());
+			drawVarImpPlot(prepareVarImpData(sessionData[2]['variables']));
 		}
-	}
+
+		function getResultChartsAndDisplay(session){
+			var base_url = session.getLoc();
+			var url = base_url +'graphics/1';
+			$("#liftChart").attr('src',url);
+		}
+
+		function populateConfusionMatrix(ConfuseData){
+			$('#TP').html(ConfuseData[0]*100+' %');
+			$('#FP').html(ConfuseData[1]*100+' %');
+			$('#TN').html(ConfuseData[2]*100+' %');
+			$('#FN').html(ConfuseData[3]*100+' %');
+		}
+
+		function prepareVarImpData(listInp){
+			varImpData = [['Variable Name','Variable Importance', { role: 'annotation' }]];
+
+			for(var i =0;i<listInp.length;i++){
+				var obsArray = [];
+				obsArray.push(listInp[i]["var_names"],listInp[i]["Overall"],listInp[i]["Overall"]);
+				varImpData.push(obsArray);
+			}
+
+			return varImpData;
+		}
+
+		function drawVarImpPlot(chartData)
+		{
+			google.charts.load("current", {packages:["corechart"]});
+			google.charts.setOnLoadCallback(drawChart);
+			function drawChart(){
+				var data = google.visualization.arrayToDataTable(chartData);
+				var options = {
+					title: "Variable Importance",
+					width:600,
+					height:400,
+					bar: {groupWidth: "50%"},
+					legend: {position:"none"},
+				};
+				var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+				chart.draw(data, options);
+			}
+		}
 
 
-	function processLROutput(lists){
-		modelLink = lists[1]["modelSaveLocation"].toString();
-		output = lists[4]["metricOutput"].flat();
-		prepareVarImpData(lists[3]["variables"]);
-		modelSummaryPath = lists[5]["summaryPath"].toString();
+		function processLROutput(lists){
+			modelLink = lists[1]["modelSaveLocation"].toString();
+			output = lists[4]["metricOutput"].flat();
+			prepareVarImpData(lists[3]["variables"]);
+			modelSummaryPath = lists[5]["summaryPath"].toString();
 
-		//call functions to populate the results
-		drawVarImpPlot(varImpData);
-		$('#modelDownload').show();
-		contructLREQN(lists[2]["modelCoeff"]);
-		constructVarOdds(lists[2]["modelCoeff"]);
-	}
+			//call functions to populate the results
+			drawVarImpPlot(varImpData);
+			$('#modelDownload').show();
+			contructLREQN(lists[2]["modelCoeff"]);
+			constructVarOdds(lists[2]["modelCoeff"]);
+		}
 
-	//hide the performance metrics and show the model selection
-	$('#show_model_sel').click(function() {
-		$('#model_opt').show();
-		$('#building_inter').hide();
-	});
-  });
-)};
+		//hide the performance metrics and show the model selection
+		$('#show_model_sel').click(function() {
+			$('#model_opt').show();
+			$('#building_inter').hide();
+		});
+  	});
+});
