@@ -348,7 +348,29 @@
                                           </div>
                                           <div id="confusionMatrix" class="collapse show" aria-labelledby="Output1Header" data-parent="#modellingResults">
                                             <div class="card-body">
-                                              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                                <div id="Result02"></div>
+                                                <table border="1">
+                                                  <thead>
+                                                    <tr>
+                                                      <th></th>
+                                                      <th>Predicted: No</th>
+                                                      <th>Predicted: Yes</th>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                    <tr>
+                                                      <td>Actual: No</td>
+                                                      <td id='TN'></td>
+                                                      <td id='FP'></td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td>Actual: Yes</td>
+                                                      <td id='FN'></td>
+                                                      <td id='TP'></td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
@@ -399,33 +421,7 @@
 
                             <div class="result-chart">
                               <div id="Result01"></div>
-                              <div id="Result02"></div>
-                              <table border="1">
-                                <thead>
-                                  <tr>
-                                    <th></th>
-                                    <th>Predicted: No</th>
-                                    <th>Predicted: Yes</th>
-                                  </tr>
-                                </thead>
 
-                                <tbody>
-
-                                  <tr>
-                                    <td>Actual: No</td>
-                                    <td>50</td>
-                                    <td>20</td>
-                                  </tr>
-
-                                  <tr>
-                                    <td>Actual: Yes</td>
-                                    <td>5</td>
-                                    <td>100</td>
-                                  </tr>
-
-                                </tbody>
-                              </table>
-                            </div>
 
                           </div>
                         </div>

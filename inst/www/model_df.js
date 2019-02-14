@@ -62,7 +62,7 @@ $("#show_perf").on("click", function(){
 								session.getObject(function(dataOutput){
 									$("#building_inter").fadeOut(100);
 									console.log(dataOutput);
-									output = dataOutput;
+									populateResults(dataOutput);
 									$('#model_out').show();
 								}).fail();
 							}).fail(function(){
@@ -70,6 +70,17 @@ $("#show_perf").on("click", function(){
 							}).always(function(){
 								$("#show_perf").removeAttr("disabled")
 							});
+
+	function populateResults(sessionData){
+		populateConfusionMatrix(sessionData[3]['metricOutput'].flat());
+	}
+
+	function populateConfusionMatrix(ConfuseData){
+		$('#table td TP').html(ConfuseData[0]);
+		$('#table td FP').html(ConfuseData[1]);
+		$('#table td TN').html(ConfuseData[0]);
+		$('#table td FN').html(ConfuseData[0]);
+	}
 
 	function prepareVarImpData(listInp){
 
