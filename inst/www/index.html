@@ -265,11 +265,6 @@
 						<li class="l-section section">
 							<div class="work">
 							  <h2>Variable Profiling</h2>
-										<!--<body id="addOption_list";></body>
-										<FORM name="drop_list">
-											<SELECT id="DropList" NAME="DropList">
-											</SELECT>
-										</form>-->
 									<div class="dropdown">
 										<button class="btn btn-outline-light dropdown-toggle float-right" type="button" id="varDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											Variables
@@ -331,176 +326,16 @@
 										</div>
 									</div>
 								</div>
+                                <div>
+                                    <button id='show_model_sel' class='btn btn-outline-light'> Show Model Selection</button>
+                                </div>
 								<div class="lds-dual-ring" id="building_inter">Let's build a model!!
 								</div>
-								<div id="model_out" >
-									<h2 align="center"><b>Model Results</b></h2>
-                                    <div class="row">&nbsp </div>
-                                    <div class="row">&nbsp </div>
-                                    <div class="row">
-        								<div class="nav nav-pills nav-fill flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        									<a class="nav-link" id="v-pills-confusionMatrix-tab" data-toggle="pill" href="#confusionMatrix" role="tab" aria-controls="" aria-selected="false">Confusion Matrix</a>
-        									<a class="nav-link active" id="v-pills-variableImportance-tab" data-toggle="pill" href="#variableImportance" role="tab" aria-controls="" aria-selected="true">Variable Importance</a>
-        									<a class="nav-link" id="v-pills-liftChart-tab" data-toggle="pill" href="#liftChart" role="tab" aria-controls="" aria-selected="false"></a>
-        								</div>
-        								<div class="tab-content col-8" id="v-pills-tabContent">
-        									<div class="tab-pane fade show active" id="confusionMatrix" role="tabpanel" aria-labelledby="v-pills-logEqn-tab">
-                                                <div id="Result02"></div>
-                                                <table border="1">
-                                                  <thead>
-                                                    <tr>
-                                                      <th></th>
-                                                      <th>Predicted: No</th>
-                                                      <th>Predicted: Yes</th>
-                                                    </tr>
-                                                  </thead>
-                                                  <tbody>
-                                                    <tr>
-                                                      <td>Actual: No</td>
-                                                      <td id='TN'></td>
-                                                      <td id='FP'></td>
-                                                    </tr>
-                                                    <tr>
-                                                      <td>Actual: Yes</td>
-                                                      <td id='FN'></td>
-                                                      <td id='TP'></td>
-                                                    </tr>
-                                                  </tbody>
-                                                </table>
-                                            </div>
-
-            									<div class="tab-pane fade card-size" id="variableImportance" role="tabpanel" aria-labelledby="v-pills-varsOdds-tab">
-            										<div id="barchart_values" style="width: 600px; height: 400px;"></div>
-            									</div>
-            									<div class="tab-pane fade" id="liftChart" role="tabpanel" aria-labelledby="v-pills-varsImpPlot-tab">
-
-            									</div>
-            								</div>
-            							</div>
-                                    <button id="show_model_sel" align="right">Show Model Selection</button>
-            					</div>
-                                        <!--<div class="accordion" id="modellingResults">
-                                        <div class="card">
-                                          <div class="card-header" id="Output1Header">
-                                            <h2 class="mb-0">
-                                              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#confusionMatrix" aria-expanded="true" aria-controls="confusionMatrix">
-                                                Confusion Matrix
-                                              </button>
-                                            </h2>
-                                          </div>
-                                          <div id="confusionMatrix" class="collapse show" aria-labelledby="Output1Header" data-parent="#modellingResults">
-                                            <div class="card-body">
-                                                <div id="Result02"></div>
-                                                <table border="1">
-                                                  <thead>
-                                                    <tr>
-                                                      <th></th>
-                                                      <th>Predicted: No</th>
-                                                      <th>Predicted: Yes</th>
-                                                    </tr>
-                                                  </thead>
-                                                  <tbody>
-                                                    <tr>
-                                                      <td>Actual: No</td>
-                                                      <td id='TN'></td>
-                                                      <td id='FP'></td>
-                                                    </tr>
-                                                    <tr>
-                                                      <td>Actual: Yes</td>
-                                                      <td id='FN'></td>
-                                                      <td id='TP'></td>
-                                                    </tr>
-                                                  </tbody>
-                                                </table>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        <div class="card">
-                                          <div class="card-header" id="Output2Header">
-                                            <h2 class="mb-0">
-                                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#liftChartArea" aria-expanded="false" aria-controls="liftChartArea">
-                                                Lift Chart
-                                              </button>
-                                            </h2>
-                                          </div>
-                                          <div id="liftChartArea" class="collapse" aria-labelledby="Output2Header" data-parent="#modellingResults">
-                                            <div class="card-body">
-                                              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                            </div>
-                                          </div>
-                                      </div>
-                                        <div class="card">
-                                          <div class="card-header" id="Output3Header">
-                                            <h2 class="mb-0">
-                                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#modelInsightsArea" aria-expanded="false" aria-controls="modelInsightsArea">
-                                                Important Variables
-                                              </button>
-                                            </h2>
-                                          </div>
-                                          <div id="modelInsightsArea" class="collapse" aria-labelledby="Output3Header" data-parent="#modellingResults">
-                                            <div class="card-body">
-                                                <div id="barchart_values" style="width: 600px; height: 400px;"></div>
-                                            </div>
-                                          </div>
-                                      </div>-->
-                                    </div>
 				        </li>
-
-    <!--                      <div class="result-wrapper">
-
-                            <div class="list">
-                              <h6>Significant Variables</h6>
-                              <ul id="sig_list">
-                              </ul>
-                            </div>
-
-							<div id="plotdiv2"></div>
-
-
-                            <div class="result-chart">
-                              <div id="Result01"></div>
-
-
-                          </div>
-                        </div>
-                      </li>
-					  -->
-						<li class="l-section section">
+						<li class="l-section section" id='ResultsTab'>
 							<div class="text-center"><h2>Results</h2></div>
 							<div class="row">&nbsp </div>
 							<div class="row">&nbsp </div>
-							<!--<div class="row">
-								<div class="nav nav-pills nav-fill flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-									<a class="nav-link" id="v-pills-varsImpPlot-tab" data-toggle="pill" href="#varsImpPlot" role="tab" aria-controls="" aria-selected="false">Variable Importance Plot</a>
-									<a class="nav-link active" id="v-pills-logEqn-tab" data-toggle="pill" href="#logEqn" role="tab" aria-controls="#logEqn" aria-selected="true">Model Output</a>
-									<a class="nav-link" id="v-pills-varsOdds-tab" data-toggle="pill" href="#varsOdds" role="tab" aria-controls="" aria-selected="false">Variable Odds</a>
-								</div>
-								<div class="tab-content col-8" id="v-pills-tabContent">
-									<div class="tab-pane fade show active" id="logEqn" role="tabpanel" aria-labelledby="v-pills-logEqn-tab">
-										<div class="form-group shadow-textarea" id="lrEqn">
-										  <label for="eqnBox">Logistic Equation</label>
-										  <textarea class="form-control z-depth-1" id="eqnBox" rows="2" spellcheck="false" readonly></textarea>
-										</div>
-										<div id="modelDownload">
-											<a id="modelLk" href="#" target="_blank"><h2 class='text-center text-light'>Download Your Model</h2></a>
-										</div>
-										<div class="form-group shadow-textarea">
-										  <textarea class="form-control z-depth-1" id="summaryArea" rows="15" spellcheck="false" readonly></textarea>
-										</div>
-									</div>
-									<div class="tab-pane fade card-size" id="varsOdds" role="tabpanel" aria-labelledby="v-pills-varsOdds-tab">
-										<div class="card-size">
-											<div id="coeffElem" class="list-group">
-
-											</div>
-										</div>
-									</div>
-									<div class="tab-pane fade" id="varsImpPlot" role="tabpanel" aria-labelledby="v-pills-varsImpPlot-tab">
-										<div id="barchart_values" style="width: 600px; height: 400px;"></div>
-									</div>
-								</div>
-							</div>-->
 							<div class="accordion" id="modellingResults">
 							  <div class="card">
 								<div class="card-header" id="Output1Header">
@@ -512,7 +347,29 @@
 								</div>
 								<div id="confusionMatrix" class="collapse show" aria-labelledby="Output1Header" data-parent="#modellingResults">
 								  <div class="card-body">
-									Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                      <div id="Result02"></div>
+                                      <table border="1" class='table table-bordered table-responsive'>
+                                        <thead>
+                                          <tr>
+                                            <th></th>
+                                            <th>Predicted: No</th>
+                                            <th>Predicted: Yes</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td>Actual: No</td>
+                                            <td id='TN'></td>
+                                            <td id='FP'></td>
+                                          </tr>
+                                          <tr>
+                                            <td>Actual: Yes</td>
+                                            <td id='FN'></td>
+                                            <td id='TP'></td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                  </div>
 								  </div>
 								</div>
 							  </div>
@@ -540,7 +397,7 @@
 								</div>
 								<div id="modelInsightsArea" class="collapse" aria-labelledby="Output3Header" data-parent="#modellingResults">
 								  <div class="card-body">
-									Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+									<div id="barchart_values" style="width: 600px; height: 400px;"></div>
 								  </div>
 								</div>
 							  </div>

@@ -2,7 +2,9 @@ var output = "";
 $(document).ready(function(){
 
 	//hide the model results initially
-	$('#model_out').hide();
+	$('#show_model_sel').hide();
+	$('#ResultsTab').hide();
+
 
 	//hide the interstitial initially
 	$('#building_inter').hide();
@@ -60,10 +62,11 @@ $("#show_perf").on("click", function(){
 							function(session)
 							{
 								session.getObject(function(dataOutput){
-									$("#building_inter").fadeOut(100);
+									$("#building_inter").text('Model Trained !! Check next page for results');
 									console.log(dataOutput);
 									populateResults(dataOutput);
-									$('#model_out').show();
+									$('#show_model_sel').show();
+									$('#ResultsTab').show();
 								}).fail();
 							}).fail(function(){
 								alert("Server error: " + modelReq.responseText);
@@ -85,11 +88,11 @@ $("#show_perf").on("click", function(){
 
 	function prepareVarImpData(listInp){
 
-		varImpData = [['Variable Name','Variable Importance']];
+		varImpData = [['Variable Name','Variable Importance', { role: 'annotation' }]];
 
 		for(var i =0;i<listInp.length;i++){
 			var obsArray = [];
-			obsArray.push(listInp[i]["var_names"],listInp[i]["Overall"]);
+			obsArray.push(listInp[i]["var_names"],listInp[i]["Overall"],listInp[i]["Overall"]);
 			varImpData.push(obsArray);
 		}
 
@@ -106,7 +109,7 @@ $("#show_perf").on("click", function(){
 				title: "Variable Importance",
 				width:600,
 				height:400,
-				bar: {groupWidth: "25%"},
+				bar: {groupWidth: "50%"},
 				legend: {position:"none"},
 			};
 			var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
