@@ -68,7 +68,7 @@ $("#show_perf").on("click", function(){
 									$('#show_model_sel').show();
 									$('#building_inter').removeClass('lds-dual-ring');
 									$('#ResultsTab').show();
-								}).fail();
+								}).fail(function(){});
 							}).fail(function(){
 								alert("Server error: " + modelReq.responseText);
 							}).always(function(){

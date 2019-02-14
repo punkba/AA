@@ -326,11 +326,13 @@
 										</div>
 									</div>
 								</div>
-                                <div>
-                                    <button id='show_model_sel' class='btn btn-outline-light'> Show Model Selection</button>
-                                </div>
 								<div class="lds-dual-ring" id="building_inter">Let's build a model!!
 								</div>
+                                <div>
+                                <br></br>
+                                <br></br>
+                                    <button id='show_model_sel' class='btn btn-outline-light'> Show Model Selection</button>
+                                </div>
 				        </li>
 						<li class="l-section section" id='ResultsTab'>
 							<div class="text-center"><h2>Results</h2></div>
@@ -347,28 +349,7 @@
 								</div>
 								<div id="importantVariables" class="collapse show" aria-labelledby="Output1Header" data-parent="#modellingResults">
 								  <div class="card-body">
-                                      <div id="Result02"></div>
-                                      <table border="1" class='table table-bordered table-responsive'>
-                                        <thead>
-                                          <tr>
-                                            <th></th>
-                                            <th>Predicted: No</th>
-                                            <th>Predicted: Yes</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            <td>Actual: No</td>
-                                            <td id='TN'></td>
-                                            <td id='FP'></td>
-                                          </tr>
-                                          <tr>
-                                            <td>Actual: Yes</td>
-                                            <td id='FN'></td>
-                                            <td id='TP'></td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
+                                      <div id="barchart_values" style="width: 700px; height: 500px;"></div>
                                   </div>
 								  </div>
 								</div>
@@ -383,7 +364,7 @@
 								</div>
 								<div id="liftChartArea" class="collapse" aria-labelledby="Output2Header" data-parent="#modellingResults">
 								  <div class="card-body">
-									Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+	                              
 								  </div>
 								</div>
 							  </div>
@@ -397,7 +378,27 @@
 								</div>
 								<div id="confusionMatrix" class="collapse" aria-labelledby="Output3Header" data-parent="#modellingResults">
 								  <div class="card-body">
-									<div id="barchart_values" style="width: 700px; height: 500px;"></div>
+                                    <table border="1" class='table table-bordered table-responsive'>
+                                      <thead>
+                                        <tr>
+                                          <th></th>
+                                          <th>Predicted: No</th>
+                                          <th>Predicted: Yes</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td>Actual: No</td>
+                                          <td id='TN'></td>
+                                          <td id='FP'></td>
+                                        </tr>
+                                        <tr>
+                                          <td>Actual: Yes</td>
+                                          <td id='FN'></td>
+                                          <td id='TP'></td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
 								  </div>
 								</div>
 							  </div>
