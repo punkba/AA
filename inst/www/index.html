@@ -27,7 +27,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<!--	
+<!--
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.appear/0.3.3/jquery.appear.js"></script>
@@ -47,33 +47,33 @@
 	  	color:black;
 	  	background-color : white;
    	 }
-	 
+
      #plotdiv1 {
        position: relative;
        width: 46%;
        height: 450px;
        border: solid gray 1px;
      }
-	 
+
 	  #plotdiv {
        position: relative;
        width: 50%;
        height: 450px;
        border: solid gray 1px;
      }
-	 
+
 	 #plotdiv2 {
        position: relative;
        width: 900px;
        height: 600px;
        border: solid gray 1px;
      }
-	 
-    </style>						
+
+    </style>
 </head>
 
 <body>
-	
+
 
 
  <!-- <div id="background-wrap">
@@ -164,7 +164,7 @@
 								<h2><b>Choose CSV File</b></h2>
 								<br></br><br></br>
 									<div class="choose-data">
-										<b>Input Data File Path</b> <input type="file" id="uploadFile"> 
+										<b>Input Data File Path</b> <input type="file" id="uploadFile">
 										<br></br>
 										<br>
 										<b>DV name: </b> <input type="text" id="dvname">
@@ -282,7 +282,7 @@
 									</div>
 									<div class="radio-list-wrapper">
 										<div id="plotdiv"></div>
-										<div id="plotdiv1"></div>	
+										<div id="plotdiv1"></div>
 									</div>
 							</div>
 						</li>
@@ -293,26 +293,26 @@
 										<h2><div id="status3">Select a Model to train!</div></h2>
 										<div class="radio-list-cover">
 											<div class="radio">
-												<input id="LR" name="radio" type="radio" checked>
+												<input id="LR" name="radio" type="radio" value ='LR' checked>
 												<label for="LR" class="radio-label">Logistic Regression</label>
 											</div>
 											<div class="radio">
-												<input id="RF" name="radio" type="radio" >
+												<input id="RF" name="radio" type="radio" value ='RF'>
 												<label for="RF" class="radio-label">Random Forest</label>
 											</div>
-											
+
 											<div class="radio">
-												<input id="SVM" name="radio" type="radio" >
+												<input id="SVM" name="radio" type="radio" value ='SVM'>
 												<label for="SVM" class="radio-label">SVM</label>
 											</div>
 
 											<div class="radio">
-												<input id="GBM" name="radio" type="radio" >
+												<input id="GBM" name="radio" type="radio" value ='GBM'>
 												<label for="GBM" class="radio-label">GBM</label>
 											</div>
 
 											<div class="radio">
-												<input id="NB" name="radio" type="radio" >
+												<input id="NB" name="radio" type="radio" value ='NB'>
 												<label for="NB" class="radio-label">Naive Bayes</label>
 											</div>
 
@@ -332,70 +332,59 @@
 									</div>
 								</div>
 								<div class="lds-dual-ring" id="building_inter">Let's build a model!!
-								</div>															
-								<div id="model_out" >
-									<h2 align="center"><b>Model Performance</b></h2>
-									<!--<table class="table table-borderless table-responsive" id="results_table">
-										<thead>
-											<tr class>
-												<th scope="col">Model</th>
-												<th scope="col">TPR(%)</th>
-												<th scope="col">FPR(%)</th>
-												<th scope="col">TNR(%)</th>
-												<th scope="col">FNR(%)</th>
-												<th scope="col">ACCURACY(%)</th>
-											</tr>
-										</thead>
-										<tbody id="normal_results">
-											<tr>
-												<th id="mod_nm" scope="row"></th>
-												<td id="inr"> 67.17% </td>
-												<td id="acc"> 79.82% </td>
-												<td id="sen"> 88.79% </td>
-												<td id="spe"> 61.47% </td>
-												<td id="kap"> 52.34% </td>
-											</tr>
-										</tbody>
-										<tbody id="oem_results">
-											<tr>
-												<th scope="row">LR</th>
-												<td id="inr"> 67.17% </td>
-												<td id="acc"> 79.82% </td>
-												<td id="sen"> 88.79% </td>
-												<td id="spe"> 61.47% </td>
-												<td id="kap"> 52.34% </td>
-											</tr>
-											<tr>
-												<th scope="row">NB</th>
-												<td id="inr"> 67.17% </td>
-												<td id="acc"> 75.98% </td>
-												<td id="sen"> 79.00% </td>
-												<td id="spe"> 60.56% </td>
-												<td id="kap"> 51.76% </td>
-											</tr>
-											<tr>
-												<th scope="row">RF</th>
-												<td id="inr"> 67.17% </td>
-												<td id="acc"> 82.76% </td>
-												<td id="sen"> 89.79% </td>
-												<td id="spe"> 70.36% </td>
-												<td id="kap"> 65.47% </td>
-											</tr>
-											<tr class="table-active">
-												<th scope="row">OEM</th>
-												<td id="inr"> 67.17% </td>
-												<td id="acc"> 95.03% </td>
-												<td id="sen"> 92.65% </td>
-												<td id="spe"> 94.37% </td>
-												<td id="kap"> 72.45% </td>
-											</tr>
-										</tbody>
-									</table>-->
-								<button id="show_model_sel" align="right">Show Model Selection</button>
-								<!-- div for results-->
 								</div>
-							</div>
-						</li>
+								<div id="model_out" >
+									<h2 align="center"><b>Model Results</b></h2>
+                                        <div class="row">&nbsp </div>
+                                        <div class="row">&nbsp </div>
+                                        <div class="accordion" id="modellingResults">
+                                        <div class="card">
+                                          <div class="card-header" id="Output1Header">
+                                            <h2 class="mb-0">
+                                              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#confusionMatrix" aria-expanded="true" aria-controls="confusionMatrix">
+                                                Confusion Matrix
+                                              </button>
+                                            </h2>
+                                          </div>
+                                          <div id="confusionMatrix" class="collapse show" aria-labelledby="Output1Header" data-parent="#modellingResults">
+                                            <div class="card-body">
+                                              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="card">
+                                          <div class="card-header" id="Output2Header">
+                                            <h2 class="mb-0">
+                                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#liftChartArea" aria-expanded="false" aria-controls="liftChartArea">
+                                                Lift Chart
+                                              </button>
+                                            </h2>
+                                          </div>
+                                          <div id="liftChartArea" class="collapse" aria-labelledby="Output2Header" data-parent="#modellingResults">
+                                            <div class="card-body">
+                                              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="card">
+                                          <div class="card-header" id="Output3Header">
+                                            <h2 class="mb-0">
+                                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#modelInsightsArea" aria-expanded="false" aria-controls="modelInsightsArea">
+                                                Important Variables
+                                              </button>
+                                            </h2>
+                                          </div>
+                                          <div id="modelInsightsArea" class="collapse" aria-labelledby="Output3Header" data-parent="#modellingResults">
+                                            <div class="card-body">
+                                              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <button id="show_model_sel" align="right">Show Model Selection</button>
+						        </div>
+					        </div>
+				        </li>
 
     <!--                      <div class="result-wrapper">
 
@@ -404,10 +393,10 @@
                               <ul id="sig_list">
                               </ul>
                             </div>
-							
-							<div id="plotdiv2"></div>	
-		
-		
+
+							<div id="plotdiv2"></div>
+
+
                             <div class="result-chart">
                               <div id="Result01"></div>
                               <div id="Result02"></div>
@@ -468,7 +457,7 @@
 									<div class="tab-pane fade card-size" id="varsOdds" role="tabpanel" aria-labelledby="v-pills-varsOdds-tab">
 										<div class="card-size">
 											<div id="coeffElem" class="list-group">
-											
+
 											</div>
 										</div>
 									</div>
@@ -476,7 +465,7 @@
 										<div id="barchart_values" style="width: 600px; height: 400px;"></div>
 									</div>
 								</div>
-							</div>-->							
+							</div>-->
 							<div class="accordion" id="modellingResults">
 							  <div class="card">
 								<div class="card-header" id="Output1Header">
@@ -530,13 +519,13 @@
                           <div class="intro">
                             <h2>Evaluation Module</h2>
 							<div class="choose-data">
-								<b>Input Data File Path</b> <input type="file" id="uploadFile2">   
-									
+								<b>Input Data File Path</b> <input type="file" id="uploadFile2">
+
 								<b><button id="downloadbutton" type="button" class='btn btn-outline-light btn-sm'>Download Results Here!</button></b>
-									
+
                           </div>
-						  
-						  <pre id="output2"><code></code></pre>	
+
+						  <pre id="output2"><code></code></pre>
 
                           <div class="lds-dual-ring" id="status2">Waiting for Dataset to Score on!</div>
 
@@ -544,7 +533,7 @@
 
                           </div>
 
-   
+
                       </li>
 
 
@@ -552,7 +541,7 @@
                     </ul>
                   </div>
 
-                  
+
                 </div>
               </div>
             </div>
@@ -563,7 +552,7 @@
         </div>
       </div>
     </div>
-  
+
 
    </div>
   </div>
