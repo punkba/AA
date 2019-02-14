@@ -2,6 +2,8 @@ modelling_module<-function(DV,model_selection,predictorClass)
 {
   library(pROC)
   library(caret)
+  library(caTools)
+  library(ROCR)
 
   clearWarnings <- function(){
     assign("last.warning", NULL, envir = baseenv())
@@ -15,32 +17,7 @@ modelling_module<-function(DV,model_selection,predictorClass)
       wars <- wars[1:8]
     }
 
-   return(as.list(wars))
-  }
-
-  processModelOutput <- function(model,modelName){
-
-    if(modelName == 'lr')
-    {
-      modelOutput <- as.data.frame(summary(model)$coefficients,keep.rownames = T)
-      modelOutput$vars <- rownames(modelOutput)
-      rownames(modelOutput) <- NULL
-      modelOutput$pval <-  modelOutput[,4]
-      modelOutput <- modelOutput[modelOutput$pval < 0.1,]
-      modelOutput$`Std. Error` <- NULL
-      modelOutput$`z value`<- NULL
-      modelOutput$`Pr(>|z|)`<-NULL
-      modelOutput$pval <- NULL
-
-      #sink(file="C:/OpencpuApp_IP/lr_summary.txt",split=TRUE)
-      sumMod <- summary(model)
-      capture.output(sumMod,file="lr_summary.txt")
-
-      print(summary(model))
-      sink(NULL)
-    }
-
-    return(modelOutput)
+    return(as.list(wars))
   }
 
   processOutput <- function(model,vars,metrics,oemInd){
@@ -82,9 +59,9 @@ modelling_module<-function(DV,model_selection,predictorClass)
       modelName <- list(modelName=I(modelName))
       modelSaveLocation <- list(modelSaveLocation=I(modelSaveLocation))
 
-      modelCoeff <- processModelOutput(model,modelName)
+      #modelCoeff <- processModelOutput(model,modelName)
 
-      modelCoeff <-list(modelCoeff=I(modelCoeff))
+      #modelCoeff <-list(modelCoeff=I(modelCoeff))
 
       variables <- list(variables=I(vars))
 
@@ -95,29 +72,47 @@ modelling_module<-function(DV,model_selection,predictorClass)
                            as.numeric(metrics['accuracy']))
 
       metricOutput <- list(metricOutput=I(metricOutput))
-
-      summaryPath <- list(summaryPath=I("lr_summary.txt"))
+      sumMod <- summary(model)
+      modelSummaryLocation <- paste0(modelName,"_summary.txt")
+      capture.output(sumMod,file=modelSummaryLocation)
+      summaryPath <- list(summaryPath=I(modelSummaryLocation))
 
     }
     outL <- list(modelName,
                  modelSaveLocation,
-                 modelCoeff,variables,metricOutput,summaryPath)
+                 variables,metricOutput,summaryPath)
 
     #if(modelName == 'lr')
     #{
-     # out <- jsonlite::toJSON(outL,pretty=T,auto_unbox = T)
-      #out <- gsub(pattern = '\\]$', replacement = "}", x = out)
-      #out <- gsub(pattern = '^\\[', replacement = "{", x = out)
+    # out <- jsonlite::toJSON(outL,pretty=T,auto_unbox = T)
+    #out <- gsub(pattern = '\\]$', replacement = "}", x = out)
+    #out <- gsub(pattern = '^\\[', replacement = "{", x = out)
     return (outL)
     #}
     #else
     #{
-     # return (list(modelName,modelSaveLocation,modelCoeff,variables,metricOutput))
+    # return (list(modelName,modelSaveLocation,modelCoeff,variables,metricOutput))
     #}
   }
 
-  setUpFunction<- function(train,test,positive_class,model){
+  dataFunction <- function(dvVar){
+    ##Splitting into test and train
+    set.seed(666)
+    #User to choose the ratio to be set for training and testing data sets
+    splitratio <- as.numeric(0.7)
+    cleaned_data <- read.csv(cleaned_data_csv)
+    split <- sample.split(cleaned_data$dvVar,SplitRatio = splitratio)
 
+    train <- subset(cleaned_data,split == TRUE)
+    test <- subset(cleaned_data,split == FALSE)
+
+    drops <- c("X")
+    train<-train[ , !(names(train) %in% drops)]
+    test<-test[ , !(names(test) %in% drops)]
+    return(list(train,test))
+  }
+
+  setUpFunction<- function(train,test,positive_class,model){
     if(is.numeric(train$DV))
     {
       if(model=="SVM")
@@ -183,10 +178,8 @@ modelling_module<-function(DV,model_selection,predictorClass)
       }
       else
       {
-
         train$DV[train$DV == positive_class] <- 1
         train$DV[train$DV == negClass] <- 0
-
 
         test$DV[test$DV == positive_class] <- 1
         test$DV[test$DV == negClass] <- 0
@@ -235,119 +228,21 @@ modelling_module<-function(DV,model_selection,predictorClass)
     res = roc(as.numeric(DV), pred_f)
     plot_res <- plot(res)
 
+    prediction_f <- prediction(pred_f, as.numeric(DV))
+    #roc_curve <- performance(prediction_f, "tpr", "fpr")
+    #plot_res1 <- plot(roc_curve)
+
+    perf <- performance(prediction_f,"lift","rpp")
+    plot_lc <- plot(perf, main="lift curve")
+
     testCopy <- testData
     testCopy$DV <- DV
     testCopy$predicted <- predicted_val
 
     #hitMiss <- hitvcap(testCopy)
 
-    return(c(tpr,fpr,tnr,fnr,recall,precision,f1score,Accuracy,plot_res))
+    return(c(tpr,fpr,tnr,fnr,recall,precision,f1score,Accuracy,plot_res,plot_lc))
   }
-
-  #hitvcap <- function(data){
-
-  #  dataset_test_1 <- data
-
-  #  Func <- function(cutoff, datas){
-
-
-      ################# Predictions based on cutoff
-  #   for ( i in 1:nrow(dataset_test_1)){
-
-  #      if(dataset_test_1$Prob[i]>=cutoff){
-  #        dataset_test_1$Pred[i] = 1
-  #      } else{
-  #        dataset_test_1$Pred[i]=0
-  #      }
-  #    }
-
-      ################### Correct one's predicted
-  #    for ( i in 1:nrow(dataset_test_1)){
-  #      if(dataset_test_1$Pred[i]+dataset_test_1$DV[i]==2){
-  #        dataset_test_1$Pred1_crct[i] = 1
-  #      } else{
-  #        dataset_test_1$Pred1_crct[i]=0
-  #      }
-  #    }
-
-      ################## Zero's Falsely Predicted
-  #    temp <- subset(dataset_test_1,dataset_test_1$DV==1)
-  #    for ( i in 1:nrow(temp)){
-
-  #      if(temp$DV+temp$Pred[i]==1){
-  #        temp$Pred1_false[i] = 1
-  #      } else{
-  #        temp$Pred1_false[i]=0
-  #      }
-  #    }
-  #    df <- dataset_test_1
-  #    tot_ones <- sum(df$DV == 1)
-  #    tot_zeros <- length(df$DV==0)
-  #    tot_ones_pred <- length(df$Pred == 1)
-  #    hits <- sum(df$Pred1_crct == 1)/tot_ones
-  #    miss <- sum(temp$Pred1_false == 1)/tot_ones
-  #      ret <- matrix(c(hits, miss), nrow = 1)
-  #   colnames(ret) <- c("Hits", "Miss")
-  #
-  #   return(ret)
-  # }
-
-
-  # vec <- seq(0,1,0.1)
-  # hit.df <- data.frame()
-
-  # for(i in vec){
-  #   hit.df <- rbind(hit.df, Func(i, dataset_test))
-  # }
-
-
-
-  # labels <- data.frame(x = hit.df$Miss,
-  #                      y = hit.df$Hits,
-  #                     Threshold = vec)
-
-# hit.df$Hits <- round(hit.df$Hits,2)
-#   hit.df$Miss <- round(hit.df$Miss,2)
-
-#   hit.df$Threshold=labels$Threshold
-
-#   hitMissRt <- ggplot(data = hit.df,aes(x = Threshold,y = Hits)) +
-#     geom_point() +
-#     geom_line(aes(color="darkblue")) +
-#    labs(x="Threshold",
-#          y="Hit Rate/Miss Rate",
-#          title = "Hit Rate/Miss Rate") +
-#     geom_point(mapping=aes(x = Threshold,y = Miss)) +
-#     geom_line(aes(color="orange")) +
-#     scale_color_discrete(labels=c("Capture Rate","Hit Rate")) +
-#     coord_cartesian(xlim=c(0,1),ylim = c(0,1)) +
-#     theme(panel.grid.major = element_blank(),
-#           panel.grid.minor = element_blank(),
-#           panel.background = element_rect(fill = "lightblue"))
-
-    #hitMissRt <- plot_ly(hit.df,
-    #                    y = ~Hits,
-    #                   x = ~Threshold,
-    #                     name='Hit Rate',
-    #                     type='scatter',
-    #                     mode='lines') %>%
-    #  add_trace(y = ~Miss,
-    #          name='Capture Rate',
-    #          mode='lines') %>%
-    #
-    #  layout(xaxis = list(range = c(0,1),
-    #                      zeroline = F,
-    #                      showgrid = F,
-    #                      title = "Threshold"),
-    #         yaxis = list(range = c(0,1),
-    #                      zeroline = F,
-    #                      showgrid = F,
-    #                      domain = c(0, 0.9),
-    #                      title = "Hit Rate/Miss Rate"),
-    #         plot_bgcolor = "aliceblue",title="Hit Rate vs Capture Rate"
-    #  )
-    #  return (hitMissRt)
-    #}
 
   k_stat_value<- function(fullmodel,train,test,pos,model){
 
@@ -391,9 +286,9 @@ modelling_module<-function(DV,model_selection,predictorClass)
     else {
 
 
-
       var_imp_res <-data.frame(var_names = character(),
                                Overall = double())
+
       mod_imp <- varImp(var_imp_mod,numTrees = 3000)
 
       if(flag_svm != "y")
@@ -465,7 +360,6 @@ modelling_module<-function(DV,model_selection,predictorClass)
 
     train_lr<-train
     test_lr<-test
-
     lr_model <- glm (DV ~ .,
                      data =train_lr,
                      family = binomial)
@@ -587,13 +481,26 @@ modelling_module<-function(DV,model_selection,predictorClass)
                            number =5,
                            classProbs = TRUE,
                            savePredictions = 'final')
-
+    #library(kernlab)
     set.seed(323)
+
+    ### finding optimal value of a tuning parameter
+    sigDist <- sigest(DV ~ ., data = train_svm, frac = 1)
+    ### creating a grid of two tuning parameters, .sigma comes from the earlier line. we are trying to find best value of .C
+    #svmTuneGrid <- data.frame(.sigma = sigDist[1], .C = 2^(-2:7))
+
+    #svm_radial <- train(DV ~.,
+    #                    data = train_svm,
+    #                    method = "svmRadial",
+    #                    preProc = c("center", "scale"),
+    #                    tuneGrid = svmTuneGrid,
+    #                    trControl = trainControl(method = "repeatedcv", repeats = 5,
+    #                                             classProbs =  TRUE, savePredictions = 'final'))
 
     svm_radial <- train(DV ~.,
                         data = train_svm,
                         method = "svmRadial",
-                        trControl=trctrl)
+                        trControl = trctrl)
 
     predResult <- predFunction(svm_radial,train_svm,test_svm,positive_class,"SVM")
 
@@ -718,26 +625,24 @@ modelling_module<-function(DV,model_selection,predictorClass)
     return(testD)
   }
 
+  #data_model <- dataFunction(dvVar)
+  #train <- data_model[[1]]
+  #test <- data_model[[2]]
   train<-read.csv("C:/opencpuapp_ip/train.csv")
-
   test<-read.csv("C:/opencpuapp_ip/test.csv")
-
-  drops <- c("X")
-  train<-train[ , !(names(train) %in% drops)]
-  test<-test[ , !(names(test) %in% drops)]
-
-  model_evaluations<-setNames(data.frame(matrix(ncol = 9, nrow = 9)),
-                              c("tpr","fpr","tnr","fnr","recall",
-                                "precision","f1score","accuracy","roc")
-                              )
-  rownames(model_evaluations)<-c("lr","rf_rose","rf_over","rf_under",
-                                 "rf_both","gbm","svm","nn","nb")
 
   names(train)[names(train)==DV] <- "DV"
   names(test)[names(test)==DV] <- "DV"
 
+  model_evaluations<-setNames(data.frame(matrix(ncol = 10, nrow = 9)),
+                              c("tpr","fpr","tnr","fnr","recall",
+                                "precision","f1score","accuracy","roc","liftcurve")
+  )
+  rownames(model_evaluations)<-c("lr","rf_rose","rf_over","rf_under",
+                                 "rf_both","gbm","svm","nn","nb")
+
   ##The class that needs to be predicted when the prob > threshold
-  positive_class <- as.numeric(predictorClass)
+  positive_class <- predictorClass
   model <- model_selection
 
   oemFlag <- F

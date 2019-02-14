@@ -51,6 +51,7 @@ $("#show_perf").on("click", function(){
 		$('#building_inter').show();
 	    $("#building_inter").text("Training the Model... Will be ready in a jiffy!");
 
+		$('#model_out').show();
 	function prepareVarImpData(listInp){
 
 		varImpData = [['Variable Name','Variable Importance']];
@@ -93,7 +94,6 @@ $("#show_perf").on("click", function(){
 		contructLREQN(lists[2]["modelCoeff"]);
 		constructVarOdds(lists[2]["modelCoeff"]);
 	}
-
 
 	/*
     var req = ocpu.call("modelling_module", {
