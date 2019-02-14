@@ -90,7 +90,7 @@ $(document).ready(function(){
 
 		function getResultChartsAndDisplay(session){
 			var base_url = session.getLoc();
-			var url = base_url +'graphics/1';
+			var url = base_url +'graphics/2';
 			$("#liftChart").attr('src',url);
 		}
 
@@ -102,11 +102,11 @@ $(document).ready(function(){
 		}
 
 		function prepareVarImpData(listInp){
-			varImpData = [['Variable Name','Variable Importance', { role: 'annotation' }]];
+			varImpData = [['Variable Name','Variable Importance', {type: 'string', role: 'annotation'}]];
 
 			for(var i =0;i<listInp.length;i++){
 				var obsArray = [];
-				obsArray.push(listInp[i]["var_names"],listInp[i]["Overall"],listInp[i]["Overall"]);
+				obsArray.push(listInp[i]["var_names"],listInp[i]["Overall"],''+listInp[i]["Overall"]);
 				varImpData.push(obsArray);
 			}
 
@@ -115,14 +115,36 @@ $(document).ready(function(){
 
 		function drawVarImpPlot(chartData)
 		{
-			google.charts.load("current", {packages:["corechart"]});
+			google.charts.load("current", {packages:["corechart",'bar']});
 			google.charts.setOnLoadCallback(drawChart);
 			function drawChart(){
 				var data = google.visualization.arrayToDataTable(chartData);
 				var options = {
 					title: "Variable Importance",
-					width:600,
-					height:400,
+					annotations: {
+          				alwaysOutside: true,
+          				textStyle: {
+			            fontSize: 12,
+			            auraColor: 'none',
+			            color: '#555'
+			        },
+					boxStyle: {
+			            stroke: '#ccc',
+			            strokeWidth: 1,
+			            gradient: {
+			            	color: '#f3e5f5',
+			                x: '0%', y: '0%'
+			            }
+			        },
+					hAxis: {
+          				title: 'Importance Score',
+          				minValue: 0,
+        			},
+			        vAxis: {
+			          title: 'Variables'
+				  	},
+					width:700,
+					height:500,
 					bar: {groupWidth: "50%"},
 					legend: {position:"none"},
 				};
