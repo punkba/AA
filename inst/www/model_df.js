@@ -66,6 +66,7 @@ $("#show_perf").on("click", function(){
 									console.log(dataOutput);
 									populateResults(dataOutput);
 									$('#show_model_sel').show();
+									$('#building_inter').removeClass('lds-dual-ring');
 									$('#ResultsTab').show();
 								}).fail();
 							}).fail(function(){
@@ -256,7 +257,7 @@ $("#show_perf").on("click", function(){
 	//hide the performance metrics and show the model selection
 	$('#show_model_sel').click(function() {
 		$('#model_opt').show();
-		$('#model_out').hide();
+		$('#building_inter').hide();
 		/*if(model_persist == "OEM")
 		{
 			$('#oem_results').hide()
