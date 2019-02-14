@@ -76,10 +76,10 @@ $("#show_perf").on("click", function(){
 	}
 
 	function populateConfusionMatrix(ConfuseData){
-		$('#table td TP').html(ConfuseData[0]);
-		$('#table td FP').html(ConfuseData[1]);
-		$('#table td TN').html(ConfuseData[0]);
-		$('#table td FN').html(ConfuseData[0]);
+		$('#TP').html(ConfuseData[0]);
+		$('#FP').html(ConfuseData[1]);
+		$('#TN').html(ConfuseData[2]);
+		$('#FN').html(ConfuseData[3]);
 	}
 
 	function prepareVarImpData(listInp){
