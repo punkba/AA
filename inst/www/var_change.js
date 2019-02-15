@@ -19,6 +19,7 @@ $('#varChangeBtn').on('click',function(){
 											initiatePreProcess();
 										}
 									$('#varChangeLnk').attr('href',session.getFileURL('LogFile'));
+									$('#varChangeLnk').show();
 									});
 								}).fail(function(){
 									alert('Server error: '+preProcessReq.responseText);
@@ -29,8 +30,6 @@ $('#varChangeBtn').on('click',function(){
 });
 
 function initiatePreProcess(){
-						$('#varChangeLnk').show();
-
 						var reqVarImp = $("#plotdiv").rplot('top_var_graph',{'target.var.name':dvname,
 																			 'ds': ds}
 													       )
