@@ -17,6 +17,12 @@ a{
 	background-color:white;
 }
 
+.buttonStyle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .img-fluid{
     height: 500px;
 }
