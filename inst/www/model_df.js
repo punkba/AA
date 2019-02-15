@@ -95,10 +95,10 @@ $(document).ready(function(){
 		}
 
 		function populateConfusionMatrix(ConfuseData){
-			$('#TP').html(ConfuseData[0]*100+' %');
-			$('#FP').html(ConfuseData[1]*100+' %');
-			$('#TN').html(ConfuseData[2]*100+' %');
-			$('#FN').html(ConfuseData[3]*100+' %');
+			$('#TP').html((ConfuseData[0]*100).toPrecision(4));
+			$('#FP').html((ConfuseData[1]*100).toPrecision(4));
+			$('#TN').html((ConfuseData[2]*100).toPrecision(4));
+			$('#FN').html((ConfuseData[3]*100).toPrecision(4));
 		}
 
 		function prepareVarImpData(listInp){
@@ -151,20 +151,6 @@ $(document).ready(function(){
 				var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
 				chart.draw(data, options);
 			}
-		}
-
-
-		function processLROutput(lists){
-			modelLink = lists[1]["modelSaveLocation"].toString();
-			output = lists[4]["metricOutput"].flat();
-			prepareVarImpData(lists[3]["variables"]);
-			modelSummaryPath = lists[5]["summaryPath"].toString();
-
-			//call functions to populate the results
-			drawVarImpPlot(varImpData);
-			$('#modelDownload').show();
-			contructLREQN(lists[2]["modelCoeff"]);
-			constructVarOdds(lists[2]["modelCoeff"]);
 		}
 
 		//hide the performance metrics and show the model selection

@@ -1,6 +1,5 @@
 <!Doctype html5>
 <html>
-
 <head>
   <title>Propensity Model</title>
     <script src="opencpu/jquery-1.10.2.min.js"></script>
@@ -53,13 +52,6 @@
        width: 46%;
        height: 450px;
        border: solid gray 1px;
-     }
-
-     #liftChart{
-        position: relative;
-        width: 60%;
-        height:350px;
-        border: solid gray 1px;
      }
 
 	  #plotdiv {
@@ -347,71 +339,48 @@
 							<div class="text-center"><h2>Results</h2></div>
 							<div class="row">&nbsp </div>
 							<div class="row">&nbsp </div>
-							<div class="accordion" id="modellingResults">
-							  <div class="card">
-								<div class="card-header" id="Output1Header">
-								  <h2 class="mb-0">
-									<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#importantVariables" aria-expanded="true" aria-controls="confusionMatrix">
-										Important Variables
-									</button>
-								  </h2>
-								</div>
-								<div id="importantVariables" class="collapse show" aria-labelledby="Output1Header" data-parent="#modellingResults">
-								  <div class="card-body">
-                                      <div id="barchart_values"></div>
-                                  </div>
-								  </div>
-								</div>
-							  </div>
-							  <div class="card">
-								<div class="card-header" id="Output2Header">
-								  <h2 class="mb-0">
-									<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#liftChartArea" aria-expanded="false" aria-controls="liftChartArea">
-										Lift Chart
-									</button>
-								  </h2>
-								</div>
-								<div id="liftChartArea" class="collapse" aria-labelledby="Output2Header" data-parent="#modellingResults">
-								  <div class="card-body">
-	                                    <img class="img-fluid" alt="Lift-Chart" id='liftChart'>
-								  </div>
-								</div>
-							  </div>
-							  <div class="card">
-								<div class="card-header" id="Output3Header">
-								  <h2 class="mb-0">
-									<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#confusionMatrix" aria-expanded="false" aria-controls="modelInsightsArea">
-									  Confusion Matrix
-									</button>
-								  </h2>
-								</div>
-								<div id="confusionMatrix" class="collapse" aria-labelledby="Output3Header" data-parent="#modellingResults">
-								  <div class="card-body">
-                                    <table border="1" class='table table-bordered table-responsive'>
-                                      <thead>
-                                        <tr>
-                                          <th></th>
-                                          <th>Predicted: No</th>
-                                          <th>Predicted: Yes</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr>
-                                          <td>Actual: No</td>
-                                          <td id='TN'></td>
-                                          <td id='FP'></td>
-                                        </tr>
-                                        <tr>
-                                          <td>Actual: Yes</td>
-                                          <td id='FN'></td>
-                                          <td id='TP'></td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-								  </div>
-								</div>
-							  </div>
-							</div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="list-group" id="list-tab" role="tablist">
+                                        <a class="list-group-item list-group-item-action active" id="list-importantVariables-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Variable Importance</a>
+                                        <a class="list-group-item list-group-item-action" id="list-liftChart-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Lift Chart</a>
+                                        <a class="list-group-item list-group-item-action" id="list-confusionMatrix-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">confusion Matrix</a>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="tab-content" id="nav-tabContent">
+                                        <div class="tab-pane fade show active" id="list-importantVariables" role="tabpanel" aria-labelledby="list-importantVariables-list">
+                                            <div id="barchart_values"></div>
+                                        </div>
+                                        <div class="tab-pane fade" id="list-liftChart" role="tabpanel" aria-labelledby="list-liftChart-list">
+                                            <img class="img-fluid" alt="Lift-Chart" id='liftChart'>
+                                        </div>
+                                        <div class="tab-pane fade" id="list-confusionMatrix" role="tabpanel" aria-labelledby="list-confusionMatrix-list">
+                                            <table border="1" class='table table-bordered table-responsive'>
+                                                <thead>
+                                                    <tr>
+                                                    <th></th>
+                                                    <th>Predicted: No</th>
+                                                    <th>Predicted: Yes</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                      <td>Actual: No</td>
+                                                      <td id='TN'></td>
+                                                      <td id='FP'></td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td>Actual: Yes</td>
+                                                      <td id='FN'></td>
+                                                      <td id='TP'></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 						</li>
 
                       <li class="l-section section">
