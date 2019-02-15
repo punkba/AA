@@ -1,6 +1,7 @@
 preprocessing <- function(conv_var_names, dv){
 
 library(dplyr)
+library(plyr)
 
 data = read.csv(file='C:/opencpuapp_ip/prepro_step1.csv', header=TRUE, sep=",")
 names(data)[names(data)==dv] <- "DV"
