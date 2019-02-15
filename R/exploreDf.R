@@ -2,6 +2,10 @@ exploreDf <- function(df_full, dv) {
 
 data<-df_full
 
+#add string for data summary
+Summary_df <- data.frame(unclass(summary(data)), check.names = FALSE, stringsAsFactors = FALSE)
+write.table(Summary_df, "LogFile.csv", sep = ",", col.names = T, append = T)
+
 #consider target variable name given as input in HybridFS function as DV'
 n <- dv
 
@@ -27,26 +31,9 @@ cat_var<-char
 logcl <- df_temp[sapply(df_temp, is.logical)]
 cat_var<-cbind(cat_var,logcl)
 
-if(ncol(cat_var) == 0)
-{
-  fact <- df_temp[sapply(df_temp, is.factor)]
-  cat_var<-cbind(cat_var,fact)
-}
-
-#get the list of Factors
-#fact <- df_temp[sapply(df_temp, is.factor)]
-#cat_var<-cbind(cat_var,fact)
-
-#removing the categorical variables in df_temp
-df_temp<-df_temp[, !sapply(df_temp,is.logical)]
-df_temp<-df_temp[, !sapply(df_temp,is.character)]
-
-#determining other categorical variables with less than 52 levels
-unique_lvl_cnt<-df_temp[lengths(lapply(df_temp, unique)) <= 52]
-disc_var_names<-list()
-disc_var_names<-names(unique_lvl_cnt)
-discrete <- list(discrete=I(disc_var_names))
-cat_var<-cbind(cat_var,unique_lvl_cnt)
+#get the list of factor variables
+fac <- df_temp[sapply(df_temp, is.factor)]
+cat_var<-cbind(cat_var,fac)
 
 cat_var_names<-list()
 cat_var_names<-names(cat_var)
@@ -55,8 +42,27 @@ cat_var_names<-names(cat_var)
 cat_var_names
 categorical <- list(categorical=I(cat_var_names))
 
+#removing the categorical variables in df_temp
+df_temp<-df_temp[, !sapply(df_temp,is.logical)]
+df_temp<-df_temp[, !sapply(df_temp,is.character)]
+df_temp<-df_temp[, !sapply(df_temp,is.factor)]
+
+#determining other categorical variables with less than 52 levels
+
+unique_lvl_cnt<-df_temp[lengths(lapply(df_temp, unique)) <= 52 & lengths(lapply(df_temp, unique)) >= 2]
+disc_var_names<-list()
+disc_var_names<-names(unique_lvl_cnt)
+
+#display the list of discrete variables
+disc_var_names
+discrete <- list(discrete=I(disc_var_names))
+
 df_cont <- data[, names(data) != n]
 for(i in names(cat_var))
+{
+  df_cont<-df_cont[names(df_cont) != i]
+}
+for(i in names(unique_lvl_cnt))
 {
   df_cont<-df_cont[names(df_cont) != i]
 }
@@ -70,6 +76,19 @@ continuous <- list(continuous=I(cont_var_names))
 #store the variables as list of lists
 final_list <- list(discrete,categorical,continuous)
 
+#add string for variable list
+lapply(final_list, function(x) write.table( data.frame(x), 'LogFile.csv'  , append= T, sep=',' ))
+
+discrete = unlist(discrete, use.names=FALSE)
+categorical = unlist(categorical, use.names=FALSE)
+continuous = unlist(continuous, use.names=FALSE)
+
+max.len = max(length(discrete), length(categorical), length(continuous))
+discrete = c(discrete, rep(NA, max.len - length(discrete)))
+categorical = c(categorical, rep(NA, max.len - length(categorical)))
+continuous = c(continuous, rep(NA, max.len - length(continuous)))
+final_df <- data.frame(discrete, categorical, continuous)
+write.csv(final_df,"C:/opencpuapp_ip/variable_list.csv")
 return(final_list)
 #close loop and return lists
 }
