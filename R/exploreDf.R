@@ -49,7 +49,7 @@ df_temp<-df_temp[, !sapply(df_temp,is.factor)]
 
 #determining other categorical variables with less than 52 levels
 
-unique_lvl_cnt<-df_temp[lengths(lapply(df_temp, unique)) <= 52 & lengths(lapply(df_temp, unique)) >= 2]
+unique_lvl_cnt<-df_temp[lengths(lapply(df_temp, unique)) <= 52] 
 disc_var_names<-list()
 disc_var_names<-names(unique_lvl_cnt)
 
