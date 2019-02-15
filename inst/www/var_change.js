@@ -18,7 +18,7 @@ $('#varChangeBtn').on('click',function(){
 										{
 											initiatePreProcess();
 										}
-									$('#varChangeLnk').attr('href',session.getFileURL('LogFile'));
+									$('#varChangeLnk').attr('href',session.getFileURL('LogFile.csv'));
 									$('#varChangeLnk').show();
 									});
 								}).fail(function(){
