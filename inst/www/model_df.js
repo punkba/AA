@@ -142,8 +142,8 @@ $(document).ready(function(){
 			        	vAxis: {
 			          		title: 'Variables'
 				  		},
-						width:700,
-						height:500,
+						width:100%,
+						height:100%,
 						bar: {groupWidth: "50%"},
 						legend: {position:"none"}
 					}
