@@ -7,15 +7,30 @@ $('#varChangeLnk').hide();
 $('#varChangeBtn').on('click',function(){
 	//Disable the button for the user
 	$('#varChangeBtn').prop("disabled",true);
-	initiatePreProcess();
+
+	var preProcessReq = ocpu.call('preprocessing',
+								 {'conv_var_names':checkedVars,
+							 	  'dv' : dvname
+							  	 },
+								 function(session){
+								  	session.getObject(function(returnCode){
+										if(returnCode == 0)
+										{
+											initiatePreProcess();
+										}
+									$('#varChangeLnk').attr('href',session.getFileURL('LogFile'));
+									});
+								}).fail(function(){
+									alert('Server error: '+preProcessReq.responseText);
+								});
 	//Get the list of variable names after updation by user for passing it to R
-	
+
 });
 });
 
 function initiatePreProcess(){
 						$('#varChangeLnk').show();
-						
+
 						var reqVarImp = $("#plotdiv").rplot('top_var_graph',{'target.var.name':dvname,
 																			 'ds': ds}
 													       )
@@ -31,7 +46,7 @@ function initiatePreProcess(){
 												   function(session){
 														session.getObject(function(output){
 														tempOut1 = output;
-														/* Plot the variable profile by default for the first variable  in 
+														/* Plot the variable profile by default for the first variable  in
 															the dropdown*/
 														plotProfilingGraph(output[0]);
 														$('#varDropdownMenuButton').html(output[0]);
