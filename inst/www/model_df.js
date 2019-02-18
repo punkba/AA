@@ -85,7 +85,7 @@ $(document).ready(function(){
 
 		function populateResults(sessionData){
 			populateConfusionMatrix(sessionData[2]['metricOutput'].flat());
-			$('#modelDownloadLink').attr('href',session.getFileURL(sessionData[1]['modelSaveLocation'].flat()));
+			$('#modelDownloadLink').attr('href',session.getFileURL(sessionData[1]['modelSaveLocation'][0]));
 			/*drawVarImpPlot(prepareVarImpData(sessionData[2]['variables']));*/
 		}
 
