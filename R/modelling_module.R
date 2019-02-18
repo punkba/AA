@@ -20,7 +20,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
     return(as.list(wars))
   }
 
-  processOutput <- function(model,vars,metrics,oemInd){
+  processOutput <- function(model,metrics,oemInd){
     library(dplyr)
     library(RJSONIO)
     library(data.table)
@@ -29,7 +29,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
     {
       selectedModel <- which.max(metrics$accuracy)
 
-      variables <- vars[selectedModel]
+      #variables <- vars[selectedModel]
 
       modResults <- metrics %>% select('tpr','fpr','tnr','fnr','accuracy')
       colnames(modResults) <- NULL
@@ -60,7 +60,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
       modelName <- list(modelName=I(modelName))
       modelSaveLocation <- list(modelSaveLocation=I(modelSaveLocation))
 
-      variables <- list(variables=I(vars))
+     # variables <- list(variables=I(vars))
 
       metricOutput <- list(as.numeric(metrics['tpr']),
                            as.numeric(metrics['fpr']),
@@ -76,8 +76,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
 
     }
     outL <- list(modelName,
-                 modelSaveLocation,
-                 variables,metricOutput,summaryPath)
+                 modelSaveLocation,,metricOutput,summaryPath)
 
     return (outL)
   }
@@ -445,7 +444,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
 
     model_evaluations["nb",] <- evalResults
 
-    important_variables  <- variable_importance(Naive_Bayes_Model,"not_app")
+    variable_importance(Naive_Bayes_Model,"not_app")
 
     model_evaluations <- model_evaluations[rowSums(is.na(model_evaluations)) != ncol(model_evaluations),]
 
@@ -460,7 +459,6 @@ modelling_module<-function(model_selection,predictorClass,dv)
     else
     {
       return (processOutput(Naive_Bayes_Model,
-                            important_variables,
                             model_evaluations,
                             flagInp))
     }
@@ -499,7 +497,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
 
     model_evaluations["svm",] <- evalResults
 
-    important_variables  <- variable_importance(svm_radial,"y")
+    variable_importance(svm_radial,"y")
 
     model_evaluations <- model_evaluations[rowSums(is.na(model_evaluations)) != ncol(model_evaluations),]
 
@@ -514,7 +512,6 @@ modelling_module<-function(model_selection,predictorClass,dv)
     else
     {
       return (processOutput(svm_radial,
-                            important_variables,
                             model_evaluations,
                             flagInp))
     }
