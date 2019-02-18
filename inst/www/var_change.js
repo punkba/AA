@@ -19,10 +19,11 @@ $('#varChangeBtn').on('click',function(){
 											initiatePreProcess();
 										}
 									$('#varChangeLnk').attr('href',session.getFileURL('LogFile.csv'));
-									$('#varChangeLnk').show();
 									});
 								}).fail(function(){
 									alert('Server error: '+preProcessReq.responseText);
+								}).always(function(){
+									$('#varChangeLnk').show();
 								});
 	//Get the list of variable names after updation by user for passing it to R
 
