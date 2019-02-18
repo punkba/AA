@@ -91,8 +91,10 @@ $(document).ready(function(){
 
 		function getResultChartsAndDisplay(session){
 			var base_url = session.getLoc();
-			var url = base_url +'graphics/2';
-			$("#liftChart").attr('src',url);
+			var liftUrl = base_url +'graphics/2';
+			$("#liftChart").attr('src',liftUrl);
+			var varImpUrl = base_url +'graphics/3';
+			$("#varImpChart").attr('src',varImpUrl);
 		}
 
 		function populateConfusionMatrix(ConfuseData){
