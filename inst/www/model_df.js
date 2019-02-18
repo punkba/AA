@@ -73,7 +73,7 @@ $(document).ready(function(){
 										$("#building_inter").text('Model Trained !! Check next page for results');
 										console.log(dataOutput);
 										populateResults(dataOutput);
-										$('#modelDownloadLink').attr('href',session.getFileURL(sessionData[1]['modelSaveLocation'].toString()));
+										$('#modelDownloadLink').attr('href',session.getFileURL(dataOutput[1]['modelSaveLocation'].toString()));
 										$('#show_model_sel').show();
 										$('#building_inter').removeClass('lds-dual-ring');
 										$('#ResultsTab').show();
