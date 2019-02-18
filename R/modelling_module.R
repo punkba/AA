@@ -20,7 +20,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
     return(as.list(wars))
   }
 
-  processOutput <- function(model,metrics,oemInd){
+  processOutput <- function(model,vars,metrics,oemInd){
     library(dplyr)
     library(RJSONIO)
     library(data.table)
@@ -29,7 +29,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
     {
       selectedModel <- which.max(metrics$accuracy)
 
-      #variables <- vars[selectedModel]
+      variables <- vars[selectedModel]
 
       modResults <- metrics %>% select('tpr','fpr','tnr','fnr','accuracy')
       colnames(modResults) <- NULL
@@ -60,8 +60,6 @@ modelling_module<-function(model_selection,predictorClass,dv)
       modelName <- list(modelName=I(modelName))
       modelSaveLocation <- list(modelSaveLocation=I(modelSaveLocation))
 
-     # variables <- list(variables=I(vars))
-
       metricOutput <- list(as.numeric(metrics['tpr']),
                            as.numeric(metrics['fpr']),
                            as.numeric(metrics['tnr']),
@@ -76,7 +74,8 @@ modelling_module<-function(model_selection,predictorClass,dv)
 
     }
     outL <- list(modelName,
-                 modelSaveLocation,,metricOutput,summaryPath)
+                 modelSaveLocation,
+                 metricOutput,summaryPath)
 
     return (outL)
   }
@@ -291,7 +290,9 @@ modelling_module<-function(model_selection,predictorClass,dv)
       var_imp_res <- rbind(var_imp_res,combinedList)
       mod_imp <- arrange(var_imp_res, var_imp_res$Overall)
       mod_imp$var_names <- factor(mod_imp$var_names, levels = mod_imp$var_names)
-      ggplot(mod_imp, aes(var_names, Overall)) + geom_col() + coord_flip() + labs(x = "Variables", y = "Importance")
+      p <- ggplot(mod_imp, aes(var_names, Overall)) + geom_col() + coord_flip() + labs(x = "Variables", y = "Importance")
+      print(p)
+      return(p)
     }
   }
 
@@ -322,7 +323,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
     model_evaluations["gbm",] <- evalResults
 
 
-    variable_importance(gbm_model,"n")
+    important_variables<- variable_importance(gbm_model,"n")
 
     model_evaluations <- model_evaluations[rowSums(is.na(model_evaluations)) != ncol(model_evaluations),]
 
@@ -337,6 +338,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
     else
     {
       return (processOutput(gbm_model,
+                            important_variables,
                             model_evaluations,
                             flagInp))
     }
@@ -360,7 +362,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
 
     model_evaluations["lr",] <- evalResults
 
-    variable_importance(lr_model,"n")
+    important_variables <- variable_importance(lr_model,"n")
 
     model_evaluations <- model_evaluations[rowSums(is.na(model_evaluations)) != ncol(model_evaluations),]
 
@@ -375,6 +377,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
     else
     {
       return (processOutput(lr_model,
+                            important_variables,
                             model_evaluations,
                             flagInp))
     }
@@ -400,7 +403,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
     test_rf <- predResult
 
     roc.curve(test_rf$DV, test_rf$Prob, plotit = F)
-    variable_importance(treeimp,"n")
+    important_variables <- variable_importance(treeimp,"n")
 
     evalResults<- evaluatemeasures(test_rf)
 
@@ -419,6 +422,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
     else
     {
       return (processOutput(treeimp,
+                            important_variables,
                             model_evaluations,
                             flagInp))
     }
@@ -444,7 +448,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
 
     model_evaluations["nb",] <- evalResults
 
-    variable_importance(Naive_Bayes_Model,"not_app")
+    important_variables  <- variable_importance(Naive_Bayes_Model,"not_app")
 
     model_evaluations <- model_evaluations[rowSums(is.na(model_evaluations)) != ncol(model_evaluations),]
 
@@ -459,6 +463,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
     else
     {
       return (processOutput(Naive_Bayes_Model,
+                            important_variables,
                             model_evaluations,
                             flagInp))
     }
@@ -497,7 +502,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
 
     model_evaluations["svm",] <- evalResults
 
-    variable_importance(svm_radial,"y")
+    important_variables  <- variable_importance(svm_radial,"y")
 
     model_evaluations <- model_evaluations[rowSums(is.na(model_evaluations)) != ncol(model_evaluations),]
 
@@ -512,6 +517,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
     else
     {
       return (processOutput(svm_radial,
+                            important_variables,
                             model_evaluations,
                             flagInp))
     }
