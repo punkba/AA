@@ -292,8 +292,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
       var_imp_res <- rbind(var_imp_res,combinedList)
       mod_imp <- arrange(var_imp_res, var_imp_res$Overall)
       mod_imp$var_names <- factor(mod_imp$var_names, levels = mod_imp$var_names)
-      p <- ggplot(mod_imp, aes(var_names, Overall)) + geom_col() + coord_flip() + labs(x = "Variables", y = "Importance")
-      return(p)
+      ggplot(mod_imp, aes(var_names, Overall)) + geom_col() + coord_flip() + labs(x = "Variables", y = "Importance")
     }
   }
 
@@ -324,7 +323,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
     model_evaluations["gbm",] <- evalResults
 
 
-    important_variables<- variable_importance(gbm_model,"n")
+    variable_importance(gbm_model,"n")
 
     model_evaluations <- model_evaluations[rowSums(is.na(model_evaluations)) != ncol(model_evaluations),]
 
@@ -339,7 +338,6 @@ modelling_module<-function(model_selection,predictorClass,dv)
     else
     {
       return (processOutput(gbm_model,
-                            important_variables,
                             model_evaluations,
                             flagInp))
     }
@@ -363,7 +361,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
 
     model_evaluations["lr",] <- evalResults
 
-    important_variables <- variable_importance(lr_model,"n")
+    variable_importance(lr_model,"n")
 
     model_evaluations <- model_evaluations[rowSums(is.na(model_evaluations)) != ncol(model_evaluations),]
 
@@ -378,7 +376,6 @@ modelling_module<-function(model_selection,predictorClass,dv)
     else
     {
       return (processOutput(lr_model,
-                            important_variables,
                             model_evaluations,
                             flagInp))
     }
@@ -404,7 +401,7 @@ modelling_module<-function(model_selection,predictorClass,dv)
     test_rf <- predResult
 
     roc.curve(test_rf$DV, test_rf$Prob, plotit = F)
-    important_variables <- variable_importance(treeimp,"n")
+    variable_importance(treeimp,"n")
 
     evalResults<- evaluatemeasures(test_rf)
 
@@ -423,7 +420,6 @@ modelling_module<-function(model_selection,predictorClass,dv)
     else
     {
       return (processOutput(treeimp,
-                            important_variables,
                             model_evaluations,
                             flagInp))
     }
