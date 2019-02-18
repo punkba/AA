@@ -1,4 +1,4 @@
-modelling_module<-function(DV,model_selection,predictorClass)
+modelling_module<-function(model_selection,predictorClass,dv)
 {
   library(pROC)
   library(caret)
@@ -54,14 +54,11 @@ modelling_module<-function(DV,model_selection,predictorClass)
       modelName <- rownames(metrics)
       modelSaveLocation <- paste0(modelName,"_model.RData")
 
+
       save(model,file=modelSaveLocation)
 
       modelName <- list(modelName=I(modelName))
       modelSaveLocation <- list(modelSaveLocation=I(modelSaveLocation))
-
-      #modelCoeff <- processModelOutput(model,modelName)
-
-      #modelCoeff <-list(modelCoeff=I(modelCoeff))
 
       variables <- list(variables=I(vars))
 
@@ -82,26 +79,17 @@ modelling_module<-function(DV,model_selection,predictorClass)
                  modelSaveLocation,
                  variables,metricOutput,summaryPath)
 
-    #if(modelName == 'lr')
-    #{
-    # out <- jsonlite::toJSON(outL,pretty=T,auto_unbox = T)
-    #out <- gsub(pattern = '\\]$', replacement = "}", x = out)
-    #out <- gsub(pattern = '^\\[', replacement = "{", x = out)
     return (outL)
-    #}
-    #else
-    #{
-    # return (list(modelName,modelSaveLocation,modelCoeff,variables,metricOutput))
-    #}
   }
 
-  dataFunction <- function(dvVar){
+  dataFunction <- function(){
     ##Splitting into test and train
     set.seed(666)
     #User to choose the ratio to be set for training and testing data sets
     splitratio <- as.numeric(0.7)
-    cleaned_data <- read.csv(cleaned_data_csv)
-    split <- sample.split(cleaned_data$dvVar,SplitRatio = splitratio)
+    cleaned_data <- read.csv("C:/opencpuapp_ip/cleaned_data.csv")
+    names(cleaned_data)[names(cleaned_data)==dv] <- "DV"
+    split <- sample.split(cleaned_data$DV,SplitRatio = splitratio)
 
     train <- subset(cleaned_data,split == TRUE)
     test <- subset(cleaned_data,split == FALSE)
@@ -239,8 +227,6 @@ modelling_module<-function(DV,model_selection,predictorClass)
     testCopy$DV <- DV
     testCopy$predicted <- predicted_val
 
-    #hitMiss <- hitvcap(testCopy)
-
     return(c(tpr,fpr,tnr,fnr,recall,precision,f1score,Accuracy,plot_res,plot_lc))
   }
 
@@ -304,8 +290,10 @@ modelling_module<-function(DV,model_selection,predictorClass)
 
       combinedList <- list(var_names=names,Overall=OverallScore)
       var_imp_res <- rbind(var_imp_res,combinedList)
-      mod_imp <- var_imp_res[order(var_imp_res$Overall,decreasing = TRUE),]
-      return(mod_imp)
+      mod_imp <- arrange(var_imp_res, var_imp_res$Overall)
+      mod_imp$var_names <- factor(mod_imp$var_names, levels = mod_imp$var_names)
+      p <- ggplot(mod_imp, aes(var_names, Overall)) + geom_col() + coord_flip() + labs(x = "Variables", y = "Importance")
+      return(p)
     }
   }
 
@@ -339,6 +327,9 @@ modelling_module<-function(DV,model_selection,predictorClass)
     important_variables<- variable_importance(gbm_model,"n")
 
     model_evaluations <- model_evaluations[rowSums(is.na(model_evaluations)) != ncol(model_evaluations),]
+
+    Summary_df <- data.frame(unclass(summary(model_evaluations)), check.names = FALSE, stringsAsFactors = FALSE)
+    write.table(Summary_df, "ModelLogFile.csv", sep = ",", col.names = T, append = T)
 
     if(flagInp)
     {
@@ -375,6 +366,9 @@ modelling_module<-function(DV,model_selection,predictorClass)
     important_variables <- variable_importance(lr_model,"n")
 
     model_evaluations <- model_evaluations[rowSums(is.na(model_evaluations)) != ncol(model_evaluations),]
+
+    Summary_df <- data.frame(unclass(summary(model_evaluations)), check.names = FALSE, stringsAsFactors = FALSE)
+    write.table(Summary_df, "ModelLogFile.csv", sep = ",", col.names = T, append = T)
 
     if(flagInp)
     {
@@ -418,6 +412,9 @@ modelling_module<-function(DV,model_selection,predictorClass)
 
     model_evaluations <- model_evaluations[rowSums(is.na(model_evaluations)) != ncol(model_evaluations),]
 
+    Summary_df <- data.frame(unclass(summary(model_evaluations)), check.names = FALSE, stringsAsFactors = FALSE)
+    write.table(Summary_df, "ModelLogFile.csv", sep = ",", col.names = T, append = T)
+
     if(flagInp)
     {
       return (list(as.character(important_variables$var_names),
@@ -456,6 +453,9 @@ modelling_module<-function(DV,model_selection,predictorClass)
 
     model_evaluations <- model_evaluations[rowSums(is.na(model_evaluations)) != ncol(model_evaluations),]
 
+    Summary_df <- data.frame(unclass(summary(model_evaluations)), check.names = FALSE, stringsAsFactors = FALSE)
+    write.table(Summary_df, "ModelLogFile.csv", sep = ",", col.names = T, append = T)
+
     if(flagInp)
     {
       return (list(as.character(important_variables$var_names),
@@ -481,21 +481,14 @@ modelling_module<-function(DV,model_selection,predictorClass)
                            number =5,
                            classProbs = TRUE,
                            savePredictions = 'final')
-    #library(kernlab)
+
     set.seed(323)
 
+    library(kernlab)
     ### finding optimal value of a tuning parameter
     sigDist <- sigest(DV ~ ., data = train_svm, frac = 1)
     ### creating a grid of two tuning parameters, .sigma comes from the earlier line. we are trying to find best value of .C
     #svmTuneGrid <- data.frame(.sigma = sigDist[1], .C = 2^(-2:7))
-
-    #svm_radial <- train(DV ~.,
-    #                    data = train_svm,
-    #                    method = "svmRadial",
-    #                    preProc = c("center", "scale"),
-    #                    tuneGrid = svmTuneGrid,
-    #                    trControl = trainControl(method = "repeatedcv", repeats = 5,
-    #                                             classProbs =  TRUE, savePredictions = 'final'))
 
     svm_radial <- train(DV ~.,
                         data = train_svm,
@@ -513,6 +506,9 @@ modelling_module<-function(DV,model_selection,predictorClass)
     important_variables  <- variable_importance(svm_radial,"y")
 
     model_evaluations <- model_evaluations[rowSums(is.na(model_evaluations)) != ncol(model_evaluations),]
+
+    Summary_df <- data.frame(unclass(summary(model_evaluations)), check.names = FALSE, stringsAsFactors = FALSE)
+    write.table(Summary_df, "ModelLogFile.csv", sep = ",", col.names = T, append = T)
 
     if(flagInp)
     {
@@ -609,9 +605,7 @@ modelling_module<-function(DV,model_selection,predictorClass)
       pred <- predict(modelInput,
                       newdata=testD,
                       type = typeResp)
-    }
-    else
-    {
+    } else {
       pred <- predict(modelInput,
                       newdata=testD,
                       type = typeResp)[,posit_class]
@@ -625,14 +619,9 @@ modelling_module<-function(DV,model_selection,predictorClass)
     return(testD)
   }
 
-  #data_model <- dataFunction(dvVar)
-  #train <- data_model[[1]]
-  #test <- data_model[[2]]
-  train<-read.csv("C:/opencpuapp_ip/train.csv")
-  test<-read.csv("C:/opencpuapp_ip/test.csv")
-
-  names(train)[names(train)==DV] <- "DV"
-  names(test)[names(test)==DV] <- "DV"
+  data_model <- dataFunction()
+  train <- data_model[[1]]
+  test <- data_model[[2]]
 
   model_evaluations<-setNames(data.frame(matrix(ncol = 10, nrow = 9)),
                               c("tpr","fpr","tnr","fnr","recall",
@@ -654,7 +643,6 @@ modelling_module<-function(DV,model_selection,predictorClass)
 
   rm(dataUpdated)
 
-  #fn <- match.fun(paste(model,'func',sep='_'))
   fn <- get(paste(model,'func',sep='_'))
   vars_imp <- fn(train,test,oemFlag,positive_class)
 

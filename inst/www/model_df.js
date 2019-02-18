@@ -85,7 +85,7 @@ $(document).ready(function(){
 
 		function populateResults(sessionData){
 			populateConfusionMatrix(sessionData[3]['metricOutput'].flat());
-			drawVarImpPlot(prepareVarImpData(sessionData[2]['variables']));
+			/*drawVarImpPlot(prepareVarImpData(sessionData[2]['variables']));*/
 		}
 
 		function getResultChartsAndDisplay(session){
@@ -101,7 +101,7 @@ $(document).ready(function(){
 			$('#FN').html((ConfuseData[3]*100).toPrecision(4));
 		}
 
-		function prepareVarImpData(listInp){
+		/*function prepareVarImpData(listInp){
 			varImpData = [['Variable Name','Variable Importance', {type: 'string', role: 'annotation'}]];
 
 			for(var i =0;i<listInp.length;i++){
@@ -111,9 +111,9 @@ $(document).ready(function(){
 			}
 
 			return varImpData;
-		}
+		}*/
 
-		function drawVarImpPlot(chartData)
+		/*function drawVarImpPlot(chartData)
 		{
 			google.charts.load("current", {packages:["corechart",'bar']});
 			google.charts.setOnLoadCallback(drawChart);
@@ -155,7 +155,7 @@ $(document).ready(function(){
 				var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
 				chart.draw(data, options);
 			}
-		}
+		}*/
 
 		//hide the performance metrics and show the model selection
 		$('#show_model_sel').click(function() {
