@@ -73,6 +73,7 @@ $(document).ready(function(){
 										$("#building_inter").text('Model Trained !! Check next page for results');
 										console.log(dataOutput);
 										populateResults(dataOutput);
+										$('#modelDownloadLink').attr('href',session.getFileURL(sessionData[1]['modelSaveLocation'].toString()));
 										$('#show_model_sel').show();
 										$('#building_inter').removeClass('lds-dual-ring');
 										$('#ResultsTab').show();
@@ -85,7 +86,6 @@ $(document).ready(function(){
 
 		function populateResults(sessionData){
 			populateConfusionMatrix(sessionData[2]['metricOutput'].flat());
-			$('#modelDownloadLink').attr('href',session.getFileURL(sessionData[1]['modelSaveLocation'][0]));
 			/*drawVarImpPlot(prepareVarImpData(sessionData[2]['variables']));*/
 		}
 
