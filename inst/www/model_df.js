@@ -61,9 +61,9 @@ $(document).ready(function(){
 
 		var modelReq = ocpu.call("modelling_module",
 								{
-									"DV" : dvname,
-							 		"model_selection" : isChecked,
-									"predictorClass" : preddv
+									"model_selection" : isChecked,
+									"predictorClass" : preddv,
+									"dv" : dvname
     							},
 								function(session)
 								{
