@@ -18,9 +18,9 @@ a{
 }
 
 .buttonStyle{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: fixed;
+    left: 40%;
+    top:60%;
 }
 
 .img-fluid{
