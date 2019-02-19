@@ -164,6 +164,7 @@ $(document).ready(function(){
 		$('#show_model_sel').click(function() {
 			$('#model_opt').show();
 			$('#building_inter').hide();
+			$('#show_model_sel').hide();
 		});
   	});
 });
