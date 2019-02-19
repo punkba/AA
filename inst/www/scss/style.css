@@ -234,6 +234,10 @@ body {
   color: #343a40;
 }
 
+table{
+    margin: 0 auto;
+}
+
 label {
   margin: 0;
 }
@@ -261,6 +265,12 @@ h6 {
 
 li {
   list-style: none;
+}
+
+.tab-content>.tab-pane {
+    display: none;
+    height: 500px;
+    max-width: 100%;
 }
 
 .varLi li {

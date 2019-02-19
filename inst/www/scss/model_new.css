@@ -23,6 +23,11 @@ a{
     top:60%;
 }
 
+a#modelDownloadLink {
+    position: relative;
+    top: 10em;
+}
+
 .img-fluid{
     height: 500px;
 }
