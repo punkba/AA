@@ -268,7 +268,6 @@ li {
 }
 
 .tab-content>.tab-pane {
-    display: none;
     height: 500px;
     max-width: 100%;
 }
