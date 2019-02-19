@@ -253,10 +253,10 @@ h6 {
   padding: 0;
 }
 
-.card-body { 
-	height: 300px; 
-	overflow-x: scroll; 
-	width: 100%; 
+.card-body {
+	height: 300px;
+	overflow-x: scroll;
+	width: 100%;
 }
 
 li {
@@ -284,6 +284,9 @@ button {
   border: none;
   padding: 6px 12px;
   color: #fff;
+  position: fixed;
+  left: 40%;
+  top:60%;
 }
 button:hover {
   cursor: pointer;
