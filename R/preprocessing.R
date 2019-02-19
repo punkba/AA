@@ -200,6 +200,13 @@ for(i in names(df))
     }
   }
 }
+cont_var_names <- names(df)
+cont_var_names <- cont_var_names[cont_var_names != "DV"]
+max.len = max(length(cat_var_names), length(cont_var_names))
+categorical = c(cat_var_names, rep(NA, max.len - length(cat_var_names)))
+continuous = c(cont_var_names, rep(NA, max.len - length(cont_var_names)))
+final_df <- data.frame(categorical, continuous)
+write.csv(final_df,"C:/opencpuapp_ip/variable_list.csv")
 
 df1<-df%>%data.frame()
 #creating correlation matrix for continuous variables
