@@ -3,7 +3,7 @@ $(document).ready(function(){
     console.log('In scoring');
     $('#scoreDownloadLink').addClass('disabled');
 
-    $('submitbutton2').on('click',function(){
+    $('#submitbutton2').on('click',function(){
         scoreFileName = $("#uploadFile2")[0].files[0];
 
         if(!scoreFileName){
