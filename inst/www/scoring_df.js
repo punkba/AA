@@ -11,8 +11,8 @@ $(document).ready(function(){
             return;
         }
         console.log('In scoring clicked');
-        $("#status1").text("Reading the CSV...")
-        $("#status1").addClass("lds-dual-ring");
+        $("#status2").text("Reading the CSV...")
+        $("#status2").addClass("lds-dual-ring");
 
         uploadcsv2(scoreFileName);
     });
@@ -26,8 +26,8 @@ $(document).ready(function(){
         }, function(session){
             $('#scoreDownloadLink').attr('href',session.getFileURL('scoredData.csv'));
             $('#scoreDownloadLink').removeClass('disabled');
-            $("#status1").text("Dataset Scored, Click to Download !!")
-            $("#status1").removeClass("lds-dual-ring");
+            $("#status2").text("Dataset Scored, Click to Download !!")
+            $("#status2").removeClass("lds-dual-ring");
         }).fail(function(){
           alert("Server error: " + req.responseText);
         }).always(function(){
