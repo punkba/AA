@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     console.log('In scoring');
     $('#scoreDownloadLink').addClass('disabled');
 
@@ -15,25 +16,22 @@ $(document).ready(function(){
 
         uploadcsv2(scoreFileName);
     });
+
+    function uploadcsv2(inputFileName){
+
+        $("#submitbutton2").attr("disabled", "disabled");
+
+        var req = ocpu.call("scoringmodule", {
+            filename : inputFileName
+        }, function(session){
+            $('#scoreDownloadLink').attr('href',session.getFileURL('scoredData.csv'));
+            $('#scoreDownloadLink').removeClass('disabled');
+            $("#status1").text("Dataset Scored, Click to Download !!")
+            $("#status1").removeClass("lds-dual-ring");
+        }).fail(function(){
+          alert("Server error: " + req.responseText);
+        }).always(function(){
+          $("#submitbutton").removeAttr("disabled");
+        });
+    }
 });
-
-function uploadcsv2(inputFileName){
-
-    $("#submitbutton2").attr("disabled", "disabled");
-
-    var req = ocpu.call("scoringmodule", {
-        filename : inputFileName
-    }, function(session){
-        $('#scoreDownloadLink').attr('href',session.getFileURL('scoredData.csv'));
-        $('#scoreDownloadLink').removeClass('disabled');
-        $("#status1").text("Dataset Scored, Click to Download !!")
-        $("#status1").removeClass("lds-dual-ring");
-    });
-    req.fail(function(){
-      alert("Server error: " + req.responseText);
-    });
-
-    req.always(function(){
-      $("#submitbutton").removeAttr("disabled");
-    });
-}
