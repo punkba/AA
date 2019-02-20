@@ -598,6 +598,9 @@ modelling_module<-function(model_selection,predictorClass,dv)
 
     threshold<-k_stat_value(modelInput,trainD,testD,posit_class,model)
 
+    threshold_df <- data.frame("ModelName" = model_selection, "PredictorClass" = predictorClass, "DVName" = dv, "Threshold" = threshold)
+    write.csv(threshold_df,"C:/opencpuapp_ip/threshold.csv")
+
     if(! (model %in% c('SVM','NB')))
     {
 

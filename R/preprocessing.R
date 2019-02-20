@@ -1,8 +1,5 @@
 preprocessing <- function(conv_var_names, dv){
 
-library(dplyr)
-library(plyr)
-
 data = read.csv(file='C:/opencpuapp_ip/prepro_step1.csv', header=TRUE, sep=",")
 names(data)[names(data)==dv] <- "DV"
 
@@ -200,13 +197,6 @@ for(i in names(df))
     }
   }
 }
-cont_var_names <- names(df)
-cont_var_names <- cont_var_names[cont_var_names != "DV"]
-max.len = max(length(cat_var_names), length(cont_var_names))
-categorical = c(cat_var_names, rep(NA, max.len - length(cat_var_names)))
-continuous = c(cont_var_names, rep(NA, max.len - length(cont_var_names)))
-final_df <- data.frame(categorical, continuous)
-write.csv(final_df,"C:/opencpuapp_ip/variable_list.csv")
 
 df1<-df%>%data.frame()
 #creating correlation matrix for continuous variables
@@ -323,6 +313,7 @@ if(length(df1)>1)
   drop=TRUE
 
   aftervif=data.frame()
+  library(plyr)
   while(drop==TRUE) {
     vfit=car::vif(fit)
     aftervif=rbind.fill(aftervif,as.data.frame(t(vfit)))
@@ -351,7 +342,18 @@ if(length(df1)>1)
   #getting the binned continuous variables
   data_cont_binned_fin<-data_cont_binned[,rem_var]
   df_cat <- cbind(df_cat, data_cont_binned_fin)
+  cont_var_names <- names(data_cont_binned_fin)
+  max.len = max(length(cat_var_names), length(cont_var_names))
+  categorical = c(cat_var_names, rep(NA, max.len - length(cat_var_names)))
+  continuous = c(cont_var_names, rep(NA, max.len - length(cont_var_names)))
+  final_df <- data.frame(categorical, continuous)
+} else {
+  categorical = c(cat_var_names)
+  continuous = c(rep(NA,length(cat_var_names)))
+  final_df <- data.frame(categorical, continuous)
 }
+write.csv(final_df,"C:/opencpuapp_ip/variable_list.csv")
+
 ######################################################################################################################################################
 #getting the final data frame with the required variables
 ######################################################################################################################################################
