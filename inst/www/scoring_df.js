@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    console.log('In scoring');
     $('#scoreDownloadLink').addClass('disabled');
 
     $('submitbutton2').on('click',function(){
@@ -8,7 +9,7 @@ $(document).ready(function(){
             alert("No file selected.");
             return;
         }
-
+        console.log('In scoring clicked');
         $("#status1").text("Reading the CSV...")
         $("#status1").addClass("lds-dual-ring");
 
