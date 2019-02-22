@@ -1,19 +1,19 @@
 preprocessing <- function(conv_var_names, dv){
 
-    library(plyr)
-    library(dplyr)
-
 data = read.csv(file='C:/opencpuapp_ip/prepro_step1.csv', header=TRUE, sep=",")
 names(data)[names(data)==dv] <- "DV"
 
 variables = read.csv(file='C:/opencpuapp_ip/variable_list.csv', header=TRUE, sep=",")
-categorical = as.list(levels(variables$categorical))
+categorical = levels(variables$categorical)
 if(length(conv_var_names) != 0)
 {
   categorical = append(categorical, conv_var_names)
+  disc_var_names = levels(variables$discrete)[levels(variables$discrete) != conv_var_names]
+} else {
+  disc_var_names <- levels(variables$discrete)
 }
 
-cat_var_names <- unlist(categorical)
+cat_var_names <- categorical
 
 ######################################################################################################################################################
 #Categorical variables treatment
@@ -167,7 +167,7 @@ if(ncol(df_cat)>0)
   }
 }
 #******DV leakage code ends**************
-
+cate_var_names <- names(df_cat)
 
 ######################################################################################################################################################
 #continuous variables treatment
@@ -186,6 +186,11 @@ df<-data
 
 #Removing categorical variables from data
 for(i in cat_var_names)
+{
+  df<-df[names(df) != i]
+}
+#Removing discrete variables from data
+for(i in disc_var_names)
 {
   df<-df[names(df) != i]
 }
@@ -345,16 +350,12 @@ if(length(df1)>1)
   #getting the binned continuous variables
   data_cont_binned_fin<-data_cont_binned[,rem_var]
   df_cat <- cbind(df_cat, data_cont_binned_fin)
-  cont_var_names <- names(data_cont_binned_fin)
-  max.len = max(length(cat_var_names), length(cont_var_names))
-  categorical = c(cat_var_names, rep(NA, max.len - length(cat_var_names)))
-  continuous = c(cont_var_names, rep(NA, max.len - length(cont_var_names)))
-  final_df <- data.frame(categorical, continuous)
-} else {
-  categorical = c(cat_var_names)
-  continuous = c(rep(NA,length(cat_var_names)))
-  final_df <- data.frame(categorical, continuous)
+  cate_var_names <- names(df_cat)
 }
+max.len = max(length(disc_var_names), length(cate_var_names))
+categorical = c(cate_var_names, rep(NA, max.len - length(cate_var_names)))
+continuous = c(disc_var_names, rep(NA, max.len - length(disc_var_names)))
+final_df <- data.frame(categorical, continuous)
 write.csv(final_df,"C:/opencpuapp_ip/variable_list.csv")
 
 ######################################################################################################################################################
