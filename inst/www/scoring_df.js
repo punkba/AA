@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     console.log('In scoring');
-    $('#scoreDownloadLink').addClass('disabled');
+    $('#scoreDownloadLink').hide();
 
     $('#submitbutton2').on('click',function(){
         scoreFileName = $("#uploadFile2")[0].files[0];
@@ -25,7 +25,7 @@ $(document).ready(function(){
             filename : inputFileName
         }, function(session){
             $('#scoreDownloadLink').attr('href',session.getFileURL('scoredData.csv'));
-            $('#scoreDownloadLink').removeClass('disabled');
+            $('#scoreDownloadLink').show();
             $("#status2").text("Dataset Scored, Click to Download !!")
             $("#status2").removeClass("lds-dual-ring");
         }).fail(function(){
