@@ -5,7 +5,7 @@ names(data)[names(data)==dv] <- "DV"
 
 variables = read.csv(file='C:/opencpuapp_ip/variable_list.csv', header=TRUE, sep=",")
 categorical = levels(variables$categorical)
-if(conv_var_names != NULL)
+if(conv_var_names)
 {
   conv_var_names = as.character(conv_var_names)
   categorical = append(categorical, conv_var_names)
