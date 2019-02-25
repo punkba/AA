@@ -1,15 +1,13 @@
 preprocessing <- function(conv_var_names, dv){
 
-library(plyr)
-library(dplyr)
-
 data = read.csv(file='C:/opencpuapp_ip/prepro_step1.csv', header=TRUE, sep=",")
 names(data)[names(data)==dv] <- "DV"
 
 variables = read.csv(file='C:/opencpuapp_ip/variable_list.csv', header=TRUE, sep=",")
 categorical = levels(variables$categorical)
-if(length(conv_var_names) != 0)
+if(conv_var_names != NULL)
 {
+  conv_var_names = as.character(conv_var_names)
   categorical = append(categorical, conv_var_names)
   disc_var_names = levels(variables$discrete)[levels(variables$discrete) != conv_var_names]
 } else {
