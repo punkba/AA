@@ -26,8 +26,6 @@ $(document).ready(function(){
         }, function(session){
             $('#scoreDownloadLink').attr('href',session.getFileURL('scoredData.csv'));
             $('#scoreDownloadLink').show();
-            $("#status2").text("Dataset Scored, Click to Download !!")
-            $("#status2").removeClass("lds-dual-ring");
         }).fail(function(){
           alert("Server error: " + req.responseText);
         }).always(function(){
